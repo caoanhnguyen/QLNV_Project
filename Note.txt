@@ -1,0 +1,20 @@
+Note 
+- ADMIN không có đăng kí nghỉ phép, thay bằng duyệt nghỉ phép cho các nhân viên khác
+- Các nhân viên bình thường trong phần nghỉ phép sẽ có đăng kí nghỉ phép và xem lại đơn xin nghỉ phép đã được duyệt hay chưa
+
+- ADMIN quản lý thử việc thôi việc có đầy đủ thêm sửa xóa (đang thiếu sửa)
+- Phòng ban và bộ phận có đầy đủ thêm sửa xóa (thiếu xóa)
+
+- Bảng chấm công bỏ giờ làm thêm
+- Lương thực nhận = lương cơ bản + phụ cấp + phụ cấp khác + hoa hồng - kỷ luật (kỷ luật có bao gồm số ngày nghỉ làm)
+  số công mặc định là 26 và sẽ trừ đi số công đã nghỉ. Nếu số ngày công ít hơn 26, lương = số ngày đi làm nhân với tiền/1 ngày công - tiền kỷ luật 
+- Bảng chấm công thử việc cần sửa lại giống với bảng chấm công, ta sẽ chọn nhân viên cần chấm công, sau đó thông
+  tin về mã nhân viên, tên nhân viên, lương thử việc, số ngày công ngày nghỉ số giờ làm thêm được tự động hiện ra
+- Tính tiền lương thử việc = lương thử việc - số ngày công nghỉ *200k + số giờ làm thêm *70k 
+  (Nếu số ngày công không đủ ít nhất 21 ngày thì trừ tiếp 1tr500k)
+- Bảng thống kê lương (nôm na là bảng để xem lương của nhân viên theo tháng) chỉ cần tạo view trong SQL không cần tạo bảng lưu trữ!
+- Đăng ký tài khoản thì mã tài khoản tự động tạo
+
+- Nhân viên có phần chấm công theo ngày, sau khi chấm công, thông tin chấm công ngày đó được đưa lên bảng Lịch sử 
+  chấm công. Khi tiến hành chấm công tính lương, sẽ tính số ngày công bằng cách lấy tổng số ngày công có trong
+  bảng lịch sử chấm công cho tới ngày chấm.
