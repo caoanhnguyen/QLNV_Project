@@ -10,15 +10,15 @@ import java.util.List;
 
 public class NVDAO {
 	private static final Connection connection = DBManager.getConnection();
-        private static final String GET_MANV_LIST = "SELECT maNV FROM tbl_NhanVien ORDER BY maNV";
-        private static final String GET_NV_BY_MANV = "SELECT * FROM tbl_NhanVien WHERE maNV = ? ORDER BY maNV";
-        private static final String GET_NV_LIST = "SELECT * FROM tbl_NhanVien ORDER BY maNV";
-        private static final String GET_MANV_BY_TENNV = "SELECT maNV FROM tbl_NhanVien WHERE hoTen = ?";
-        private static final String ADD_NV = "INSERT INTO tbl_NhanVien VALUES (NULL,?,?,?,?,?,NOW(),?,?,?,?,?,?,?,?)";
-        private static final String DELETE_NV = "DELETE FROM tbl_NhanVien WHERE maNV = ?";
-        private static final String UPDATE_NV = "UPDATE tbl_NhanVien SET hoTen = ?, gioiTinh = ?, danToc = ?, chucVu = ?,loaiHopDong = ?,thoiGian = ?, CMND_CCCD = ?, SDT = ?,hocVan = ?,email = ?, maPB = ?, ghiChu = ? WHERE maNV = ?";
-        private static final String GET_SO_NV_BY_TIME = "SELECT COUNT(*) FROM tbl_NhanVien WHERE ngayDangKy >= DATE_FORMAT(CONCAT(?, '-', ?, '-01'), '%Y-%m-%d');";
-        private static final String GET_MANV_LIST_0BH = "select maNV from tbl_nhanvien where maNV not in (select maNV from tbl_baohiem) ORDER BY maNV";
+        private static final String GET_MANV_LIST = "SELECT maNV FROM tbl_NhanVien ORDER BY maNV".toLowerCase();
+        private static final String GET_NV_BY_MANV = "SELECT * FROM tbl_NhanVien WHERE maNV = ? ORDER BY maNV".toLowerCase();
+        private static final String GET_NV_LIST = "SELECT * FROM tbl_NhanVien ORDER BY maNV".toLowerCase();
+        private static final String GET_MANV_BY_TENNV = "SELECT maNV FROM tbl_NhanVien WHERE hoTen = ?".toLowerCase();
+        private static final String ADD_NV = "INSERT INTO tbl_NhanVien VALUES (NULL,?,?,?,?,?,NOW(),?,?,?,?,?,?,?,?)".toLowerCase();
+        private static final String DELETE_NV = "DELETE FROM tbl_NhanVien WHERE maNV = ?".toLowerCase();
+        private static final String UPDATE_NV = "UPDATE tbl_NhanVien SET hoTen = ?, gioiTinh = ?, danToc = ?, chucVu = ?,loaiHopDong = ?,thoiGian = ?, CMND_CCCD = ?, SDT = ?,hocVan = ?,email = ?, maPB = ?, ghiChu = ? WHERE maNV = ?".toLowerCase();
+        private static final String GET_SO_NV_BY_TIME = "SELECT COUNT(*) FROM tbl_NhanVien WHERE ngayDangKy >= DATE_FORMAT(CONCAT(?, '-', ?, '-01'), '%Y-%m-%d');".toLowerCase();
+        private static final String GET_MANV_LIST_0BH = "select maNV from tbl_nhanvien where maNV not in (select maNV from tbl_baohiem) ORDER BY maNV".toLowerCase();
         
         public int getSoNVByTime(int nam, int thang){
             try(PreparedStatement pst = connection.prepareStatement(GET_SO_NV_BY_TIME)) {

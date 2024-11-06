@@ -19,12 +19,12 @@ import java.util.List;
  */
 public class NghiPhepDAO {
     private static Connection connection = DBManager.getConnection();
-    private static final String GET_NP_LIST = "SELECT * FROM tbl_NghiPhep";
-    private static final String DUYET_NP = "UPDATE tbl_NghiPhep SET trangThai = 'Đã xác nhận' WHERE maNghiPhep = ?";
-    private static final String TU_CHOI_NP = "UPDATE tbl_NghiPhep SET trangThai = 'Không đồng ý' WHERE maNghiPhep = ?";
-    private static final String DELETE_NP = "DELETE FROM tbl_NghiPhep WHERE maNghiPhep = ?";
-    private static final String ADD_NP = "INSERT INTO tbl_NghiPhep VALUES (NULL,?,?,?,?,?,'Chưa xác nhận')";
-    private static final String GET_SO_NGAY_NGHI_PHEP = "SELECT COUNT(*) AS SoNgayNghi FROM tbl_LSVangMat WHERE maNV = ? AND MONTH(ngayNghi) = ? AND YEAR(ngayNghi) = ?;";
+    private static final String GET_NP_LIST = "SELECT * FROM tbl_NghiPhep".toLowerCase();
+    private static final String DUYET_NP = "UPDATE tbl_NghiPhep SET trangThai = 'Đã xác nhận' WHERE maNghiPhep = ?".toLowerCase();
+    private static final String TU_CHOI_NP = "UPDATE tbl_NghiPhep SET trangThai = 'Không đồng ý' WHERE maNghiPhep = ?".toLowerCase();
+    private static final String DELETE_NP = "DELETE FROM tbl_NghiPhep WHERE maNghiPhep = ?".toLowerCase();
+    private static final String ADD_NP = "INSERT INTO tbl_NghiPhep VALUES (NULL,?,?,?,?,?,'Chưa xác nhận')".toLowerCase();
+    private static final String GET_SO_NGAY_NGHI_PHEP = "SELECT COUNT(*) AS SoNgayNghi FROM tbl_LSVangMat WHERE maNV = ? AND MONTH(ngayNghi) = ? AND YEAR(ngayNghi) = ?;".toLowerCase();
     
     public int getSoNgayNghiPhep(String maNV, int thang, int nam){
         try(PreparedStatement pst = connection.prepareStatement(GET_SO_NGAY_NGHI_PHEP)){

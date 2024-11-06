@@ -17,9 +17,9 @@ import java.util.List;
  */
 public class ChamCongDAO {
     private static final Connection connection = DBManager.getConnection();
-    private static final String GET_SO_NGAY_CHAM_CONG = "SELECT COUNT(*) AS SoNgayChamCong FROM tbl_LSChamCong WHERE maNV = ? AND MONTH(ngayChamCong) = ? AND YEAR(ngayChamCong) = ?;";
-    private static final String ADD_CC = "INSERT INTO tbl_LSChamCong VALUES (null,?,NOW())";
-    private static final String CHECK_IN = "SELECT * FROM tbl_LSChamCong WHERE ngayChamCong = ? AND maNV = ?";
+    private static final String GET_SO_NGAY_CHAM_CONG = "SELECT COUNT(*) AS SoNgayChamCong FROM tbl_LSChamCong WHERE maNV = ? AND MONTH(ngayChamCong) = ? AND YEAR(ngayChamCong) = ?;".toLowerCase();
+    private static final String ADD_CC = "INSERT INTO tbl_LSChamCong VALUES (null,?,NOW())".toLowerCase();
+    private static final String CHECK_IN = "SELECT * FROM tbl_LSChamCong WHERE ngayChamCong = ? AND maNV = ?".toLowerCase();
     
     public void addChamCong(String maNV){
         try(PreparedStatement pst = connection.prepareStatement(ADD_CC)){

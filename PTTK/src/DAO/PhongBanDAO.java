@@ -19,15 +19,15 @@ import java.util.List;
  */
 public class PhongBanDAO {
     private static final Connection connection = DBManager.getConnection();
-    private static final String ADD_PB = "INSERT INTO tbl_PhongBan VALUES (null,?,?,NOW(),?)";
-    private static final String UPDATE_PB = "UPDATE tbl_PhongBan set tenPB = ?, ghiChu = ? where maPB = ?";
-    private static final String GET_PB_LIST = "SELECT * FROM tbl_PhongBan";
-    private static final String GET_MA_PB_LIST = "SELECT maPB FROM tbl_PhongBan";
-    private static final String GET_PB_BY_MAPB = "SELECT * FROM tbl_PhongBan where maPB = ?";
-    private static final String VALID_TENPB = "SELECT * FROM tbl_PhongBan where tenPB = ?";
-    private static final String GET_MAPB_BY_TENPB = "SELECT maPB FROM tbl_PhongBan WHERE tenPB = ?";
-    private static final String GET_TENPB_BY_MANV = "SELECT tenPB FROM tbl_NhanVien nv JOIN tbl_PhongBan pb ON nv.maPB = pb.maPB WHERE maNV = ?;";
-    private static final String GET_TENPB_BY_MAPB = "SELECT tenPB FROM tbl_PhongBan where maPB = ?";
+    private static final String ADD_PB = "INSERT INTO tbl_PhongBan VALUES (null,?,?,NOW(),?)".toLowerCase();
+    private static final String UPDATE_PB = "UPDATE tbl_PhongBan set tenPB = ?, ghiChu = ? where maPB = ?".toLowerCase();
+    private static final String GET_PB_LIST = "SELECT * FROM tbl_PhongBan".toLowerCase();
+    private static final String GET_MA_PB_LIST = "SELECT maPB FROM tbl_PhongBan".toLowerCase();
+    private static final String GET_PB_BY_MAPB = "SELECT * FROM tbl_PhongBan where maPB = ?".toLowerCase();
+    private static final String VALID_TENPB = "SELECT * FROM tbl_PhongBan where tenPB = ?".toLowerCase();
+    private static final String GET_MAPB_BY_TENPB = "SELECT maPB FROM tbl_PhongBan WHERE tenPB = ?".toLowerCase();
+    private static final String GET_TENPB_BY_MANV = "SELECT tenPB FROM tbl_NhanVien nv JOIN tbl_PhongBan pb ON nv.maPB = pb.maPB WHERE maNV = ?;".toLowerCase();
+    private static final String GET_TENPB_BY_MAPB = "SELECT tenPB FROM tbl_PhongBan where maPB = ?".toLowerCase();
     
     public String getTenPBByMaPB(String maPB){
         try (PreparedStatement pst = connection.prepareStatement(GET_TENPB_BY_MAPB)){

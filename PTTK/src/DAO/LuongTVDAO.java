@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class LuongTVDAO {
     private static Connection connection = DBManager.getConnection();
-    private static final String GET_MALTV_LIST = "SELECT MaLuongTV FROM tbl_LuongTV";
+    private static final String GET_MALTV_LIST = "SELECT MaLuongTV FROM tbl_LuongTV".toLowerCase();
     
     public List<String> getMaLTVList(){
         try(PreparedStatement pst = connection.prepareStatement(GET_MALTV_LIST)){

@@ -19,11 +19,11 @@ import java.util.List;
  */
 public class TinhLuongTVDAO {
     private static Connection connection = DBManager.getConnection();
-    private static final String GET_LIST_TINHLUONGTV = "SELECT * FROM tbl_TinhLuongTV ";
-    private static final String ADD_TINHLUONGTV = "INSERT INTO tbl_TinhLuongTV VALUES(?,?,?,?,?,?,?,?,?)";
-    private static final String GET_LIST_TLTV_BY_THANG_NAM = "SELECT * FROM tbl_TinhLuongTV WHERE thang =? and nam = ? ";
-    private static final String UPDATE_TINHLUONGTV ="UPDATE tbl_TinhLuongTV SET soNgayCong = ?,soGioLamThem = ?,ghiChu = ?,luongThucNhan = ? WHERE maNVTV = ? and thang = ? and nam = ? ";
-    private static final String DELETE_TINHLUONGTV = "DELETE FROM tbl_TinhLuongTV WHERE maNVTV =? and thang =? and nam = ?";
+    private static final String GET_LIST_TINHLUONGTV = "SELECT * FROM tbl_TinhLuongTV ".toLowerCase();
+    private static final String ADD_TINHLUONGTV = "INSERT INTO tbl_TinhLuongTV VALUES(?,?,?,?,?,?,?,?,?)".toLowerCase();
+    private static final String GET_LIST_TLTV_BY_THANG_NAM = "SELECT * FROM tbl_TinhLuongTV WHERE thang =? and nam = ? ".toLowerCase();
+    private static final String UPDATE_TINHLUONGTV ="UPDATE tbl_TinhLuongTV SET soNgayCong = ?,soGioLamThem = ?,ghiChu = ?,luongThucNhan = ? WHERE maNVTV = ? and thang = ? and nam = ? ".toLowerCase();
+    private static final String DELETE_TINHLUONGTV = "DELETE FROM tbl_TinhLuongTV WHERE maNVTV =? and thang =? and nam = ?".toLowerCase();
     
     public List<TinhLuongTV> getListTinhLuongTV(){
         try(Statement stm = connection.createStatement()){

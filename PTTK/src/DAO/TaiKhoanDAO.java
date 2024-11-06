@@ -13,12 +13,12 @@ import java.util.List;
 
 public class TaiKhoanDAO {
 	private static Connection connection = DBManager.getConnection();
-	private static final String ADD_NEW_TK = "INSERT INTO tbl_TaiKhoan VALUES (null,?,?,?,?)";
-	private static final String DELETE_TK = "DELETE FROM tbl_taiKhoan where maTK = ?";
-	private static final String UPDATE_TK = "UPDATE tbl_taiKhoan SET maLoaiTK = ?, tenChuTK = ?, matKhau = ? where tenDNhap = ?";
-	private static final String VALID_ACC = "SELECT * FROM tbl_TaiKhoan WHERE tenDNhap = ? AND matKhau = ?";
-        private static final String GET_TK_LIST = "SELECT * FROM tbl_TaiKhoan";
-        private static final String GET_TK_BY_TENDNHAP = "SELECT * FROM tbl_TaiKhoan WHERE tenDNhap = ?";
+	private static final String ADD_NEW_TK = "INSERT INTO tbl_taikhoan VALUES (null,?,?,?,?)".toLowerCase();
+	private static final String DELETE_TK = "DELETE FROM tbl_taiKhoan where maTK = ?".toLowerCase();
+	private static final String UPDATE_TK = "UPDATE tbl_taiKhoan SET maLoaiTK = ?, tenChuTK = ?, matKhau = ? where tenDNhap = ?".toLowerCase();
+	private static final String VALID_ACC = "SELECT * FROM tbl_taiKhoan WHERE tenDNhap = ? AND matKhau = ?".toLowerCase();
+        private static final String GET_TK_LIST = "SELECT * FROM tbl_TaiKhoan".toLowerCase();
+        private static final String GET_TK_BY_TENDNHAP = "SELECT * FROM tbl_TaiKhoan WHERE tenDNhap = ?".toLowerCase();
 	
 	public void themTaiKhoan(String maLoaiTK,String tenChuTK,String tenDangNhap,String matKhau) {
 		try(PreparedStatement pst = connection.prepareStatement(ADD_NEW_TK)){

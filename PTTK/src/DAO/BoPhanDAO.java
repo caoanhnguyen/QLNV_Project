@@ -19,12 +19,12 @@ import java.util.List;
  */
 public class BoPhanDAO {
     private static Connection connection = DBManager.getConnection();
-    private static final String ADD_BP = "INSERT INTO tbl_BoPhan (maBP, tenBP, ngayTLap, ghiChu) VALUES (null,?,NOW(),?)";
-    private static final String UPDATE_BP = "UPDATE tbl_BoPhan SET tenBP = ?, ghiChu = ? WHERE maBP = ?";
-    private static final String GET_BP_LIST = "SELECT * FROM tbl_BoPhan";
-    private static final String GET_MA_BP_LIST = "SELECT maBP FROM tbl_BoPhan";
-    private static final String GET_BP_BY_MABP = "SELECT * FROM tbl_BoPhan where maBP = ?";
-    private static final String VALID_TENBP = "SELECT * FROM tbl_BoPhan where tenBP = ?";
+    private static final String ADD_BP = "INSERT INTO tbl_BoPhan (maBP, tenBP, ngayTLap, ghiChu) VALUES (null,?,NOW(),?)".toLowerCase();
+    private static final String UPDATE_BP = "UPDATE tbl_BoPhan SET tenBP = ?, ghiChu = ? WHERE maBP = ?".toLowerCase();
+    private static final String GET_BP_LIST = "SELECT * FROM tbl_BoPhan".toLowerCase();
+    private static final String GET_MA_BP_LIST = "SELECT maBP FROM tbl_BoPhan".toLowerCase();
+    private static final String GET_BP_BY_MABP = "SELECT * FROM tbl_BoPhan where maBP = ?".toLowerCase();
+    private static final String VALID_TENBP = "SELECT * FROM tbl_BoPhan where tenBP = ?".toLowerCase();
     
     
     public void themBP(String tenBP, String ghiChu){

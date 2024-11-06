@@ -20,14 +20,14 @@ import java.util.List;
  */
 public class NVThuViecDAO {
     private static final Connection connection = DBManager.getConnection();
-    private static final String GET_NVTV_LIST = "SELECT * FROM tbl_HoSoThuViec";
-    private static final String DELETE_NVTV = "DELETE FROM tbl_HoSoThuViec WHERE maNVTV = ?";
-    private static final String ADD_NVTV = "INSERT INTO tbl_HoSoThuViec VALUES (null,?,?,?,?,?,NOW(),?,?,?,?,?)";
-    private static final String GET_LIST_MANVTV = "SELECT maNVTV FROM tbl_HoSoThuViec";
-    private static final String GET_LUONGTV_BY_MANVTV = "SELECT LuongTV FROM tbl_HoSoThuViec hstv JOIN tbl_LuongTV ltv ON hstv.maLuongTV = ltv.maLuongTV WHERE maNVTV = ?;";
-    private static final String GET_MALUONGTV_BY_MANVTV = "SELECT hstv.maLuongTV FROM tbl_HoSoThuViec hstv JOIN tbl_LuongTV ltv ON hstv.maLuongTV = ltv.maLuongTV WHERE maNVTV = ?;";
-    private static final String GET_SO_NV_BY_TIME = "SELECT COUNT(*) FROM tbl_HoSoThuViec WHERE ngayBatDau >= DATE_FORMAT(CONCAT(?, '-', ?, '-01'), '%Y-%m-%d');";
-    private static final String UPDATE_NVTV = "UPDATE tbl_HoSoThuViec SET hoTen = ?, ngaySinh = ?, gioiTinh = ?, CMND_CCCD = ?, viTriThuViec = ?, soThangThuViec = ?, SDT = ?, hocVan = ?, maLuongTV = ?, ghiChu = ? WHERE maNVTV = ?;";
+    private static final String GET_NVTV_LIST = "SELECT * FROM tbl_HoSoThuViec".toLowerCase();
+    private static final String DELETE_NVTV = "DELETE FROM tbl_HoSoThuViec WHERE maNVTV = ?".toLowerCase();
+    private static final String ADD_NVTV = "INSERT INTO tbl_HoSoThuViec VALUES (null,?,?,?,?,?,NOW(),?,?,?,?,?)".toLowerCase();
+    private static final String GET_LIST_MANVTV = "SELECT maNVTV FROM tbl_HoSoThuViec".toLowerCase();
+    private static final String GET_LUONGTV_BY_MANVTV = "SELECT LuongTV FROM tbl_HoSoThuViec hstv JOIN tbl_LuongTV ltv ON hstv.maLuongTV = ltv.maLuongTV WHERE maNVTV = ?;".toLowerCase();
+    private static final String GET_MALUONGTV_BY_MANVTV = "SELECT hstv.maLuongTV FROM tbl_HoSoThuViec hstv JOIN tbl_LuongTV ltv ON hstv.maLuongTV = ltv.maLuongTV WHERE maNVTV = ?;".toLowerCase();
+    private static final String GET_SO_NV_BY_TIME = "SELECT COUNT(*) FROM tbl_HoSoThuViec WHERE ngayBatDau >= DATE_FORMAT(CONCAT(?, '-', ?, '-01'), '%Y-%m-%d');".toLowerCase();
+    private static final String UPDATE_NVTV = "UPDATE tbl_HoSoThuViec SET hoTen = ?, ngaySinh = ?, gioiTinh = ?, CMND_CCCD = ?, viTriThuViec = ?, soThangThuViec = ?, SDT = ?, hocVan = ?, maLuongTV = ?, ghiChu = ? WHERE maNVTV = ?;".toLowerCase();
     
     
     public void updateNVTV(String hoTen,Date ngaySinh,String gioiTinh,String CCCD,String viTri,int soThangTV,String SDT,String hocVan,String maLuongTV,String ghiChu,String maNVTV) throws Exception{

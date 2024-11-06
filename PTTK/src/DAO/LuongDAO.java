@@ -17,11 +17,11 @@ import java.util.List;
  */
 public class LuongDAO {
     private static final Connection connection = DBManager.getConnection();
-    private static final String GET_LUONG_LIST = "SELECT * FROM tbl_Luong";
-    private static final String ADD_LUONG = "INSERT INTO tbl_Luong VALUES (null,?,?,?,?)";
-    private static final String UPDATE_LUONG = "UPDATE tbl_Luong SET luongCoBan = ?,phuCapCV = ?,phuCapKhac = ?,ghiChu = ? WHERE maLuong = ?";
-    private static final String DELETE_LUONG = "DELETE FROM tbl_Luong WHERE maLuong = ?";
-    private static final String GET_LUONG_BY_MANV = "SELECT l.maLuong ,luongCoBan,phuCapCV,phuCapKhac,l.ghiChu FROM tbl_Luong l JOIN tbl_NhanVien nv ON l.maLuong = nv.maLuong WHERE maNV = ?; ";
+    private static final String GET_LUONG_LIST = "SELECT * FROM tbl_Luong".toLowerCase();
+    private static final String ADD_LUONG = "INSERT INTO tbl_Luong VALUES (null,?,?,?,?)".toLowerCase();
+    private static final String UPDATE_LUONG = "UPDATE tbl_Luong SET luongCoBan = ?,phuCapCV = ?,phuCapKhac = ?,ghiChu = ? WHERE maLuong = ?".toLowerCase();
+    private static final String DELETE_LUONG = "DELETE FROM tbl_Luong WHERE maLuong = ?".toLowerCase();
+    private static final String GET_LUONG_BY_MANV = "SELECT l.maLuong ,luongCoBan,phuCapCV,phuCapKhac,l.ghiChu FROM tbl_Luong l JOIN tbl_NhanVien nv ON l.maLuong = nv.maLuong WHERE maNV = ?; ".toLowerCase();
     
     public void themLuong(int luongCB,int phuCapCV,int phuCapKhac,String ghiChu) throws Exception{
         try(PreparedStatement pst = connection.prepareStatement(ADD_LUONG)){

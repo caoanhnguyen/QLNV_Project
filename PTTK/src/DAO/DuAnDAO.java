@@ -19,18 +19,18 @@ import java.util.List;
  */
 public class DuAnDAO {
     private static Connection connection = DBManager.getConnection();
-    private static final String ADD_DUAN = "INSERT INTO tbl_DuAn VALUES (null, ?,?,?,?,?,?,?)";
-    private static final String GET_MADA_BY_TENDA = "SELECT maDA FROM tbl_DuAn WHERE tenDA = ?";
-    private static final String GET_ADLIST = "SELECT * FROM tbl_DuAn";
-    private static final String GET_MA_DA_LIST = "SELECT maDA FROM tbl_DuAn";
-    private static final String GET_TEN_DA_LIST = "SELECT tenDA FROM tbl_DuAn";
-    private static final String DELETE_DA = "DELETE FROM tbl_DuAn WHERE maDA = ?";
-    private static final String UPDATE_DA = "UPDATE tbl_DuAn SET tenDA = ?,diaDiem = ?,gia = ?,hoaHong = ?,ngayBatDau = ?,ngayKetThuc = ?,trangThai = ? WHERE maDA = ?";
-    private static final String GET_NV_NOT_IN_DA = "select hoTen from tbl_nhanvien where maNV not in (select nv.maNV from tbl_NhanVien nv join tbl_phancongda pcda on nv.maNV = pcda.maNV where tenDA = ?);";
-    private static final String GET_NV_IN_DA = "select maDA,nv.maNV,hoTen,SDT,ngayPhanCong from tbl_nhanvien nv join tbl_phancongda pc on nv.maNV = pc.maNV where tenDA = ?;";
-    private static final String GET_COUNT_NV_IN_DA = "select count(*) from tbl_nhanvien nv join tbl_phancongda pc on nv.maNV = pc.maNV where tenDA = ?;";
-    private static final String GET_HOAHONG_BY_MANV = "SELECT SUM(hoaHong) AS tongHoaHong FROM tbl_DuAn AS da INNER JOIN tbl_PhanCongDA AS pc ON da.maDA = pc.maDA WHERE pc.maNV = ? and ngayKetThuc >= DATE_FORMAT(CONCAT(?, '-', ?, '-01'), '%Y-%m-%d') and ngayBatDau <= DATE_FORMAT(CONCAT(?, '-', ?, '-01'), '%Y-%m-%d');";
-    private static final String GET_DA_CHUA_HOAN_THANH = "select tenDA from tbl_duan where trangThai not in ('Hoàn thành');";
+    private static final String ADD_DUAN = "INSERT INTO tbl_DuAn VALUES (null, ?,?,?,?,?,?,?)".toLowerCase();
+    private static final String GET_MADA_BY_TENDA = "SELECT maDA FROM tbl_DuAn WHERE tenDA = ?".toLowerCase();
+    private static final String GET_ADLIST = "SELECT * FROM tbl_DuAn".toLowerCase();
+    private static final String GET_MA_DA_LIST = "SELECT maDA FROM tbl_DuAn".toLowerCase();
+    private static final String GET_TEN_DA_LIST = "SELECT tenDA FROM tbl_DuAn".toLowerCase();
+    private static final String DELETE_DA = "DELETE FROM tbl_DuAn WHERE maDA = ?".toLowerCase();
+    private static final String UPDATE_DA = "UPDATE tbl_DuAn SET tenDA = ?,diaDiem = ?,gia = ?,hoaHong = ?,ngayBatDau = ?,ngayKetThuc = ?,trangThai = ? WHERE maDA = ?".toLowerCase();
+    private static final String GET_NV_NOT_IN_DA = "select hoTen from tbl_nhanvien where maNV not in (select nv.maNV from tbl_NhanVien nv join tbl_phancongda pcda on nv.maNV = pcda.maNV where tenDA = ?);".toLowerCase();
+    private static final String GET_NV_IN_DA = "select maDA,nv.maNV,hoTen,SDT,ngayPhanCong from tbl_nhanvien nv join tbl_phancongda pc on nv.maNV = pc.maNV where tenDA = ?;".toLowerCase();
+    private static final String GET_COUNT_NV_IN_DA = "select count(*) from tbl_nhanvien nv join tbl_phancongda pc on nv.maNV = pc.maNV where tenDA = ?;".toLowerCase();
+    private static final String GET_HOAHONG_BY_MANV = "SELECT SUM(hoaHong) AS tongHoaHong FROM tbl_DuAn AS da INNER JOIN tbl_PhanCongDA AS pc ON da.maDA = pc.maDA WHERE pc.maNV = ? and ngayKetThuc >= DATE_FORMAT(CONCAT(?, '-', ?, '-01'), '%Y-%m-%d') and ngayBatDau <= DATE_FORMAT(CONCAT(?, '-', ?, '-01'), '%Y-%m-%d');".toLowerCase();
+    private static final String GET_DA_CHUA_HOAN_THANH = "select tenDA from tbl_duan where trangThai not in ('Hoàn thành');".toLowerCase();
     
     public int hoaHongNVInDA(String maNV,int nam,int thang){
         try(PreparedStatement pst = connection.prepareStatement(GET_HOAHONG_BY_MANV)){

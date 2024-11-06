@@ -19,10 +19,10 @@ import java.util.List;
  */
 public class BaoHiemDAO {
     private static Connection connection = DBManager.getConnection();
-    private static final String GET_BH_LIST = "SELECT * FROM tbl_BaoHiem";
-    private static final String DELETE_BH = "DELETE FROM tbl_BaoHiem WHERE maBaoHiem = ?";
-    private static final String UPDATE_BH = "UPDATE tbl_BaoHiem set noiCap = ?,ngayCap = ?, ghiChu = ? WHERE maBaoHiem = ?";
-    private static final String ADD_BH = "INSERT INTO tbl_BaoHiem VALUES (NULL,?,?,?,?)";
+    private static final String GET_BH_LIST = "SELECT * FROM tbl_BaoHiem".toLowerCase();
+    private static final String DELETE_BH = "DELETE FROM tbl_BaoHiem WHERE maBaoHiem = ?".toLowerCase();
+    private static final String UPDATE_BH = "UPDATE tbl_BaoHiem set noiCap = ?,ngayCap = ?, ghiChu = ? WHERE maBaoHiem = ?".toLowerCase();
+    private static final String ADD_BH = "INSERT INTO tbl_BaoHiem VALUES (NULL,?,?,?,?)".toLowerCase();
     
     public void themBaoHiem(String maNV,String noiCap,Date ngayCap,String ghiChu)throws SQLException{
         try(PreparedStatement pst = connection.prepareStatement(ADD_BH)){

@@ -18,8 +18,8 @@ import java.util.List;
  */
 public class ThayDoiBLDAO {
     private static Connection connection = DBManager.getConnection();
-    private static final String GET_TDBL_LIST = "SELECT * FROM tbl_ThayDoiBangLuong";
-    private static final String ADD_TDBL = "INSERT INTO tbl_ThayDoiBangLuong VALUES (?,?,?,NOW(),?)";
+    private static final String GET_TDBL_LIST = "SELECT * FROM tbl_ThayDoiBangLuong".toLowerCase();
+    private static final String ADD_TDBL = "INSERT INTO tbl_ThayDoiBangLuong VALUES (?,?,?,NOW(),?)".toLowerCase();
     
     
     public List<ThayDoiBangLuong> getTDBL_List(){

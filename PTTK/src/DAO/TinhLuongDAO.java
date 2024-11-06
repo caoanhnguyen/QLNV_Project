@@ -20,11 +20,11 @@ import java.util.List;
  */
 public class TinhLuongDAO {
     private static final Connection connection = DBManager.getConnection();
-    private static final String ADD_TINH_lUONG = "INSERT INTO tbl_TinhLuong VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)" ;
-    private static final String GET_LIST_TINHLUONG = "SELECT * FROM tbl_TinhLuong";
-    private static final String KTRA_TON_TAI = "SELECT * FROM tbl_TinhLuong WHERE maNV = ? AND thang = ? AND NAM = ?";
-    private static final String GET_TINH_LUONG_LIST = "SELECT * FROM tbl_TinhLuong WHERE nam = ? and thang = ?";
-    private static final String GET_AVG_LUONG = "SELECT AVG(luongThucNhan) from tbl_tinhLuong where nam = ? and thang = ?";
+    private static final String ADD_TINH_lUONG = "INSERT INTO tbl_TinhLuong VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)".toLowerCase();
+    private static final String GET_LIST_TINHLUONG = "SELECT * FROM tbl_TinhLuong".toLowerCase();
+    private static final String KTRA_TON_TAI = "SELECT * FROM tbl_TinhLuong WHERE maNV = ? AND thang = ? AND NAM = ?".toLowerCase();
+    private static final String GET_TINH_LUONG_LIST = "SELECT * FROM tbl_TinhLuong WHERE nam = ? and thang = ?".toLowerCase();
+    private static final String GET_AVG_LUONG = "SELECT AVG(luongThucNhan) from tbl_tinhLuong where nam = ? and thang = ?".toLowerCase();
     
     public float getAVGLuong(int thang, int nam){
         try(PreparedStatement pst = connection.prepareStatement(GET_AVG_LUONG)) {

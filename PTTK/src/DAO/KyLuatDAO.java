@@ -20,13 +20,13 @@ import java.util.List;
  */
 public class KyLuatDAO {
     private static Connection connection = DBManager.getConnection();
-    private static final String ADD_KL = "INSERT INTO tbl_KyLuat (maKyLuat,tienKyLuat,lyDo) VALUES (null, ?,?);";
-    private static final String UPDATE_Kl = "UPDATE tbl_KyLuat SET tienKyLuat = ? , lyDo =? WHERE maKyLuat =?;";
-    private static final String DELETE_Kl = "DELETE FROM tbl_KyLuat WHERE maKyLuat =?";
-    private static final String GET_KL_BY_MAKL = "SELECT * FROM tbl_KyLuat WHERE maKyLuat = ?";
-    private static final String GET_LIST_MAKL = "SELECT maKyLuat FROM tbl_KyLuat";
-    private static final String GET_LIST_KL = "SELECT * FROM tbl_KyLuat";
-    private static final String VALID_LYDO = "SELECT * FROM tbl_KyLuat WHERE lyDo = ?";
+    private static final String ADD_KL = "INSERT INTO tbl_KyLuat (maKyLuat,tienKyLuat,lyDo) VALUES (null, ?,?);".toLowerCase();
+    private static final String UPDATE_Kl = "UPDATE tbl_KyLuat SET tienKyLuat = ? , lyDo =? WHERE maKyLuat =?;".toLowerCase();
+    private static final String DELETE_Kl = "DELETE FROM tbl_KyLuat WHERE maKyLuat =?".toLowerCase();
+    private static final String GET_KL_BY_MAKL = "SELECT * FROM tbl_KyLuat WHERE maKyLuat = ?".toLowerCase();
+    private static final String GET_LIST_MAKL = "SELECT maKyLuat FROM tbl_KyLuat".toLowerCase();
+    private static final String GET_LIST_KL = "SELECT * FROM tbl_KyLuat".toLowerCase();
+    private static final String VALID_LYDO = "SELECT * FROM tbl_KyLuat WHERE lyDo = ?".toLowerCase();
     
     public void themKyLuat(int tienKyLuat,String lyDo)throws Exception{
         try(PreparedStatement pst = connection.prepareStatement(ADD_KL)){

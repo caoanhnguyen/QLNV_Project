@@ -18,8 +18,8 @@ import java.util.List;
  */
 public class ThoiViecDAO {
     private static final Connection connection = DBManager.getConnection();
-    private static final String GET_THOIVIEC_LIST = "SELECT * FROM tbl_ThoiViec";
-    private static final String GET_SO_NV_BY_TIME = "SELECT COUNT(*) FROM tbl_ThoiViec WHERE ngayThoiViec >= DATE_FORMAT(CONCAT(?, '-', ?, '-01'), '%Y-%m-%d');";
+    private static final String GET_THOIVIEC_LIST = "SELECT * FROM tbl_ThoiViec".toLowerCase();
+    private static final String GET_SO_NV_BY_TIME = "SELECT COUNT(*) FROM tbl_ThoiViec WHERE ngayThoiViec >= DATE_FORMAT(CONCAT(?, '-', ?, '-01'), '%Y-%m-%d');".toLowerCase();
    
     public int getSoNVTVByTime(int nam,int thang){
         try(PreparedStatement pst = connection.prepareStatement(GET_SO_NV_BY_TIME)) {

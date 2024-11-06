@@ -18,13 +18,13 @@ import java.util.List;
  */
 public class KhenThuongDAO {
     private static Connection connection = DBManager.getConnection();
-    private static final String ADD_KT = "INSERT INTO tbl_KhenThuong(maThuong,tienThuong,lyDo) VALUES (null ,?,?);" ;
-    private static final String UPDATE_KT = "UPDATE tbl_KhenThuong SET tienThuong = ? , lyDo = ? WHERE maThuong = ?";
-    private static final String DELETE_KT = "DELETE FROM tbl_KhenThuong WHERE maThuong = ?";
-    private static final String GET_KT_BY_MAKT = "SELECT * FROM tbl_KhenThuong WHERE maThuong = ?";
-    private static final String GET_LIST_MAKT = "SELECT maThuong FROM tbl_KhenThuong";
-    private static final String GET_LIST_KT = "SELECT * FROM tbl_KhenThuong";
-    private static final String VALID_LYDO = "SELECT * FROM tbl_KhenThuong WHERE lyDo = ?";
+    private static final String ADD_KT = "INSERT INTO tbl_KhenThuong(maThuong,tienThuong,lyDo) VALUES (null ,?,?);".toLowerCase();
+    private static final String UPDATE_KT = "UPDATE tbl_KhenThuong SET tienThuong = ? , lyDo = ? WHERE maThuong = ?".toLowerCase();
+    private static final String DELETE_KT = "DELETE FROM tbl_KhenThuong WHERE maThuong = ?".toLowerCase();
+    private static final String GET_KT_BY_MAKT = "SELECT * FROM tbl_KhenThuong WHERE maThuong = ?".toLowerCase();
+    private static final String GET_LIST_MAKT = "SELECT maThuong FROM tbl_KhenThuong".toLowerCase();
+    private static final String GET_LIST_KT = "SELECT * FROM tbl_KhenThuong".toLowerCase();
+    private static final String VALID_LYDO = "SELECT * FROM tbl_KhenThuong WHERE lyDo = ?".toLowerCase();
     
     public void themKhenThuong(int tienKhenThuong,String lyDo)throws Exception{
         try(PreparedStatement pst = connection.prepareStatement(ADD_KT)){

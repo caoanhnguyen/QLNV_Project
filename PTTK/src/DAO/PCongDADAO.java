@@ -17,9 +17,9 @@ import java.util.List;
  */
 public class PCongDADAO {
     private static Connection connection = DBManager.getConnection();
-    private static final String ADD_PC_DA = "INSERT INTO tbl_PhanCongDA VALUES (?,?,?,NOW())";
-    private static final String DELETE_PC_DA = "DELETE FROM tbl_PhanCongDA WHERE maDA =? and maNV = ?";
-    private static final String GET_DA_BY_MANV = "select pc.maNV, da.maDA, da.tenDA, diaDiem, gia, hoaHong, ngayBatDau, ngayKetThuc, trangThai from tbl_DuAn da left join tbl_PhanCongDA pc on da.maDA = pc.maDA where maNV = ?";
+    private static final String ADD_PC_DA = "INSERT INTO tbl_PhanCongDA VALUES (?,?,?,NOW())".toLowerCase();
+    private static final String DELETE_PC_DA = "DELETE FROM tbl_PhanCongDA WHERE maDA =? and maNV = ?".toLowerCase();
+    private static final String GET_DA_BY_MANV = "select pc.maNV, da.maDA, da.tenDA, diaDiem, gia, hoaHong, ngayBatDau, ngayKetThuc, trangThai from tbl_DuAn da left join tbl_PhanCongDA pc on da.maDA = pc.maDA where maNV = ?".toLowerCase();
     
     public void themPhanCongDA(String maDA,String tenDA,String maNV){
         try(PreparedStatement pst = connection.prepareStatement(ADD_PC_DA)){
