@@ -1,4 +1,4 @@
-drop database  if exists QLNV;
+drop database if exists QLNV;
 create database QLNV;
 use QLNV;
 
@@ -61,10 +61,10 @@ create table tbl_NhanVien
     ghiChu nvarchar(255)
 );
 
-SELECT count(*)
-FROM tbl_NhanVien
-WHERE ngayDangKy >= DATE_FORMAT(CONCAT(2020, '-', 5, '-01'), '%Y-%m-%d');
-select * from tbl_nhanvien;
+-- SELECT count(*)
+-- FROM tbl_NhanVien
+-- WHERE ngayDangKy >= DATE_FORMAT(CONCAT(2020, '-', 5, '-01'), '%Y-%m-%d');
+-- select * from tbl_nhanvien;
 
 create table tbl_TaiKhoan
 (
@@ -74,8 +74,8 @@ create table tbl_TaiKhoan
     tenDNhap nvarchar(50),
     matKhau nvarchar(50)
 );
-use QLNV;
-select * from tbl_TaiKhoan;
+-- use QLNV;
+-- select * from tbl_TaiKhoan;
 
 create table tbl_BaoHiem
 (
@@ -86,10 +86,10 @@ create table tbl_BaoHiem
     ghiChu nvarchar(255)
 );
 
-alter table tbl_baohiem
-add constraint unique_maNV unique (maNV);
+-- alter table tbl_baohiem
+-- add constraint unique_maNV unique (maNV);
 
-select * from tbl_nhanvien where maNV not in (select maNV from tbl_baohiem);
+-- select * from tbl_nhanvien where maNV not in (select maNV from tbl_baohiem);
 
 create table tbl_HoSoThuViec
 (
@@ -107,24 +107,24 @@ create table tbl_HoSoThuViec
     ghiChu nvarchar(255)
 );
 
-UPDATE tbl_HoSoThuViec
-SET
-    hoTen = 'Tên Mới',
-    ngaySinh = '1990-01-01 00:00:00',
-    gioiTinh = 'Nam',
-    CMND_CCCD = '123456789012',
-    viTriThuViec = 'Vị trí mới',
-    ngayBatDau = '2024-01-01 00:00:00',
-    soThangThuViec = 6,
-    SDT = '0901234567',
-    hocVan = 'Cử nhân',
-    maLuongTV = 'MLTV001',
-    ghiChu = 'Ghi chú mới'
-WHERE
-    maNVTV = 'NVTV007';
+-- UPDATE tbl_HoSoThuViec
+-- SET
+--     hoTen = 'Tên Mới',
+--     ngaySinh = '1990-01-01 00:00:00',
+--     gioiTinh = 'Nam',
+--     CMND_CCCD = '123456789012',
+--     viTriThuViec = 'Vị trí mới',
+--     ngayBatDau = '2024-01-01 00:00:00',
+--     soThangThuViec = 6,
+--     SDT = '0901234567',
+--     hocVan = 'Cử nhân',
+--     maLuongTV = 'MLTV001',
+--     ghiChu = 'Ghi chú mới'
+-- WHERE
+--     maNVTV = 'NVTV007';
 
 
-select * from tbl_hosothuviec;
+-- select * from tbl_hosothuviec;
 
 create table tbl_TinhLuong
 (
@@ -156,12 +156,12 @@ create table tbl_TinhLuongTV
     ghiChu nvarchar(255)
 );
 
-use QLNV;
-select avg(luongThucNhan) from tbl_tinhluong;
-select * from tbl_tinhluong;
-SELECT AVG(luongThucNhan) from tbl_tinhLuong where nam = 2024 and thang = 7;
-delete from tbl_tinhluong where nam = 2016;
-select * from tbl_nhanvien;
+-- use QLNV;
+-- select avg(luongThucNhan) from tbl_tinhluong;
+-- select * from tbl_tinhluong;
+-- SELECT AVG(luongThucNhan) from tbl_tinhLuong where nam = 2024 and thang = 7;
+-- delete from tbl_tinhluong where nam = 2016;
+-- select * from tbl_nhanvien;
 
 create table tbl_ThoiViec
 (
@@ -178,9 +178,9 @@ create table tbl_KhenThuong
     lyDo nvarchar(255)
 );
 
-use QLNV;
-select * from tbl_KhenThuong;
-select * from tbl_nhanVien;
+-- use QLNV;
+-- select * from tbl_KhenThuong;
+-- select * from tbl_nhanVien;
 
 create table tbl_KyLuat
 (
@@ -201,10 +201,10 @@ create table tbl_DuAn
     trangThai nvarchar(50)
 );
 
-select * from tbl_duan where trangThai not in ('Hoàn thành');
+-- select * from tbl_duan where trangThai not in ('Hoàn thành');
 
-use QLNV;
-select * from tbl_duan;
+-- use QLNV;
+-- select * from tbl_duan;
 
 create table tbl_PhanCongDA
 (
@@ -213,8 +213,8 @@ create table tbl_PhanCongDA
     maNV varchar(5) not null,
     ngayPhanCong date
 );
-use QLNV;
-select * from tbl_PhanCongDA;
+-- use QLNV;
+-- select * from tbl_PhanCongDA;
 
 create table tbl_NghiPhep
 (
@@ -233,7 +233,7 @@ create table tbl_LSVangMat
     ngayNghi date not null,
     ghiChu nvarchar(255)
 );
-drop table tbl_LSVangMat;
+-- drop table tbl_LSVangMat;
 create table tbl_ThayDoiBangLuong
 (
 	maNV varchar(5),
@@ -250,9 +250,9 @@ create table tbl_LSChamCong
     ngayChamCong date
 );
 
-delete from tbl_LSChamCong;
-SELECT * FROM tbl_LSChamCong WHERE ngayChamCong = '2024-08-08';
-SELECT * FROM tbl_LSChamCong WHERE ngayChamCong = '2024-08-08' AND maNV = 'NV005';
+-- delete from tbl_LSChamCong;
+-- SELECT * FROM tbl_LSChamCong WHERE ngayChamCong = '2024-08-08';
+-- SELECT * FROM tbl_LSChamCong WHERE ngayChamCong = '2024-08-08' AND maNV = 'NV005';
 
 alter table tbl_TaiKhoan
 add constraint fk_maLoaiTK foreign key (maLoaiTK) references tbl_LoaiTK(maLoaiTK);
@@ -275,14 +275,14 @@ add constraint fk_maNV_NghiPhep foreign key (maNV) references tbl_NhanVien(maNV)
 alter table tbl_PhongBan
 add constraint fk_maBP_PhongBan foreign key (maBP) references tbl_BoPhan(maBP);
 
-alter table tbl_ChamCongTV
-add constraint fk_maNVTV_ChamCongTV foreign key (maNVTV) references tbl_HoSoThuViec(maNVTV);
+alter table tbl_TinhLuongTV
+add constraint fk_maNVTV_TinhLuongTV foreign key (maNVTV) references tbl_HoSoThuViec(maNVTV);
 
 alter table tbl_BaoHiem
 add constraint fk_maNV_BaoHiem foreign key (maNV) references tbl_NhanVien(maNV);
 
-alter table tbl_ChamCong
-add constraint fk_maNV_ChamCong foreign key (maNV) references tbl_NhanVien(maNV);
+alter table tbl_TinhLuong
+add constraint fk_maNV_TinhLuong foreign key (maNV) references tbl_NhanVien(maNV);
 
 -- thêm khóa ngoại bảng tài khoản
 alter table tbl_TaiKhoan
@@ -303,8 +303,6 @@ DROP FOREIGN KEY fk_maPB_NhanVien;
 ALTER TABLE tbl_NhanVien
 ADD CONSTRAINT fk_maLuong_NhanVien FOREIGN KEY (maLuong) REFERENCES tbl_Luong(maLuong) ON DELETE RESTRICT,
 ADD CONSTRAINT fk_maPB_NhanVien FOREIGN KEY (maPB) REFERENCES tbl_PhongBan(maPB) ON DELETE RESTRICT;
-
-select * from tbl_luong;
 
 -- Thêm khóa ngoại bảng thay đổi bảng lương
 alter table tbl_ThayDoiBangLuong
@@ -365,7 +363,7 @@ drop foreign key fk_maBP_PhongBan;
 
 -- Xóa khóa ngoại bảng tính lương thử việc
 alter table tbl_TinhLuongTV
-drop foreign key fk_maNVTV_ChamCongTV;
+drop foreign key fk_maNVTV_TinhLuongTV;
 
 -- Xóa khóa ngoại bảng bảo hiểm
 alter table tbl_BaoHiem
