@@ -90,12 +90,12 @@ public class ThemBaoHiem extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        tfNgayCapSo = new javax.swing.JTextField();
         bttThem_ThemBaoHiem = new util.ButtonGradient();
         bttHuy_ThemBaoHiem = new util.ButtonGradient();
         tfNoiCap = new javax.swing.JTextField();
         tfGhiChu = new javax.swing.JTextField();
         cbMaNV = new javax.swing.JComboBox<>();
+        tfNgayCapSo = new com.toedter.calendar.JDateChooser();
 
         jLabel1.setText("jLabel1");
 
@@ -117,9 +117,6 @@ public class ThemBaoHiem extends javax.swing.JFrame {
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel14.setText("Nơi cấp");
-
-        tfNgayCapSo.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        tfNgayCapSo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         bttThem_ThemBaoHiem.setText("Thêm");
         bttThem_ThemBaoHiem.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -164,6 +161,8 @@ public class ThemBaoHiem extends javax.swing.JFrame {
             }
         });
 
+        tfNgayCapSo.setDateFormatString("yyyy-MM-dd");
+
         javax.swing.GroupLayout pnThongTinBHLayout = new javax.swing.GroupLayout(pnThongTinBH);
         pnThongTinBH.setLayout(pnThongTinBHLayout);
         pnThongTinBHLayout.setHorizontalGroup(
@@ -186,27 +185,26 @@ public class ThemBaoHiem extends javax.swing.JFrame {
                                 .addGap(47, 47, 47)
                                 .addComponent(jLabel13)
                                 .addGap(18, 18, 18)
-                                .addComponent(tfNgayCapSo, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(tfNgayCapSo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(tfGhiChu))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE))
                     .addGroup(pnThongTinBHLayout.createSequentialGroup()
-                        .addGroup(pnThongTinBHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnThongTinBHLayout.createSequentialGroup()
-                                .addGap(197, 197, 197)
-                                .addComponent(bttThem_ThemBaoHiem, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(116, 116, 116)
-                                .addComponent(bttHuy_ThemBaoHiem, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnThongTinBHLayout.createSequentialGroup()
-                                .addGap(52, 52, 52)
-                                .addComponent(jLabel14)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfNoiCap, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(197, 197, 197)
+                        .addComponent(bttThem_ThemBaoHiem, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(116, 116, 116)
+                        .addComponent(bttHuy_ThemBaoHiem, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnThongTinBHLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(239, 239, 239))
+            .addGroup(pnThongTinBHLayout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(jLabel14)
+                .addGap(18, 18, 18)
+                .addComponent(tfNoiCap, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnThongTinBHLayout.setVerticalGroup(
             pnThongTinBHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,18 +212,19 @@ public class ThemBaoHiem extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addComponent(jLabel2)
                 .addGap(46, 46, 46)
-                .addGroup(pnThongTinBHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(tfNgayCapSo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                .addGroup(pnThongTinBHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnThongTinBHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel13)
+                        .addComponent(cbMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4))
+                    .addComponent(tfNgayCapSo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(pnThongTinBHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(tfNoiCap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addGroup(pnThongTinBHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfGhiChu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfGhiChu, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
                 .addGap(48, 48, 48)
                 .addGroup(pnThongTinBHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -293,7 +292,7 @@ public class ThemBaoHiem extends javax.swing.JFrame {
             try{
                 String maNV = cbMaNV.getSelectedItem().toString() == null ? " " : cbMaNV.getSelectedItem().toString();
                 String noiCap = tfNoiCap.getText();
-                Date ngayCap = Date.valueOf(tfNgayCapSo.getText());
+                Date ngayCap = new Date(tfNgayCapSo.getDate().getTime());
                 String ghiChu = tfGhiChu.getText();
 
                 if(maNV.equals(" ")){
@@ -363,7 +362,7 @@ public class ThemBaoHiem extends javax.swing.JFrame {
     private util.PanelGradient panelGradient1;
     private util.PanelGradient pnThongTinBH;
     private javax.swing.JTextField tfGhiChu;
-    private javax.swing.JTextField tfNgayCapSo;
+    private com.toedter.calendar.JDateChooser tfNgayCapSo;
     private javax.swing.JTextField tfNoiCap;
     // End of variables declaration//GEN-END:variables
 }

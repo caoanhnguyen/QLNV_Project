@@ -153,7 +153,6 @@ public class DuAnDAO {
     public List<String> getMaDAList(){
         try(Statement stm = connection.createStatement()){
             List<String> maDAList = new ArrayList<>();
-//            maDAList.add("");
             ResultSet result = stm.executeQuery(GET_MA_DA_LIST);
             
             while(result.next()){
@@ -171,7 +170,6 @@ public class DuAnDAO {
     public List<String> getTenDAList(){
         try(Statement stm = connection.createStatement()){
             List<String> tenDAList = new ArrayList<>();
-            tenDAList.add("");
             ResultSet result = stm.executeQuery(GET_TEN_DA_LIST);
             
             while(result.next()){
@@ -189,7 +187,6 @@ public class DuAnDAO {
     public List<String> getTenDAChuaHTList(){
         try(Statement stm = connection.createStatement()){
             List<String> tenDAList = new ArrayList<>();
-            tenDAList.add("");
             ResultSet result = stm.executeQuery(GET_DA_CHUA_HOAN_THANH);
             
             while(result.next()){
@@ -207,7 +204,6 @@ public class DuAnDAO {
     public List<String> getNVNotInDA(String tenDA){
         try(PreparedStatement pst = connection.prepareStatement(GET_NV_NOT_IN_DA)){
             List<String> tenNVList = new ArrayList<>();
-            tenNVList.add("");
             
             pst.setString(1,tenDA);
             ResultSet result = pst.executeQuery();

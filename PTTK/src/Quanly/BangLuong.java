@@ -18,6 +18,7 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import phantichthietkehethong_nhom4.Phantichthietkehethong_nhom4;
+import util.ExportExcelUtil;
 
 /**
  *
@@ -73,7 +74,7 @@ public class BangLuong extends javax.swing.JPanel {
         loadMaLuongToCB_MaLuongMoi();
         
         //Load data lên bảng Tính lương
-        tinhLuongList = tlDAO.getTinhLuongList(Integer.parseInt((String) cbThang_BTL.getSelectedItem()), Integer.parseInt((String) cbNam_BTL.getSelectedItem()));
+        tinhLuongList = tlDAO.getTinhLuongList(cbThang_BTL.getMonth()+1, cbNam_BTL.getYear());
         loadDataToTableTinhLuong(tinhLuongList);
         
         safetySelectedCB(cbMaLuong);
@@ -240,8 +241,8 @@ public class BangLuong extends javax.swing.JPanel {
         tbl_BTL = new javax.swing.JTable();
         btnXuatFile_BTL = new util.ButtonGradient();
         btnReset_BTL = new util.ButtonGradient();
-        cbThang_BTL = new javax.swing.JComboBox<>();
-        cbNam_BTL = new javax.swing.JComboBox<>();
+        cbNam_BTL = new com.toedter.calendar.JYearChooser();
+        cbThang_BTL = new com.toedter.calendar.JMonthChooser();
         jPanel7 = new javax.swing.JPanel();
         jPTDBL = new javax.swing.JPanel();
         txtThayDoiBangLuong = new javax.swing.JTextField();
@@ -572,19 +573,6 @@ public class BangLuong extends javax.swing.JPanel {
             }
         });
 
-        cbThang_BTL.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        cbThang_BTL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        cbThang_BTL.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        cbNam_BTL.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        cbNam_BTL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016" }));
-        cbNam_BTL.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        cbNam_BTL.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbNam_BTLActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPBangLuongLayout = new javax.swing.GroupLayout(jPBangLuong);
         jPBangLuong.setLayout(jPBangLuongLayout);
         jPBangLuongLayout.setHorizontalGroup(
@@ -592,13 +580,13 @@ public class BangLuong extends javax.swing.JPanel {
             .addGroup(jPBangLuongLayout.createSequentialGroup()
                 .addGap(75, 75, 75)
                 .addComponent(jLabel16)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addComponent(cbThang_BTL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77)
+                .addGap(34, 34, 34)
                 .addComponent(jLabel19)
                 .addGap(18, 18, 18)
                 .addComponent(cbNam_BTL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                 .addComponent(btnReset_BTL, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(103, 103, 103)
                 .addComponent(btnXuatFile_BTL, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -614,14 +602,19 @@ public class BangLuong extends javax.swing.JPanel {
             jPBangLuongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPBangLuongLayout.createSequentialGroup()
                 .addComponent(txtBangTinhLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPBangLuongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel19)
-                    .addComponent(cbThang_BTL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbNam_BTL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReset_BTL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnXuatFile_BTL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPBangLuongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPBangLuongLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPBangLuongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPBangLuongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel16)
+                                .addComponent(jLabel19)
+                                .addComponent(btnReset_BTL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnXuatFile_BTL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbThang_BTL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPBangLuongLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(cbNam_BTL, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(28, 28, 28)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(69, Short.MAX_VALUE))
@@ -964,19 +957,20 @@ public class BangLuong extends javax.swing.JPanel {
     private void btnReset_BTLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReset_BTLActionPerformed
         // TODO add your handling code here:
 //        Phantichthietkehethong_nhom4.resetForm(jPBangLuong);
-        tinhLuongList = tlDAO.getTinhLuongList(Integer.parseInt((String) cbThang_BTL.getSelectedItem()), Integer.parseInt((String) cbNam_BTL.getSelectedItem()));
+        tinhLuongList = tlDAO.getTinhLuongList(cbThang_BTL.getMonth()+1, cbNam_BTL.getYear());
         loadDataToTableTinhLuong(tinhLuongList);
     }//GEN-LAST:event_btnReset_BTLActionPerformed
 
-    private void cbNam_BTLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNam_BTLActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbNam_BTLActionPerformed
-
     private void btnXuatFile_BTLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatFile_BTLActionPerformed
-        Xuatfile_BangCong xfbc = new Xuatfile_BangCong();
-        xfbc.setLocationRelativeTo(null);
-        xfbc.setResizable(false);
-        xfbc.setVisible(true);
+//        Xuatfile_BangCong xfbc = new Xuatfile_BangCong();
+//        xfbc.setLocationRelativeTo(null);
+//        xfbc.setResizable(false);
+//        xfbc.setVisible(true);
+          int thang = cbThang_BTL.getMonth()+1;
+          int nam = cbNam_BTL.getYear();
+          String fileName = "BangTinhLuong_Thang" + thang + "_Nam" + nam;
+          ExportExcelUtil exportUtil = new ExportExcelUtil();
+          exportUtil.exportToExcel(tbl_BTL, fileName);
     }//GEN-LAST:event_btnXuatFile_BTLActionPerformed
 
     private void cbMaLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMaLuongActionPerformed
@@ -1090,8 +1084,8 @@ public class BangLuong extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbMaLuong;
     private javax.swing.JComboBox<String> cbMaLuongMoi;
     private javax.swing.JComboBox<String> cbMaNV;
-    private javax.swing.JComboBox<String> cbNam_BTL;
-    private javax.swing.JComboBox<String> cbThang_BTL;
+    private com.toedter.calendar.JYearChooser cbNam_BTL;
+    private com.toedter.calendar.JMonthChooser cbThang_BTL;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

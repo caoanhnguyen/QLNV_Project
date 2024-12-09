@@ -33,7 +33,7 @@ public class DuAn extends javax.swing.JPanel {
     private List<Model.DuAn> DAList;
     
     public DuAn() {
-        initComponents();
+        initComponents();    
         daDAO = new DuAnDAO();
         pcDAO = new PCongDADAO();
         
@@ -51,6 +51,9 @@ public class DuAn extends javax.swing.JPanel {
         loadTenNVToCB_DA();
         
         safetySelectedCB(cbMaDA);
+        
+        
+        loadDataToTablePC_DA(daDAO.getNVInDA(cbDuAn.getSelectedItem().toString()));
     }
     
     private void safetySelectedCB(JComboBox myCB){
@@ -181,8 +184,6 @@ public class DuAn extends javax.swing.JPanel {
         txtDiaDiem = new javax.swing.JTextField();
         txtGia = new javax.swing.JTextField();
         txtHoaHong = new javax.swing.JTextField();
-        txtNgayBatDau = new javax.swing.JTextField();
-        txtNgayKetThuc = new javax.swing.JTextField();
         cbk_HoanThan_DA = new javax.swing.JCheckBox();
         btnUpdate_DA = new util.ButtonGradient();
         btnAdd_DA = new util.ButtonGradient();
@@ -191,6 +192,9 @@ public class DuAn extends javax.swing.JPanel {
         cbMaDA = new javax.swing.JComboBox<>();
         cbk_ChuaTK_DA = new javax.swing.JCheckBox();
         cbk_DangTK_DA = new javax.swing.JCheckBox();
+        jPanel4 = new javax.swing.JPanel();
+        chooserNgayBatDau = new com.toedter.calendar.JDateChooser();
+        chooserNgayKetThuc = new com.toedter.calendar.JDateChooser();
         jPanel2 = new javax.swing.JPanel();
         jPPC_DA = new javax.swing.JPanel();
         txtPhanCongDuAn = new javax.swing.JTextField();
@@ -279,12 +283,11 @@ public class DuAn extends javax.swing.JPanel {
 
         txtHoaHong.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         txtHoaHong.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        txtNgayBatDau.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        txtNgayBatDau.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        txtNgayKetThuc.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        txtNgayKetThuc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtHoaHong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtHoaHongActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(cbk_HoanThan_DA);
         cbk_HoanThan_DA.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -373,6 +376,21 @@ public class DuAn extends javax.swing.JPanel {
             }
         });
 
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        chooserNgayBatDau.setDateFormatString("yyyy-MM-dd");
+
+        chooserNgayKetThuc.setDateFormatString("yyyy-MM-dd");
+
         javax.swing.GroupLayout jPQLDuAnLayout = new javax.swing.GroupLayout(jPQLDuAn);
         jPQLDuAn.setLayout(jPQLDuAnLayout);
         jPQLDuAnLayout.setHorizontalGroup(
@@ -387,6 +405,8 @@ public class DuAn extends javax.swing.JPanel {
                     .addGroup(jPQLDuAnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPQLDuAnLayout.createSequentialGroup()
                             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
                             .addComponent(btnAdd_DA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(82, 82, 82)
                             .addComponent(btnDelete_DA, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -404,15 +424,17 @@ public class DuAn extends javax.swing.JPanel {
                                 .addComponent(jLabel1))
                             .addGap(40, 40, 40)
                             .addGroup(jPQLDuAnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPQLDuAnLayout.createSequentialGroup()
-                                    .addGap(485, 485, 485)
-                                    .addGroup(jPQLDuAnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPQLDuAnLayout.createSequentialGroup()
-                                            .addGap(72, 72, 72)
-                                            .addComponent(txtHoaHong, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPQLDuAnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPQLDuAnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPQLDuAnLayout.createSequentialGroup()
+                                        .addGap(557, 557, 557)
+                                        .addComponent(txtHoaHong, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPQLDuAnLayout.createSequentialGroup()
+                                        .addGap(485, 485, 485)
+                                        .addGroup(jPQLDuAnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(cbk_DangTK_DA)
-                                            .addComponent(txtNgayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(chooserNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(chooserNgayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(145, 145, 145)))
                                 .addGroup(jPQLDuAnLayout.createSequentialGroup()
                                     .addGroup(jPQLDuAnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addGroup(jPQLDuAnLayout.createSequentialGroup()
@@ -430,12 +452,9 @@ public class DuAn extends javax.swing.JPanel {
                                             .addGap(90, 90, 90)
                                             .addComponent(jLabel3))
                                         .addComponent(jLabel4))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                                    .addGroup(jPQLDuAnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(txtNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(jPQLDuAnLayout.createSequentialGroup()
-                                            .addComponent(cbk_ChuaTK_DA)
-                                            .addGap(18, 18, 18))))))))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbk_ChuaTK_DA)
+                                    .addGap(18, 18, 18))))))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         jPQLDuAnLayout.setVerticalGroup(
@@ -449,32 +468,40 @@ public class DuAn extends javax.swing.JPanel {
                     .addComponent(jLabel6)
                     .addComponent(txtHoaHong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbMaDA, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(jPQLDuAnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel3)
-                    .addComponent(txtTenDuAn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPQLDuAnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPQLDuAnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7)
+                        .addComponent(jLabel3)
+                        .addComponent(txtTenDuAn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(chooserNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
-                .addGroup(jPQLDuAnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(txtDiaDiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNgayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addGroup(jPQLDuAnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPQLDuAnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel4)
+                        .addComponent(txtDiaDiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(chooserNgayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
                 .addGroup(jPQLDuAnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbk_HoanThan_DA)
                     .addComponent(cbk_ChuaTK_DA)
                     .addComponent(cbk_DangTK_DA))
-                .addGap(51, 51, 51)
-                .addGroup(jPQLDuAnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDelete_DA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAdd_DA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReset_DA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUpdate_DA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addGroup(jPQLDuAnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPQLDuAnLayout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addGroup(jPQLDuAnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDelete_DA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAdd_DA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnReset_DA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnUpdate_DA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPQLDuAnLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(37, Short.MAX_VALUE))
         );
@@ -805,8 +832,8 @@ public class DuAn extends javax.swing.JPanel {
                 String diaDiem = txtDiaDiem.getText();
                 int gia = Integer.parseInt(txtGia.getText());
                 int hoaHong = Integer.parseInt(txtHoaHong.getText());
-                Date ngayBatDau = Date.valueOf(txtNgayBatDau.getText());
-                Date ngayKetThuc = Date.valueOf(txtNgayKetThuc.getText());
+                Date ngayBatDau = new Date(chooserNgayBatDau.getDate().getTime());
+                Date ngayKetThuc = new Date(chooserNgayKetThuc.getDate().getTime());
                 String trangThai="";
                 if(cbk_ChuaTK_DA.isSelected()){
                     trangThai = "Chưa triển khai";
@@ -858,8 +885,8 @@ public class DuAn extends javax.swing.JPanel {
                 try{
                     gia = Integer.parseInt(txtGia.getText());
                     hoaHong = Integer.parseInt(txtHoaHong.getText());
-                    ngayBatDau = Date.valueOf(txtNgayBatDau.getText());
-                    ngayKetThuc = Date.valueOf(txtNgayKetThuc.getText());
+                    ngayBatDau = new Date(chooserNgayBatDau.getDate().getTime());
+                    ngayKetThuc = new Date(chooserNgayKetThuc.getDate().getTime());
                     
                     daDAO.themDuAn(tenDA, diaDiem, gia, hoaHong, ngayBatDau, ngayKetThuc, trangThai);
                     JOptionPane.showMessageDialog(null, "Thêm thành công!");
@@ -903,8 +930,8 @@ public class DuAn extends javax.swing.JPanel {
             txtDiaDiem.setText(da.getDiaDiem());
             txtGia.setText(String.valueOf(da.getGia()));
             txtHoaHong.setText(String.valueOf(da.getHoaHong()));
-            txtNgayBatDau.setText(da.getNgayBatDau().toString());
-            txtNgayKetThuc.setText(da.getNgayKetThuc().toString());
+            chooserNgayBatDau.setDate(da.getNgayBatDau());
+            chooserNgayKetThuc.setDate(da.getNgayKetThuc());
             switch (da.getTrangThai()) {
                 case "Hoàn thành":
                     cbk_HoanThan_DA.setSelected(true);
@@ -930,8 +957,8 @@ public class DuAn extends javax.swing.JPanel {
             txtDiaDiem.setText(tbl_QuanLyDuAn.getValueAt(row, 2).toString());
             txtGia.setText(tbl_QuanLyDuAn.getValueAt(row, 3).toString());
             txtHoaHong.setText(tbl_QuanLyDuAn.getValueAt(row, 4).toString());
-            txtNgayBatDau.setText(tbl_QuanLyDuAn.getValueAt(row, 5).toString());
-            txtNgayKetThuc.setText(tbl_QuanLyDuAn.getValueAt(row, 6).toString());
+            chooserNgayBatDau.setDate((Date)tbl_QuanLyDuAn.getValueAt(row, 5));
+            chooserNgayKetThuc.setDate((Date)tbl_QuanLyDuAn.getValueAt(row, 6));
             if(tbl_QuanLyDuAn.getValueAt(row, 7).toString().equals("Hoàn thành")){
                 cbk_HoanThan_DA.setSelected(true);
             }else if(tbl_QuanLyDuAn.getValueAt(row, 7).toString().equals("Đang triển khai")){
@@ -1013,6 +1040,10 @@ public class DuAn extends javax.swing.JPanel {
         loadTenDAToCB_DA();
     }//GEN-LAST:event_clickToUpdateData
 
+    private void txtHoaHongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHoaHongActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtHoaHongActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private util.ButtonGradient btnAdd_DA;
@@ -1029,6 +1060,8 @@ public class DuAn extends javax.swing.JPanel {
     private javax.swing.JCheckBox cbk_ChuaTK_DA;
     private javax.swing.JCheckBox cbk_DangTK_DA;
     private javax.swing.JCheckBox cbk_HoanThan_DA;
+    private com.toedter.calendar.JDateChooser chooserNgayBatDau;
+    private com.toedter.calendar.JDateChooser chooserNgayKetThuc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -1042,6 +1075,7 @@ public class DuAn extends javax.swing.JPanel {
     private javax.swing.JPanel jPQLDuAn;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -1052,8 +1086,6 @@ public class DuAn extends javax.swing.JPanel {
     private javax.swing.JTextField txtDiaDiem;
     private javax.swing.JTextField txtGia;
     private javax.swing.JTextField txtHoaHong;
-    private javax.swing.JTextField txtNgayBatDau;
-    private javax.swing.JTextField txtNgayKetThuc;
     public static javax.swing.JTextField txtPhanCongDuAn;
     public static javax.swing.JTextField txtQuanLyDuAn;
     private javax.swing.JTextField txtTenDuAn;

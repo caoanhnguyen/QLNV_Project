@@ -40,7 +40,7 @@ public class SuaNVTV extends javax.swing.JFrame {
         
         txtMaNVTV.setText(nvtv.getMaNVTV());
         txtHoTenTV.setText(nvtv.getHoTen());
-        txtNgaySinh_TV.setText(nvtv.getNgaySinh().toString());
+        chooserNgaySinh.setDate(nvtv.getNgaySinh());
         txtCCCD_TV.setText(nvtv.getCMND_CCCD());
         cbMaLTV.setSelectedItem(nvtv.getMaLuongTV());
         txtViTriTV.setText(nvtv.getViTriThuViec());
@@ -81,7 +81,6 @@ public class SuaNVTV extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         txtHoTenTV = new javax.swing.JTextField();
-        txtNgaySinh_TV = new javax.swing.JTextField();
         txtCCCD_TV = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -99,6 +98,7 @@ public class SuaNVTV extends javax.swing.JFrame {
         cbMaLTV = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         txtMaNVTV = new javax.swing.JTextField();
+        chooserNgaySinh = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,8 +118,6 @@ public class SuaNVTV extends javax.swing.JFrame {
         jLabel11.setText("Ghi chú");
 
         txtHoTenTV.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        txtNgaySinh_TV.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         txtCCCD_TV.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -198,6 +196,8 @@ public class SuaNVTV extends javax.swing.JFrame {
         txtMaNVTV.setEditable(false);
         txtMaNVTV.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        chooserNgaySinh.setDateFormatString("yyyy-MM-dd");
+
         javax.swing.GroupLayout pnThongTinNhanVienThuViecLayout = new javax.swing.GroupLayout(pnThongTinNhanVienThuViec);
         pnThongTinNhanVienThuViec.setLayout(pnThongTinNhanVienThuViecLayout);
         pnThongTinNhanVienThuViecLayout.setHorizontalGroup(
@@ -225,42 +225,34 @@ public class SuaNVTV extends javax.swing.JFrame {
                             .addComponent(jLabel10)
                             .addComponent(jLabel12))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnThongTinNhanVienThuViecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnThongTinNhanVienThuViecLayout.createSequentialGroup()
+                        .addGroup(pnThongTinNhanVienThuViecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnThongTinNhanVienThuViecLayout.createSequentialGroup()
                                 .addGroup(pnThongTinNhanVienThuViecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pnThongTinNhanVienThuViecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(txtHoTenTV)
-                                        .addComponent(txtNgaySinh_TV)
                                         .addComponent(txtCCCD_TV)
-                                        .addComponent(cbMaLTV, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(cbMaLTV, javax.swing.GroupLayout.Alignment.TRAILING, 0, 180, Short.MAX_VALUE)
+                                        .addComponent(chooserNgaySinh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(txtViTriTV, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(pnThongTinNhanVienThuViecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(20, 20, 20)
+                                .addGroup(pnThongTinNhanVienThuViecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(pnThongTinNhanVienThuViecLayout.createSequentialGroup()
-                                        .addGap(20, 20, 20)
+                                        .addComponent(jLabel19)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtSoThangTV, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(pnThongTinNhanVienThuViecLayout.createSequentialGroup()
                                         .addGroup(pnThongTinNhanVienThuViecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(jLabel16)
-                                            .addComponent(jLabel14)))
-                                    .addGroup(pnThongTinNhanVienThuViecLayout.createSequentialGroup()
+                                            .addComponent(jLabel17)
+                                            .addComponent(jLabel14)
+                                            .addComponent(jLabel7))
+                                        .addGap(18, 18, 18)
                                         .addGroup(pnThongTinNhanVienThuViecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(pnThongTinNhanVienThuViecLayout.createSequentialGroup()
-                                                .addGap(45, 45, 45)
-                                                .addComponent(jLabel17)
-                                                .addGap(21, 21, 21))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnThongTinNhanVienThuViecLayout.createSequentialGroup()
-                                                .addGroup(pnThongTinNhanVienThuViecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
-                                                .addGap(18, 18, 18)))
-                                        .addGroup(pnThongTinNhanVienThuViecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtSoThangTV, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(pnThongTinNhanVienThuViecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(txtHocVanTV)
-                                                .addComponent(txtSDT_TV, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(pnThongTinNhanVienThuViecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(txtMaNVTV, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(cbGioiTinhTV, javax.swing.GroupLayout.Alignment.LEADING, 0, 103, Short.MAX_VALUE))))))
-                            .addComponent(txtGhiChuTV, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(txtMaNVTV, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtSDT_TV, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtHocVanTV, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cbGioiTinhTV, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(txtGhiChuTV))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         pnThongTinNhanVienThuViecLayout.setVerticalGroup(
@@ -274,24 +266,35 @@ public class SuaNVTV extends javax.swing.JFrame {
                     .addComponent(txtHoTenTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(txtMaNVTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addGap(19, 19, 19)
                 .addGroup(pnThongTinNhanVienThuViecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnThongTinNhanVienThuViecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbGioiTinhTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel14))
                     .addGroup(pnThongTinNhanVienThuViecLayout.createSequentialGroup()
-                        .addGroup(pnThongTinNhanVienThuViecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txtNgaySinh_TV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
+                        .addGroup(pnThongTinNhanVienThuViecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnThongTinNhanVienThuViecLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel5))
+                            .addComponent(chooserNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(pnThongTinNhanVienThuViecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(txtCCCD_TV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtCCCD_TV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel16)
+                            .addComponent(txtSDT_TV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)
                         .addGroup(pnThongTinNhanVienThuViecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(cbMaLTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbMaLTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel17)
+                            .addComponent(txtHocVanTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27)
                         .addGroup(pnThongTinNhanVienThuViecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
-                            .addComponent(txtViTriTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtViTriTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel19)
+                            .addComponent(txtSoThangTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
                         .addGroup(pnThongTinNhanVienThuViecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtGhiChuTV, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -299,31 +302,15 @@ public class SuaNVTV extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(pnThongTinNhanVienThuViecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bttSua_SuaNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bttHuy_ThemSinhVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnThongTinNhanVienThuViecLayout.createSequentialGroup()
-                        .addGroup(pnThongTinNhanVienThuViecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel14)
-                            .addComponent(cbGioiTinhTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
-                        .addGroup(pnThongTinNhanVienThuViecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel16)
-                            .addComponent(txtSDT_TV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
-                        .addGroup(pnThongTinNhanVienThuViecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel17)
-                            .addComponent(txtHocVanTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
-                        .addGroup(pnThongTinNhanVienThuViecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel19)
-                            .addComponent(txtSoThangTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(43, Short.MAX_VALUE))
+                            .addComponent(bttHuy_ThemSinhVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnThongTinNhanVienThuViec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnThongTinNhanVienThuViec, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,7 +352,7 @@ public class SuaNVTV extends javax.swing.JFrame {
             String maNVTV = txtMaNVTV.getText();
             try{
                 soThangTV = Integer.parseInt(txtSoThangTV.getText());
-                ngaySinh = (Date.valueOf(txtNgaySinh_TV.getText()));
+                ngaySinh = new Date(chooserNgaySinh.getDate().getTime());
                 nvtvDAO.updateNVTV(hoTen, ngaySinh, gioiTinh, CCCD, viTriThuViec, soThangTV, SDT, hocVan, maLuongTV, ghiChu, maNVTV);
                 
                 JOptionPane.showMessageDialog(null, "Update thành công!");
@@ -441,6 +428,7 @@ public class SuaNVTV extends javax.swing.JFrame {
     private util.ButtonGradient bttSua_SuaNhanVien;
     private javax.swing.JComboBox<String> cbGioiTinhTV;
     private javax.swing.JComboBox<String> cbMaLTV;
+    private com.toedter.calendar.JDateChooser chooserNgaySinh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -459,7 +447,6 @@ public class SuaNVTV extends javax.swing.JFrame {
     private javax.swing.JTextField txtHoTenTV;
     private javax.swing.JTextField txtHocVanTV;
     private javax.swing.JTextField txtMaNVTV;
-    private javax.swing.JTextField txtNgaySinh_TV;
     private javax.swing.JTextField txtSDT_TV;
     private javax.swing.JTextField txtSoThangTV;
     private javax.swing.JTextField txtViTriTV;

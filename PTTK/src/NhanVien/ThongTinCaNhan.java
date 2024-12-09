@@ -10,6 +10,7 @@ import DAO.NVDAO;
 import DAO.TinhLuongDAO;
 import java.awt.Color;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -47,6 +48,9 @@ public class ThongTinCaNhan extends javax.swing.JPanel {
         //set data
         setDataTTCN();
         setDataBLCN();
+        
+        tinhLuongList = tinhLuongDAO.getListTinhLuong();
+        loadDataToTableTinhLuong(tinhLuongList);
          
     }
     
@@ -185,10 +189,10 @@ public class ThongTinCaNhan extends javax.swing.JPanel {
         jScrollPane4 = new javax.swing.JScrollPane();
         tbl_TinhLuong = new javax.swing.JTable();
         btnXem_CCCN = new util.ButtonGradient();
-        cbThang_CCCN = new javax.swing.JComboBox<>();
-        cbNam_CCCN = new javax.swing.JComboBox<>();
         btnReset_CCCN = new util.ButtonGradient();
         btnChamCong = new util.ButtonGradient();
+        cbThang_CCCN = new com.toedter.calendar.JMonthChooser();
+        cbNam_CCCN = new com.toedter.calendar.JYearChooser();
         txtChamCongCaNhan = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -504,19 +508,6 @@ public class ThongTinCaNhan extends javax.swing.JPanel {
             }
         });
 
-        cbThang_CCCN.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        cbThang_CCCN.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        cbThang_CCCN.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        cbNam_CCCN.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        cbNam_CCCN.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016" }));
-        cbNam_CCCN.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        cbNam_CCCN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbNam_CCCNActionPerformed(evt);
-            }
-        });
-
         btnReset_CCCN.setText("Làm mới");
         btnReset_CCCN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnReset_CCCN.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -557,15 +548,15 @@ public class ThongTinCaNhan extends javax.swing.JPanel {
                 .addGap(19, 19, 19)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(28, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+            .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addComponent(jLabel25)
-                .addGap(28, 28, 28)
-                .addComponent(cbThang_CCCN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77)
-                .addComponent(jLabel26)
                 .addGap(18, 18, 18)
-                .addComponent(cbNam_CCCN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbThang_CCCN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbNam_CCCN, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnXem_CCCN, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58)
@@ -578,14 +569,16 @@ public class ThongTinCaNhan extends javax.swing.JPanel {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel25)
-                    .addComponent(jLabel26)
-                    .addComponent(cbThang_CCCN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbNam_CCCN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnXem_CCCN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReset_CCCN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnChamCong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel25)
+                        .addComponent(jLabel26)
+                        .addComponent(btnXem_CCCN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnReset_CCCN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnChamCong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(cbNam_CCCN, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                        .addComponent(cbThang_CCCN, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(48, 48, 48)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(40, Short.MAX_VALUE))
@@ -799,8 +792,8 @@ public class ThongTinCaNhan extends javax.swing.JPanel {
 
     private void btnXem_CCCNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXem_CCCNActionPerformed
         // TODO add your handling code here:
-        int thang = Integer.parseInt(cbThang_CCCN.getSelectedItem().toString());
-        int nam = Integer.parseInt(cbNam_CCCN.getSelectedItem().toString());
+        int thang = cbThang_CCCN.getMonth()+1;
+        int nam = cbNam_CCCN.getYear();
         tinhLuongList = tinhLuongDAO.getTinhLuongList(thang, nam);
         List<Model.TinhLuong> tinhLuong = new ArrayList<>();
         for(Model.TinhLuong tl: tinhLuongList){
@@ -812,10 +805,6 @@ public class ThongTinCaNhan extends javax.swing.JPanel {
         //load data lên bảng 
         loadDataToTableTinhLuong(tinhLuong);
     }//GEN-LAST:event_btnXem_CCCNActionPerformed
-
-    private void cbNam_CCCNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNam_CCCNActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbNam_CCCNActionPerformed
 
     private void btnReset_CCCNMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReset_CCCNMouseEntered
         btnReset_CCCN.setForeground(new Color(51, 0, 153));
@@ -840,12 +829,24 @@ public class ThongTinCaNhan extends javax.swing.JPanel {
 
     private void btnChamCongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChamCongActionPerformed
         // TODO add your handling code here:
-        List<Model.LSChamCong> lscc = lsccDAO.checkCC(LocalDate.now().toString(),maNV);
-        if(lscc.size()==0){
-             lsccDAO.addChamCong(maNV);
-             JOptionPane.showMessageDialog(panelGradient1, "Chấm công thành công!");
-        }else{
-            JOptionPane.showMessageDialog(panelGradient1, "Hôm nay đã chấm công! Hẹn gặp vào ngày mai.");
+        // Lấy thời gian hiện tại
+        LocalTime currentTime = LocalTime.now();
+
+        // Đặt thời gian giới hạn là 9h sáng (09:00)
+        LocalTime limitTime = LocalTime.of(9, 0);
+
+        // Kiểm tra nếu thời gian hiện tại trước 9h sáng
+        if (currentTime.isBefore(limitTime)) {
+            List<Model.LSChamCong> lscc = lsccDAO.checkCC(LocalDate.now().toString(), maNV);
+            if (lscc.size() == 0) {
+                lsccDAO.addChamCong(maNV);
+                JOptionPane.showMessageDialog(panelGradient1, "Chấm công thành công!");
+            } else {
+                JOptionPane.showMessageDialog(panelGradient1, "Hôm nay đã chấm công! Hẹn gặp vào ngày mai.");
+            }
+        } else {
+            // Nếu sau 9h sáng
+            JOptionPane.showMessageDialog(panelGradient1, "Không thể chấm công sau 9h sáng!");
         }
     }//GEN-LAST:event_btnChamCongActionPerformed
 
@@ -854,8 +855,8 @@ public class ThongTinCaNhan extends javax.swing.JPanel {
     private util.ButtonGradient btnChamCong;
     private util.ButtonGradient btnReset_CCCN;
     private util.ButtonGradient btnXem_CCCN;
-    private javax.swing.JComboBox<String> cbNam_CCCN;
-    private javax.swing.JComboBox<String> cbThang_CCCN;
+    private com.toedter.calendar.JYearChooser cbNam_CCCN;
+    private com.toedter.calendar.JMonthChooser cbThang_CCCN;
     private javax.swing.JLabel gt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;

@@ -6,7 +6,6 @@ package DAO;
 
 import Model.Luong;
 import Model.TinhLuong;
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.REUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,7 +40,7 @@ public class TinhLuongDAO {
         return 0;
     }
     
-    public List<Model.TinhLuong> getTinhLuongList(int thangInput,int namInput){
+    public List<Model.TinhLuong> getTinhLuongList(int thangInput, int namInput){
         List<Model.TinhLuong> tinhLuongList = new ArrayList<>();
         try(PreparedStatement pst = connection.prepareStatement(GET_TINH_LUONG_LIST)){
             pst.setInt(1, namInput);

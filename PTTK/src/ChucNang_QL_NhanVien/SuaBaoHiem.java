@@ -72,13 +72,13 @@ public class SuaBaoHiem extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        tfNgayCapSo = new javax.swing.JTextField();
         bttSua_SuaBaoHiem = new util.ButtonGradient();
         bttHuy_SuaBaoHiem = new util.ButtonGradient();
         tfMaNhanVien = new javax.swing.JTextField();
         tfNoiCap = new javax.swing.JTextField();
         tfGhiChu = new javax.swing.JTextField();
         cbMaBaoHiem = new javax.swing.JComboBox<>();
+        tfNgayCapSo = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,9 +101,6 @@ public class SuaBaoHiem extends javax.swing.JFrame {
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel14.setText("Nơi cấp");
-
-        tfNgayCapSo.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        tfNgayCapSo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         bttSua_SuaBaoHiem.setText("Sửa");
         bttSua_SuaBaoHiem.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -152,6 +149,8 @@ public class SuaBaoHiem extends javax.swing.JFrame {
             }
         });
 
+        tfNgayCapSo.setDateFormatString("yyyy-MM-dd");
+
         javax.swing.GroupLayout pnThongTinNhanVienLayout = new javax.swing.GroupLayout(pnThongTinNhanVien);
         pnThongTinNhanVien.setLayout(pnThongTinNhanVienLayout);
         pnThongTinNhanVienLayout.setHorizontalGroup(
@@ -181,8 +180,8 @@ public class SuaBaoHiem extends javax.swing.JFrame {
                                         .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING))
                                     .addGap(18, 18, 18)
                                     .addGroup(pnThongTinNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(tfNgayCapSo, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-                                        .addComponent(tfNoiCap))))
+                                        .addComponent(tfNoiCap)
+                                        .addComponent(tfNgayCapSo, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE))))
                             .addComponent(tfGhiChu)))
                     .addGroup(pnThongTinNhanVienLayout.createSequentialGroup()
                         .addGap(163, 163, 163)
@@ -197,11 +196,12 @@ public class SuaBaoHiem extends javax.swing.JFrame {
                 .addGap(47, 47, 47)
                 .addComponent(jLabel2)
                 .addGap(44, 44, 44)
-                .addGroup(pnThongTinNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel13)
-                    .addComponent(tfNgayCapSo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbMaBaoHiem, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnThongTinNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnThongTinNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel13)
+                        .addComponent(cbMaBaoHiem, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfNgayCapSo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(pnThongTinNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -259,7 +259,7 @@ public class SuaBaoHiem extends javax.swing.JFrame {
             String maBaoHiem = cbMaBaoHiem.getSelectedItem().toString();
             try{
                 String noiCap = tfNoiCap.getText();
-                Date ngayCap = Date.valueOf(tfNgayCapSo.getText());
+                Date ngayCap = new Date(tfNgayCapSo.getDate().getTime());
                 String ghiChu = tfGhiChu.getText();
                 bhDAO.updateBaoHiem(noiCap, ngayCap, ghiChu, maBaoHiem);
                 
@@ -284,7 +284,7 @@ public class SuaBaoHiem extends javax.swing.JFrame {
         }else{
             Model.BaoHiem bh = bhDAO.getBaoHiemByMaBH(maBaoHiem);
             tfMaNhanVien.setText(bh.getMaNV());
-            tfNgayCapSo.setText(bh.getNgayCap().toString());
+            tfNgayCapSo.setDate(bh.getNgayCap());
             tfNoiCap.setText(bh.getNoiCap());
             tfGhiChu.setText(bh.getGhiChu());
         }
@@ -338,7 +338,7 @@ public class SuaBaoHiem extends javax.swing.JFrame {
     private util.PanelGradient pnThongTinNhanVien;
     private javax.swing.JTextField tfGhiChu;
     private javax.swing.JTextField tfMaNhanVien;
-    private javax.swing.JTextField tfNgayCapSo;
+    private com.toedter.calendar.JDateChooser tfNgayCapSo;
     private javax.swing.JTextField tfNoiCap;
     // End of variables declaration//GEN-END:variables
 }

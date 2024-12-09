@@ -66,7 +66,7 @@ public class ChamCong extends javax.swing.JPanel {
         tinhLuongDAO = new TinhLuongDAO();
         tinhLuongTVDAO = new TinhLuongTVDAO();
         kyLuatList = new ArrayList<>();
-        kyLuatList =kyLuatDAO.getListKyLuat();
+        kyLuatList = kyLuatDAO.getListKyLuat();
         tinhLuongList = tinhLuongDAO.getListTinhLuong();
         khenThuongList = new ArrayList<>();
         khenThuongList = khenThuongDAO.getListKhenThuong();
@@ -288,9 +288,7 @@ public class ChamCong extends javax.swing.JPanel {
         pnCCTV = new javax.swing.JPanel();
         txtBangQuanLyChamCongThuViec = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        cnMonth_CCTV = new javax.swing.JComboBox<>();
         jLabel16 = new javax.swing.JLabel();
-        cbYear_CCTV = new javax.swing.JComboBox<>();
         btnReset_CCTV = new util.ButtonGradient();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -299,6 +297,8 @@ public class ChamCong extends javax.swing.JPanel {
         btnDelete_CCTV = new util.ButtonGradient();
         btnUpdate_CCTV = new util.ButtonGradient();
         btnXuatFile_CCTV = new util.ButtonGradient();
+        cnMonth_CCTV = new com.toedter.calendar.JMonthChooser();
+        cbYear_CCTV = new com.toedter.calendar.JYearChooser();
         jP_KT_KL = new javax.swing.JPanel();
         txtThongTinKhenThuong = new javax.swing.JTextField();
         txtThongTinKyLuat = new javax.swing.JTextField();
@@ -780,26 +780,8 @@ public class ChamCong extends javax.swing.JPanel {
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         jLabel15.setText("Năm");
 
-        cnMonth_CCTV.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
-        cnMonth_CCTV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-        cnMonth_CCTV.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        cnMonth_CCTV.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cnMonth_CCTVActionPerformed(evt);
-            }
-        });
-
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
         jLabel16.setText("Tháng");
-
-        cbYear_CCTV.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
-        cbYear_CCTV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2015" }));
-        cbYear_CCTV.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        cbYear_CCTV.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbYear_CCTVActionPerformed(evt);
-            }
-        });
 
         btnReset_CCTV.setText("Làm mới");
         btnReset_CCTV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -932,12 +914,12 @@ public class ChamCong extends javax.swing.JPanel {
             .addGroup(pnCCTVLayout.createSequentialGroup()
                 .addGap(97, 97, 97)
                 .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cnMonth_CCTV, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(78, 78, 78)
+                .addGap(18, 18, 18)
+                .addComponent(cnMonth_CCTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(161, 161, 161)
                 .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbYear_CCTV, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(cbYear_CCTV, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnReset_CCTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(102, 102, 102))
@@ -954,12 +936,13 @@ public class ChamCong extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(txtBangQuanLyChamCongThuViec, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23)
-                .addGroup(pnCCTVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cnMonth_CCTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel16)
-                    .addComponent(cbYear_CCTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReset_CCTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnCCTVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnCCTVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel15)
+                        .addComponent(jLabel16)
+                        .addComponent(btnReset_CCTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cnMonth_CCTV, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbYear_CCTV, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 11, Short.MAX_VALUE))
@@ -1947,25 +1930,6 @@ public class ChamCong extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnAdd_CCActionPerformed
 
-    private void cnMonth_CCTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnMonth_CCTVActionPerformed
-        // TODO add your handling code here:
-        int thang =Integer.parseInt( cnMonth_CCTV.getSelectedItem().toString());
-        int nam = Integer.parseInt(cbYear_CCTV.getSelectedItem().toString());
-        tinhLuongTVList = tinhLuongTVDAO.getListTinhLuongTVByThangNam(thang, nam);
-        loadDataToTableTLTV(tinhLuongTVList);
-        
-        
-    }//GEN-LAST:event_cnMonth_CCTVActionPerformed
-
-    private void cbYear_CCTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbYear_CCTVActionPerformed
-        // TODO add your handling code here:
-        int thang =Integer.parseInt( cbThang.getSelectedItem().toString());
-        int nam = Integer.parseInt(cbNam.getSelectedItem().toString());
-        tinhLuongTVList = tinhLuongTVDAO.getListTinhLuongTVByThangNam(thang, nam);
-        
-        loadDataToTableTLTV(tinhLuongTVList);
-    }//GEN-LAST:event_cbYear_CCTVActionPerformed
-
     private void btnDelete_CCTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete_CCTVActionPerformed
         // TODO add your handling code here:
         int row = tblBangCongThuViec.getSelectedRow();
@@ -1987,7 +1951,9 @@ public class ChamCong extends javax.swing.JPanel {
 
     private void btnReset_CCTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReset_CCTVActionPerformed
         // TODO add your handling code here:
-        tinhLuongTVList = tinhLuongTVDAO.getListTinhLuongTV();
+        int thang = cnMonth_CCTV.getMonth()+1;
+        int nam = cbYear_CCTV.getYear();
+        tinhLuongTVList = tinhLuongTVDAO.getListTinhLuongTVByThangNam(thang, nam);
         loadDataToTableTLTV(tinhLuongTVList);
         
     }//GEN-LAST:event_btnReset_CCTVActionPerformed
@@ -2039,8 +2005,8 @@ public class ChamCong extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbMaThuong;
     private javax.swing.JComboBox<String> cbNam;
     private javax.swing.JComboBox<String> cbThang;
-    private javax.swing.JComboBox<String> cbYear_CCTV;
-    private javax.swing.JComboBox<String> cnMonth_CCTV;
+    private com.toedter.calendar.JYearChooser cbYear_CCTV;
+    private com.toedter.calendar.JMonthChooser cnMonth_CCTV;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

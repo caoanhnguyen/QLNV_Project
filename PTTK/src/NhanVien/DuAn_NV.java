@@ -6,6 +6,7 @@ package NhanVien;
 
 import DAO.DuAnDAO;
 import DAO.PCongDADAO;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -111,17 +112,17 @@ public class DuAn_NV extends javax.swing.JPanel {
         txtDiaDiem_XDA = new javax.swing.JTextField();
         txtGia_XDA = new javax.swing.JTextField();
         txtHoaHong_XDA = new javax.swing.JTextField();
-        txtNgayBatDau_XDA = new javax.swing.JTextField();
-        txtNgayKetThuc_XDA = new javax.swing.JTextField();
         cbMaDA = new javax.swing.JComboBox<>();
         txtTrangThai = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        chooserNgayBatDau = new com.toedter.calendar.JDateChooser();
+        chooserNgayKetThuc = new com.toedter.calendar.JDateChooser();
 
         jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
 
         txtXemDuAn.setBackground(new java.awt.Color(0, 153, 153));
         txtXemDuAn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtXemDuAn.setText("Dự án được phân công");
+        txtXemDuAn.setText(" Dự án được phân công");
         txtXemDuAn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtXemDuAnActionPerformed(evt);
@@ -196,14 +197,6 @@ public class DuAn_NV extends javax.swing.JPanel {
         txtHoaHong_XDA.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         txtHoaHong_XDA.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        txtNgayBatDau_XDA.setEditable(false);
-        txtNgayBatDau_XDA.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        txtNgayBatDau_XDA.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        txtNgayKetThuc_XDA.setEditable(false);
-        txtNgayKetThuc_XDA.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        txtNgayKetThuc_XDA.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
         cbMaDA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbMaDAActionPerformed(evt);
@@ -216,6 +209,10 @@ public class DuAn_NV extends javax.swing.JPanel {
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel8.setText("Trạng thái");
+
+        chooserNgayBatDau.setDateFormatString("yyyy-MM-dd");
+
+        chooserNgayKetThuc.setDateFormatString("yyyy-MM-dd");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -234,12 +231,8 @@ public class DuAn_NV extends javax.swing.JPanel {
                         .addGap(40, 40, 40)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(485, 485, 485)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(72, 72, 72)
-                                        .addComponent(txtHoaHong_XDA, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txtNgayKetThuc_XDA, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(557, 557, 557)
+                                .addComponent(txtHoaHong_XDA, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -258,9 +251,10 @@ public class DuAn_NV extends javax.swing.JPanel {
                                         .addGap(90, 90, 90)
                                         .addComponent(jLabel3)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtNgayBatDau_XDA, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(chooserNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(chooserNgayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(37, Short.MAX_VALUE))
             .addComponent(txtXemDuAn)
         );
@@ -274,19 +268,25 @@ public class DuAn_NV extends javax.swing.JPanel {
                     .addComponent(jLabel6)
                     .addComponent(txtHoaHong_XDA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbMaDA, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel3)
-                    .addComponent(txtTenDuAn_XDA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNgayBatDau_XDA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(txtDiaDiem_XDA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNgayKetThuc_XDA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel3)
+                            .addComponent(txtTenDuAn_XDA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(txtDiaDiem_XDA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(chooserNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addComponent(chooserNgayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtGia_XDA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -301,7 +301,7 @@ public class DuAn_NV extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1107, Short.MAX_VALUE)
+            .addGap(0, 1121, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -358,8 +358,8 @@ public class DuAn_NV extends javax.swing.JPanel {
             txtDiaDiem_XDA.setText(da.getDiaDiem());
             txtGia_XDA.setText(String.valueOf(da.getGia()));
             txtHoaHong_XDA.setText(String.valueOf(da.getHoaHong()));
-            txtNgayBatDau_XDA.setText(da.getNgayBatDau().toString());
-            txtNgayKetThuc_XDA.setText(da.getNgayKetThuc().toString());
+            chooserNgayBatDau.setDate(da.getNgayBatDau());
+            chooserNgayKetThuc.setDate(da.getNgayKetThuc());
             txtTrangThai.setText(da.getTrangThai());
         }
     }//GEN-LAST:event_cbMaDAActionPerformed
@@ -373,8 +373,8 @@ public class DuAn_NV extends javax.swing.JPanel {
             txtDiaDiem_XDA.setText(tbl_XemDuAn.getValueAt(row, 2).toString());
             txtGia_XDA.setText(tbl_XemDuAn.getValueAt(row, 3).toString());
             txtHoaHong_XDA.setText(tbl_XemDuAn.getValueAt(row, 4).toString());
-            txtNgayBatDau_XDA.setText(tbl_XemDuAn.getValueAt(row, 5).toString());
-            txtNgayKetThuc_XDA.setText(tbl_XemDuAn.getValueAt(row, 6).toString());
+            chooserNgayBatDau.setDate((Date)tbl_XemDuAn.getValueAt(row, 5));
+            chooserNgayKetThuc.setDate((Date)tbl_XemDuAn.getValueAt(row, 6));
             txtTrangThai.setText(tbl_XemDuAn.getValueAt(row, 7).toString());
         }
     }//GEN-LAST:event_clickToGetDataDA
@@ -382,6 +382,8 @@ public class DuAn_NV extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbMaDA;
+    private com.toedter.calendar.JDateChooser chooserNgayBatDau;
+    private com.toedter.calendar.JDateChooser chooserNgayKetThuc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -400,8 +402,6 @@ public class DuAn_NV extends javax.swing.JPanel {
     private javax.swing.JTextField txtDiaDiem_XDA;
     private javax.swing.JTextField txtGia_XDA;
     private javax.swing.JTextField txtHoaHong_XDA;
-    private javax.swing.JTextField txtNgayBatDau_XDA;
-    private javax.swing.JTextField txtNgayKetThuc_XDA;
     private javax.swing.JTextField txtTenDuAn_XDA;
     private javax.swing.JTextField txtTrangThai;
     public static javax.swing.JTextField txtXemDuAn;

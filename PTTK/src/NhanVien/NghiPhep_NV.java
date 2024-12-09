@@ -105,12 +105,12 @@ public class NghiPhep_NV extends javax.swing.JPanel {
         txtNhanVien = new javax.swing.JTextField();
         txtHoTen = new javax.swing.JTextField();
         txtLyDo = new javax.swing.JTextField();
-        txtTuNgay = new javax.swing.JTextField();
-        txtDenNgay = new javax.swing.JTextField();
         txtTrangThai = new javax.swing.JTextField();
         btnDangKy = new util.ButtonGradient();
         btnHuyDangKy = new util.ButtonGradient();
         btnReset = new util.ButtonGradient();
+        chooserNgayBatDau = new com.toedter.calendar.JDateChooser();
+        chooserNgayKetThuc = new com.toedter.calendar.JDateChooser();
 
         jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
 
@@ -188,12 +188,6 @@ public class NghiPhep_NV extends javax.swing.JPanel {
         txtLyDo.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         txtLyDo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        txtTuNgay.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        txtTuNgay.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        txtDenNgay.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        txtDenNgay.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
         txtTrangThai.setEditable(false);
         txtTrangThai.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         txtTrangThai.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -246,6 +240,10 @@ public class NghiPhep_NV extends javax.swing.JPanel {
             }
         });
 
+        chooserNgayBatDau.setDateFormatString("yyyy-MM-dd");
+
+        chooserNgayKetThuc.setDateFormatString("yyyy-MM-dd");
+
         javax.swing.GroupLayout jPDK_NPLayout = new javax.swing.GroupLayout(jPDK_NP);
         jPDK_NP.setLayout(jPDK_NPLayout);
         jPDK_NPLayout.setHorizontalGroup(
@@ -274,9 +272,9 @@ public class NghiPhep_NV extends javax.swing.JPanel {
                                 .addComponent(jLabel2)))
                         .addGap(18, 18, 18)
                         .addGroup(jPDK_NPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDenNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTuNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtLyDo, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtLyDo, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chooserNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chooserNgayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(104, Short.MAX_VALUE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(jPDK_NPLayout.createSequentialGroup()
@@ -294,17 +292,21 @@ public class NghiPhep_NV extends javax.swing.JPanel {
             .addGroup(jPDK_NPLayout.createSequentialGroup()
                 .addComponent(txtDangKyNghiPhep, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
-                .addGroup(jPDK_NPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(txtNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTuNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(jPDK_NPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel3)
-                    .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDenNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPDK_NPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPDK_NPLayout.createSequentialGroup()
+                        .addGroup(jPDK_NPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(txtNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24)
+                        .addGroup(jPDK_NPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel3)
+                            .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPDK_NPLayout.createSequentialGroup()
+                        .addComponent(chooserNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(chooserNgayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(24, 24, 24)
                 .addGroup(jPDK_NPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -427,14 +429,14 @@ public class NghiPhep_NV extends javax.swing.JPanel {
     private void btnDangKyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangKyActionPerformed
         // TODO add your handling code here
         
-        if(txtTuNgay.getText().isEmpty()||txtDenNgay.getText().isEmpty()||txtLyDo.getText().isEmpty()){
+        if(chooserNgayBatDau.getDateFormatString().isEmpty()||chooserNgayKetThuc.getDateFormatString().isEmpty()||txtLyDo.getText().isEmpty()){
             JOptionPane.showMessageDialog(panelGradient1, "Bạn chưa điền đầy đủ thông tin!");
         }else{
             try{
                 String maNV1 = txtNhanVien.getText();
                 String hoTen = txtHoTen.getText();
-                Date ngayBatDau = (Date.valueOf(txtTuNgay.getText()));
-                Date ngayKetThuc = (Date.valueOf(txtDenNgay.getText()));
+                Date ngayBatDau = new Date(chooserNgayBatDau.getDate().getTime());
+                Date ngayKetThuc = new Date(chooserNgayKetThuc.getDate().getTime());
                 String lyDo = txtLyDo.getText();
                 npDAO.themNghiPhep(maNV, hoTen, lyDo, ngayBatDau, ngayKetThuc);
                 JOptionPane.showMessageDialog(panelGradient1, "Đăng ký thành công!");
@@ -457,8 +459,8 @@ public class NghiPhep_NV extends javax.swing.JPanel {
         int row = tbl_DangKyNghiPhep.getSelectedRow();
         if(row>=-1){
             txtLyDo.setText(tbl_DangKyNghiPhep.getValueAt(row, 3).toString());
-            txtTuNgay.setText(tbl_DangKyNghiPhep.getValueAt(row, 4).toString());
-            txtDenNgay.setText(tbl_DangKyNghiPhep.getValueAt(row, 5).toString());
+            chooserNgayBatDau.setDate((Date)tbl_DangKyNghiPhep.getValueAt(row, 4));
+            chooserNgayKetThuc.setDate((Date)tbl_DangKyNghiPhep.getValueAt(row, 5));
             txtTrangThai.setText(tbl_DangKyNghiPhep.getValueAt(row, 6).toString());
         }
     }//GEN-LAST:event_clickToGetData
@@ -468,6 +470,8 @@ public class NghiPhep_NV extends javax.swing.JPanel {
     private util.ButtonGradient btnDangKy;
     private util.ButtonGradient btnHuyDangKy;
     private util.ButtonGradient btnReset;
+    private com.toedter.calendar.JDateChooser chooserNgayBatDau;
+    private com.toedter.calendar.JDateChooser chooserNgayKetThuc;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -482,11 +486,9 @@ public class NghiPhep_NV extends javax.swing.JPanel {
     private util.PanelGradient panelGradient1;
     private javax.swing.JTable tbl_DangKyNghiPhep;
     public static javax.swing.JTextField txtDangKyNghiPhep;
-    private javax.swing.JTextField txtDenNgay;
     private javax.swing.JTextField txtHoTen;
     private javax.swing.JTextField txtLyDo;
     private javax.swing.JTextField txtNhanVien;
     private javax.swing.JTextField txtTrangThai;
-    private javax.swing.JTextField txtTuNgay;
     // End of variables declaration//GEN-END:variables
 }
