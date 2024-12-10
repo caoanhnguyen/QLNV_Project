@@ -21,6 +21,7 @@ import Model.HoSoThuViec;
 import java.awt.Color;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -33,6 +34,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import phantichthietkehethong_nhom4.Phantichthietkehethong_nhom4;
+import util.ExportExcelUtil;
 
 /**
  *
@@ -920,11 +922,11 @@ public class NhanVien extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDeleteNVTVMouseExited
 
     private void btnXuatFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatFileActionPerformed
-
-        Xuatfile_NhanVien xfnv = new Xuatfile_NhanVien();
-        xfnv.setLocationRelativeTo(null);
-        xfnv.setVisible(true);
-        xfnv.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
+        LocalDate now = LocalDate.now();
+        int thang = now.getMonthValue();
+        int nam = now.getYear();
+        String fileName = "DanhSachNhanVien_Thang" + thang + "_Nam" + nam;
+        ExportExcelUtil.exportToExcel(tblThongTinChiTiet, fileName);
     }//GEN-LAST:event_btnXuatFileActionPerformed
 
     private void btnXuatFileMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXuatFileMouseExited

@@ -4,7 +4,6 @@
  */
 package Quanly;
 
-import ChucNang_QL_ChamCong.Xuatfile_BangCong;
 import DAO.LuongDAO;
 import DAO.NVDAO;
 import DAO.ThayDoiBLDAO;
@@ -962,15 +961,11 @@ public class BangLuong extends javax.swing.JPanel {
     }//GEN-LAST:event_btnReset_BTLActionPerformed
 
     private void btnXuatFile_BTLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatFile_BTLActionPerformed
-//        Xuatfile_BangCong xfbc = new Xuatfile_BangCong();
-//        xfbc.setLocationRelativeTo(null);
-//        xfbc.setResizable(false);
-//        xfbc.setVisible(true);
+
           int thang = cbThang_BTL.getMonth()+1;
           int nam = cbNam_BTL.getYear();
           String fileName = "BangTinhLuong_Thang" + thang + "_Nam" + nam;
-          ExportExcelUtil exportUtil = new ExportExcelUtil();
-          exportUtil.exportToExcel(tbl_BTL, fileName);
+          ExportExcelUtil.exportToExcel(tbl_BTL, fileName);
     }//GEN-LAST:event_btnXuatFile_BTLActionPerformed
 
     private void cbMaLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMaLuongActionPerformed

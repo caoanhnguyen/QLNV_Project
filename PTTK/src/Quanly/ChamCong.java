@@ -9,8 +9,6 @@ import ChucNang_QL_ChamCong.ChonNhanVien;
 import ChucNang_QL_ChamCong.DanhSachKhenThuong;
 import ChucNang_QL_ChamCong.DanhSachKyLuat;
 import ChucNang_QL_ChamCong.SuaCongNhanVienThuViec;
-import ChucNang_QL_ChamCong.Xuatfile_ChamCongNhanVienThuViec;
-import ChucNang_QL_NhanVien.Xuatfile_NhanVien;
 import DAO.ChamCongDAO;
 import DAO.DuAnDAO;
 import DAO.KhenThuongDAO;
@@ -30,6 +28,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import phantichthietkehethong_nhom4.Phantichthietkehethong_nhom4;
+import util.ExportExcelUtil;
 
 /**
  *
@@ -207,7 +206,7 @@ public class ChamCong extends javax.swing.JPanel {
             row[12] = tl.getGhiChu();
             dtm.addRow(row);
         }
-        tblChamCong.setModel(dtm);
+        tblThongTinChiTiet.setModel(dtm);
     }
     public void loadDataToTableTLTV(List<Model.TinhLuongTV> tinhLuongTVList){
         DefaultTableModel dtm = new DefaultTableModel();
@@ -273,7 +272,7 @@ public class ChamCong extends javax.swing.JPanel {
         txtTongLuong = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblChamCong = new javax.swing.JTable();
+        tblThongTinChiTiet = new javax.swing.JTable();
         btnSelectNV = new util.ButtonGradient();
         btnKTCC = new util.ButtonGradient();
         btnKLCC = new util.ButtonGradient();
@@ -282,9 +281,9 @@ public class ChamCong extends javax.swing.JPanel {
         btnReset_CC = new util.ButtonGradient();
         btnXuatFile_CC = new util.ButtonGradient();
         cbMaNV_CC = new javax.swing.JComboBox<>();
-        cbThang = new javax.swing.JComboBox<>();
-        cbNam = new javax.swing.JComboBox<>();
         jLabel22 = new javax.swing.JLabel();
+        cbThang_CC = new com.toedter.calendar.JMonthChooser();
+        cbNam_CC = new com.toedter.calendar.JYearChooser();
         pnCCTV = new javax.swing.JPanel();
         txtBangQuanLyChamCongThuViec = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
@@ -422,7 +421,7 @@ public class ChamCong extends javax.swing.JPanel {
         txtHHDA.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel11.setText("Số ngày công mặc định 26 ngày/tháng");
+        jLabel11.setText("Số ngày công mặc định 26 ");
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel12.setText("Số ngày");
@@ -452,7 +451,7 @@ public class ChamCong extends javax.swing.JPanel {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
-        tblChamCong.setModel(new javax.swing.table.DefaultTableModel(
+        tblThongTinChiTiet.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -463,19 +462,26 @@ public class ChamCong extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tblChamCong);
+        tblThongTinChiTiet.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tblThongTinChiTiet.setColumnSelectionAllowed(true);
+        tblThongTinChiTiet.setMinimumSize(new java.awt.Dimension(100, 80));
+        jScrollPane1.setViewportView(tblThongTinChiTiet);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 820, Short.MAX_VALUE)
+            .addGap(0, 895, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 895, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(0, 450, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         btnSelectNV.setText("Chọn nhân viên");
@@ -596,20 +602,6 @@ public class ChamCong extends javax.swing.JPanel {
             }
         });
 
-        cbThang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-        cbThang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbThangActionPerformed(evt);
-            }
-        });
-
-        cbNam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016" }));
-        cbNam.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbNamActionPerformed(evt);
-            }
-        });
-
         jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel22.setText("Năm");
 
@@ -649,56 +641,59 @@ public class ChamCong extends javax.swing.JPanel {
                         .addGap(6, 6, 6))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel10)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbThang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbThang_CC, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                         .addComponent(jLabel22)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbNam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbNam_CC, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jLabel11))
+                        .addGap(74, 74, 74)
+                        .addComponent(jLabel11)
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel14)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnTinhLuong, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnAdd_CC, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnReset_CC, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnXuatFile_CC, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnKTCC, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel12))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnKLCC, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel13)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtNghiKhongPhep, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                            .addComponent(txtTongLuong, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtSoNgay_CC))
-                        .addGap(22, 22, 22))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(txtQuanLyChamCong, javax.swing.GroupLayout.PREFERRED_SIZE, 1079, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btnKTCC, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel12))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btnKLCC, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel13)
+                                            .addComponent(jLabel14))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(txtSoNgay_CC, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                                        .addComponent(txtNghiKhongPhep, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(txtTongLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(70, 70, 70))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(448, 448, 448)
-                .addComponent(btnSelectNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnTinhLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(txtQuanLyChamCong))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAdd_CC, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnReset_CC, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnXuatFile_CC, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(448, 448, 448)
+                                .addComponent(btnSelectNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -707,7 +702,7 @@ public class ChamCong extends javax.swing.JPanel {
                 .addComponent(txtQuanLyChamCong, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSelectNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
@@ -743,27 +738,30 @@ public class ChamCong extends javax.swing.JPanel {
                     .addComponent(jLabel9)
                     .addComponent(txtHHDA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtPCCV_CC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
-                    .addComponent(cbThang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel22)
-                    .addComponent(cbNam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14)
-                    .addComponent(txtTongLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnTinhLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(130, 130, 130)
-                        .addComponent(btnAdd_CC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnReset_CC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnXuatFile_CC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(58, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel5)
+                                .addComponent(txtPCCV_CC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel10)
+                                .addComponent(jLabel22)
+                                .addComponent(jLabel14)
+                                .addComponent(txtTongLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbThang_CC, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(41, 41, 41)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnTinhLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(130, 130, 130)
+                                .addComponent(btnAdd_CC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnReset_CC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnXuatFile_CC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cbNam_CC, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Bảng công", jPanel1);
@@ -882,17 +880,17 @@ public class ChamCong extends javax.swing.JPanel {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1074, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addGap(65, 65, 65)
                 .addComponent(btnAddCong_CCTV, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(112, 112, 112)
                 .addComponent(btnDelete_CCTV, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                 .addComponent(btnUpdate_CCTV, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(106, 106, 106)
                 .addComponent(btnXuatFile_CCTV, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(68, 68, 68))
+            .addComponent(jScrollPane2)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -922,13 +920,13 @@ public class ChamCong extends javax.swing.JPanel {
                 .addComponent(cbYear_CCTV, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnReset_CCTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(102, 102, 102))
+                .addGap(202, 202, 202))
             .addGroup(pnCCTVLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(pnCCTVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtBangQuanLyChamCongThuViec))
-                .addContainerGap(22, Short.MAX_VALUE))
+                    .addComponent(txtBangQuanLyChamCongThuViec)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
         pnCCTVLayout.setVerticalGroup(
             pnCCTVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -939,13 +937,13 @@ public class ChamCong extends javax.swing.JPanel {
                 .addGroup(pnCCTVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnCCTVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel15)
-                        .addComponent(jLabel16)
-                        .addComponent(btnReset_CCTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel16))
                     .addComponent(cnMonth_CCTV, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbYear_CCTV, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbYear_CCTV, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReset_CCTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGap(0, 69, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Bảng công thử việc", pnCCTV);
@@ -1155,11 +1153,11 @@ public class ChamCong extends javax.swing.JPanel {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
@@ -1186,7 +1184,7 @@ public class ChamCong extends javax.swing.JPanel {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1214,14 +1212,18 @@ public class ChamCong extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jP_KT_KLLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jP_KT_KLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtThongTinKhenThuong, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                .addGroup(jP_KT_KLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtThongTinKyLuat, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(19, 19, 19))
-            .addGroup(jP_KT_KLLayout.createSequentialGroup()
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtThongTinKhenThuong))
+                .addGroup(jP_KT_KLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jP_KT_KLLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jP_KT_KLLayout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(txtThongTinKyLuat, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jP_KT_KLLayout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addGroup(jP_KT_KLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jP_KT_KLLayout.createSequentialGroup()
@@ -1231,7 +1233,16 @@ public class ChamCong extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(bttUpdate_KT, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnDelete_KT, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnDelete_KT, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(179, 179, 179)
+                        .addComponent(btnReset_KL, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAdd_KL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnUpdate_KL, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDelete_KL, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(74, 145, Short.MAX_VALUE))
                     .addGroup(jP_KT_KLLayout.createSequentialGroup()
                         .addGroup(jP_KT_KLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel18)
@@ -1241,28 +1252,18 @@ public class ChamCong extends javax.swing.JPanel {
                         .addGroup(jP_KT_KLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtLyDo_KT)
                             .addComponent(txtTienThuong_KT, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cbMaThuong, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jP_KT_KLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jP_KT_KLLayout.createSequentialGroup()
+                            .addComponent(cbMaThuong, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jP_KT_KLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtTienKL_KL, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jP_KT_KLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtTienKyLuat_KyLuat, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                            .addComponent(txtTienKyLuat_KyLuat)
                             .addComponent(txtLyDo_KL)
-                            .addComponent(cbKyLuat, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jP_KT_KLLayout.createSequentialGroup()
-                        .addComponent(btnReset_KL, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAdd_KL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnUpdate_KL, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDelete_KL, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(71, 71, 71))
+                            .addComponent(cbKyLuat, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(155, 155, 155))))
         );
         jP_KT_KLLayout.setVerticalGroup(
             jP_KT_KLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1303,7 +1304,7 @@ public class ChamCong extends javax.swing.JPanel {
                 .addGroup(jP_KT_KLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Khen thưởng/Kỷ luật", jP_KT_KL);
@@ -1312,7 +1313,10 @@ public class ChamCong extends javax.swing.JPanel {
         panelGradient1.setLayout(panelGradient1Layout);
         panelGradient1Layout.setHorizontalGroup(
             panelGradient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(panelGradient1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
         panelGradient1Layout.setVerticalGroup(
             panelGradient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1331,294 +1335,11 @@ public class ChamCong extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtQuanLyChamCongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuanLyChamCongActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtQuanLyChamCongActionPerformed
-
-    private void btnSelectNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectNVActionPerformed
-        ChonNhanVien cnv = new ChonNhanVien(this);
-        cnv.setLocationRelativeTo(null);
-        cnv.setResizable(false);
-        cnv.setVisible(true);
-        cnv.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
-    }//GEN-LAST:event_btnSelectNVActionPerformed
-
-    private void btnSelectNVMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSelectNVMouseEntered
-       btnSelectNV.setForeground(new Color(51, 0, 153));
-    }//GEN-LAST:event_btnSelectNVMouseEntered
-
-    private void btnSelectNVMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSelectNVMouseExited
-        setWhiteColor();
-    }//GEN-LAST:event_btnSelectNVMouseExited
-
-    private void btnTinhLuongMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTinhLuongMouseEntered
-        btnTinhLuong.setForeground(new Color(51, 0, 153));
-    }//GEN-LAST:event_btnTinhLuongMouseEntered
-
-    private void btnTinhLuongMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTinhLuongMouseExited
-        setWhiteColor();
-    }//GEN-LAST:event_btnTinhLuongMouseExited
-
-    private void btnAdd_CCMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdd_CCMouseEntered
-        btnAdd_CC.setForeground(new Color(51, 0, 153));
-    }//GEN-LAST:event_btnAdd_CCMouseEntered
-
-    private void btnAdd_CCMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdd_CCMouseExited
-        setWhiteColor();
-    }//GEN-LAST:event_btnAdd_CCMouseExited
-
-    private void btnReset_CCMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReset_CCMouseEntered
-       btnReset_CC.setForeground(new Color(51, 0, 153));
-    }//GEN-LAST:event_btnReset_CCMouseEntered
-
-    private void btnReset_CCMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReset_CCMouseExited
-        setWhiteColor();
-    }//GEN-LAST:event_btnReset_CCMouseExited
-
-    private void btnXuatFile_CCMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXuatFile_CCMouseEntered
-        btnXuatFile_CC.setForeground(new Color(51, 0, 153));
-    }//GEN-LAST:event_btnXuatFile_CCMouseEntered
-
-    private void btnXuatFile_CCMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXuatFile_CCMouseExited
-        setWhiteColor();
-    }//GEN-LAST:event_btnXuatFile_CCMouseExited
-
-    private void btnKTCCMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKTCCMouseEntered
-        btnKTCC.setForeground(new Color(51, 0, 153));
-    }//GEN-LAST:event_btnKTCCMouseEntered
-
-    private void btnKTCCMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKTCCMouseExited
-        setWhiteColor();
-    }//GEN-LAST:event_btnKTCCMouseExited
-
-    private void btnKLCCMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKLCCMouseEntered
-        btnKLCC.setForeground(new Color(51, 0, 153));
-    }//GEN-LAST:event_btnKLCCMouseEntered
-
-    private void btnKLCCMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKLCCMouseExited
-        setWhiteColor();
-    }//GEN-LAST:event_btnKLCCMouseExited
-
-    private void txtBangQuanLyChamCongThuViecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBangQuanLyChamCongThuViecActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBangQuanLyChamCongThuViecActionPerformed
-
-    private void txtThongTinKhenThuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtThongTinKhenThuongActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtThongTinKhenThuongActionPerformed
-
-    private void txtThongTinKyLuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtThongTinKyLuatActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtThongTinKyLuatActionPerformed
-
-    private void btnReset_CCTVMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReset_CCTVMouseEntered
-        btnReset_CCTV.setForeground(new Color(51, 0, 153));
-    }//GEN-LAST:event_btnReset_CCTVMouseEntered
-
-    private void btnReset_CCTVMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReset_CCTVMouseExited
-       setWhiteColor();
-    }//GEN-LAST:event_btnReset_CCTVMouseExited
-
-    private void btnAddCong_CCTVMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddCong_CCTVMouseEntered
-        btnAddCong_CCTV.setForeground(new Color(51, 0, 153));
-    }//GEN-LAST:event_btnAddCong_CCTVMouseEntered
-
-    private void btnAddCong_CCTVMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddCong_CCTVMouseExited
-       setWhiteColor();
-    }//GEN-LAST:event_btnAddCong_CCTVMouseExited
-
-    private void btnDelete_CCTVMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDelete_CCTVMouseEntered
-        btnDelete_CCTV.setForeground(new Color(51, 0, 153));
-    }//GEN-LAST:event_btnDelete_CCTVMouseEntered
-
-    private void btnDelete_CCTVMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDelete_CCTVMouseExited
-        setWhiteColor();
-    }//GEN-LAST:event_btnDelete_CCTVMouseExited
-
-    private void btnUpdate_CCTVMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdate_CCTVMouseEntered
-        btnUpdate_CCTV.setForeground(new Color(51, 0, 153));
-    }//GEN-LAST:event_btnUpdate_CCTVMouseEntered
-
-    private void btnUpdate_CCTVMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdate_CCTVMouseExited
-        setWhiteColor();
-    }//GEN-LAST:event_btnUpdate_CCTVMouseExited
-
-    private void btnXuatFile_CCTVMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXuatFile_CCTVMouseEntered
-        btnXuatFile_CCTV.setForeground(new Color(51, 0, 153));
-    }//GEN-LAST:event_btnXuatFile_CCTVMouseEntered
-
-    private void btnXuatFile_CCTVMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXuatFile_CCTVMouseExited
-        setWhiteColor();
-    }//GEN-LAST:event_btnXuatFile_CCTVMouseExited
-
-    private void btnReset_KTMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReset_KTMouseEntered
-        btnReset_KT.setForeground(new Color(51, 0, 153));
-    }//GEN-LAST:event_btnReset_KTMouseEntered
-
-    private void btnReset_KTMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReset_KTMouseExited
-        setWhiteColor();
-    }//GEN-LAST:event_btnReset_KTMouseExited
-
-    private void btnAdd_KTMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdd_KTMouseEntered
-        btnAdd_KT.setForeground(new Color(51, 0, 153));
-        
-    }//GEN-LAST:event_btnAdd_KTMouseEntered
-
-    private void btnAdd_KTMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdd_KTMouseExited
-        setWhiteColor();
-    }//GEN-LAST:event_btnAdd_KTMouseExited
-
-    private void bttUpdate_KTMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bttUpdate_KTMouseEntered
-        bttUpdate_KT.setForeground(new Color(51, 0, 153));
-    }//GEN-LAST:event_bttUpdate_KTMouseEntered
-
-    private void bttUpdate_KTMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bttUpdate_KTMouseExited
-        setWhiteColor();
-    }//GEN-LAST:event_bttUpdate_KTMouseExited
-
-    private void btnDelete_KTMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDelete_KTMouseEntered
-        btnDelete_KT.setForeground(new Color(51, 0, 153));
-    }//GEN-LAST:event_btnDelete_KTMouseEntered
-
-    private void btnDelete_KTMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDelete_KTMouseExited
-        setWhiteColor();
-    }//GEN-LAST:event_btnDelete_KTMouseExited
-
-    private void btnReset_KLMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReset_KLMouseEntered
-        btnReset_KL.setForeground(new Color(51, 0, 153));
-    }//GEN-LAST:event_btnReset_KLMouseEntered
-
-    private void btnReset_KLMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReset_KLMouseExited
-       setWhiteColor();
-    }//GEN-LAST:event_btnReset_KLMouseExited
-
-    private void btnAdd_KLMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdd_KLMouseEntered
-        btnAdd_KL.setForeground(new Color(51, 0, 153));
-    }//GEN-LAST:event_btnAdd_KLMouseEntered
-
-    private void btnAdd_KLMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdd_KLMouseExited
-        setWhiteColor();
-    }//GEN-LAST:event_btnAdd_KLMouseExited
-
-    private void btnUpdate_KLMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdate_KLMouseEntered
-        btnUpdate_KL.setForeground(new Color(51, 0, 153));
-    }//GEN-LAST:event_btnUpdate_KLMouseEntered
-
-    private void btnUpdate_KLMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdate_KLMouseExited
-       setWhiteColor();
-    }//GEN-LAST:event_btnUpdate_KLMouseExited
-
-    private void btnDelete_KLMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDelete_KLMouseEntered
-        btnDelete_KL.setForeground(new Color(51, 0, 153));
-    }//GEN-LAST:event_btnDelete_KLMouseEntered
-
-    private void btnDelete_KLMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDelete_KLMouseExited
-        setWhiteColor();
-    }//GEN-LAST:event_btnDelete_KLMouseExited
-
-    private void btnKTCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKTCCActionPerformed
-        DanhSachKhenThuong dskt = new DanhSachKhenThuong(this);
-        dskt.setLocationRelativeTo(null);
-        dskt.setResizable(false);
-        dskt.setVisible(true);
-        dskt.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
-        dskt.tfTongTien_DanhSachKhenThuong.setText(txtKhenThuong_CC.getText());
-    }//GEN-LAST:event_btnKTCCActionPerformed
-
-    private void btnKLCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKLCCActionPerformed
-        DanhSachKyLuat dskl = new DanhSachKyLuat(this);
-        dskl.setLocationRelativeTo(null);
-        dskl.setResizable(false);
-        dskl.setVisible(true);
-        dskl.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
-        dskl.tfTongTien_DanhSachKyLuat.setText(txtKyLuat_CC.getText());
-
-    }//GEN-LAST:event_btnKLCCActionPerformed
-
-    private void btnXuatFile_CCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatFile_CCActionPerformed
-        Xuatfile_NhanVien xfbc = new Xuatfile_NhanVien();
-        xfbc.setLocationRelativeTo(null);
-        xfbc.setVisible(true);
-        xfbc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
-    }//GEN-LAST:event_btnXuatFile_CCActionPerformed
-
-    private void btnAddCong_CCTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCong_CCTVActionPerformed
-        ChamCongNhanVienThuViec ccnvtv = new ChamCongNhanVienThuViec(this);
-        ccnvtv.setLocationRelativeTo(null);
-        ccnvtv.setResizable(false);
-        ccnvtv.setVisible(true);
-        ccnvtv.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
-    }//GEN-LAST:event_btnAddCong_CCTVActionPerformed
-
-    private void btnUpdate_CCTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate_CCTVActionPerformed
-        SuaCongNhanVienThuViec scnvtv = new SuaCongNhanVienThuViec(this);
-        scnvtv.setLocationRelativeTo(null);
-        scnvtv.setResizable(false);
-        int row = tblBangCongThuViec.getSelectedRow();
-        if(row >= 0){
-            scnvtv.setVisible(true);
-            scnvtv.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
-            scnvtv.txtMaNVSuaCongNV.setText(tblBangCongThuViec.getValueAt(row, 0).toString());
-            scnvtv.tfLuong_SCThuViec.setText(tblBangCongThuViec.getValueAt(row, 4).toString());
-            scnvtv.txtThang_SCThuViec.setText(tblBangCongThuViec.getValueAt(row, 2).toString());
-            scnvtv.txtNam_SCThuViec.setText(tblBangCongThuViec.getValueAt(row, 3).toString());
-            scnvtv.tfSoNgayCong_SCThuViec.setText(tblBangCongThuViec.getValueAt(row, 5).toString());
-            scnvtv.tfSoGioThem_SCThuViec.setText(tblBangCongThuViec.getValueAt(row, 6).toString());
-            scnvtv.tfGhiChu_SCThuViec.setText(tblBangCongThuViec.getValueAt(row, 8).toString());
-        }
-        else{
-            JOptionPane.showMessageDialog(panelGradient1, "Vui lòng chọn công cần sửa!");
-        }
-        
-    }//GEN-LAST:event_btnUpdate_CCTVActionPerformed
-
-    private void btnXuatFile_CCTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatFile_CCTVActionPerformed
-        Xuatfile_ChamCongNhanVienThuViec xfcc = new Xuatfile_ChamCongNhanVienThuViec();
-        xfcc.setLocationRelativeTo(null);
-        xfcc.setResizable(false);
-        xfcc.setVisible(true);
-        xfcc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
-    }//GEN-LAST:event_btnXuatFile_CCTVActionPerformed
-
-    private void cbMaNV_CCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMaNV_CCActionPerformed
-        // TODO add your handling code here:
-        String maNV = cbMaNV_CC.getSelectedItem().toString();
-        if(maNV.equalsIgnoreCase("")){
-            
-        }else{
-            int thang = Integer.parseInt(cbThang.getSelectedItem().toString());
-            int nam = Integer.parseInt(cbNam.getSelectedItem().toString());
-            
-            Model.NhanVien nv = nvDAO.getNVByMaNV(maNV);
-            Model.Luong luong = luongDAO.getLuongByMaNV(maNV);
-            txtMaPhong_CC.setText(nv.getMaPB());
-            txtMaLuong_CC.setText(nv.getMaLuong());  
-            txtLuongCB_CC.setText(String.valueOf(luong.getLuongCoBan()));
-            txtPCCV_CC.setText(Integer.toString(luong.getPhuCapCV()));
-            txtPCK_CC.setText(Integer.toString(luong.getPhuCapKhac()));
-            txtHHDA.setText(Integer.toString(duanDAO.hoaHongNVInDA(maNV,nam,thang)));
-            
-            int soNgayNghiPhep = nghiPhepDAO.getSoNgayNghiPhep(maNV, thang, nam);
-            int soNgayChamCong = chamCongDAO.getSoNgayChamCong(maNV, thang, nam);
-            txtSoNgay_CC.setText(String.valueOf(soNgayChamCong));
-            txtNghiKhongPhep.setText(String.valueOf(26-soNgayChamCong-soNgayNghiPhep));
-            
-        }
-    }//GEN-LAST:event_cbMaNV_CCActionPerformed
-
-    private void txtMaPhong_CCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaPhong_CCActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMaPhong_CCActionPerformed
-
-    private void txtMaLuong_CCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaLuong_CCActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMaLuong_CCActionPerformed
-
     private void cbKyLuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbKyLuatActionPerformed
         // TODO add your handling code here:
         String maKyLuat = cbKyLuat.getSelectedItem().toString();
         if(maKyLuat.equals("")){
-            
+
         }
         else{
             Model.kyLuat kl = kyLuatDAO.getKyLuatByMaKyLuat(maKyLuat);
@@ -1627,109 +1348,11 @@ public class ChamCong extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cbKyLuatActionPerformed
 
-    private void txtLyDo_KLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLyDo_KLActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtLyDo_KLActionPerformed
-
-    private void btnReset_KLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReset_KLActionPerformed
-        // TODO add your handling code here:
-        Phantichthietkehethong_nhom4.resetForm(jP_KT_KL);
-        txtThongTinKhenThuong.setText("Thông tin khen thưởng");
-        txtThongTinKyLuat.setText("Thông tin kỷ luật");
-        
-    }//GEN-LAST:event_btnReset_KLActionPerformed
-
-    private void btnAdd_KLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd_KLActionPerformed
-        // TODO add your handling code here:
-        String tienKL = txtTienKyLuat_KyLuat.getText();
-        String lyDo = txtLyDo_KL.getText();
-        int tienKyLuat;
-        if(tienKL.equalsIgnoreCase("") || lyDo.equalsIgnoreCase("")){
-            JOptionPane.showMessageDialog(panelGradient1, "Vui lòng điền đầy đủ thông tin");
-        }else{
-            if(kyLuatDAO.islyDoExists(lyDo)){
-                JOptionPane.showMessageDialog(panelGradient1, "Lý do kỉ luật đã tồn tại");
-            }
-            else{
-                try{
-                    tienKyLuat = Integer.parseInt(tienKL);                 
-                    kyLuatDAO.themKyLuat(tienKyLuat, lyDo);
-                    
-                    JOptionPane.showMessageDialog(panelGradient1, "Thêm thành công!");
-
-                    
-                    kyLuatList = kyLuatDAO.getListKyLuat();
-                    loadDataToTableKL(kyLuatList);
-                    loadMaKLToCB_CC();
-                }catch(NumberFormatException e){
-                    JOptionPane.showMessageDialog(null, "Error: Nhập thời gian là 1 số!", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
-                }catch(SQLException e){
-                    JOptionPane.showMessageDialog(null, "SQL error: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
-                }catch(Exception j){
-                    JOptionPane.showMessageDialog(null, "Error: " + j.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        }
-        
-        
-    }//GEN-LAST:event_btnAdd_KLActionPerformed
-
-    private void btnDelete_KLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete_KLActionPerformed
-        // TODO add your handling code here:
-        String maKyLuat = cbKyLuat.getSelectedItem().toString();
-        
-        int confirm = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xóa không?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
-
-        // Kiểm tra phản hồi của người dùng
-        if (confirm == JOptionPane.YES_OPTION) {
-            // Thực hiện hành động xóa
-            
-            kyLuatDAO.xoaKyLuat(maKyLuat);
-            kyLuatList = kyLuatDAO.getListKyLuat();
-            loadDataToTableKL(kyLuatList);
-            phantichthietkehethong_nhom4.Phantichthietkehethong_nhom4.resetForm(jP_KT_KL);
-
-            loadMaKLToCB_CC();
-            loadMaKLToCB_CC();
-        }
-        
-    }//GEN-LAST:event_btnDelete_KLActionPerformed
-
-    private void btnUpdate_KLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate_KLActionPerformed
-        // TODO add your handling code here:
-        String tienKyLuat = txtTienKyLuat_KyLuat.getText();
-        String lyDo = txtLyDo_KL.getText();
-        int tienKL;
-        String maKyLuat = cbKyLuat.getSelectedItem().toString();
-        if(tienKyLuat.equalsIgnoreCase("")|| lyDo.equalsIgnoreCase("")){
-            JOptionPane.showMessageDialog(panelGradient1, "Vui lòng điền đầy đủ thông tin");
-        }
-        else{
-            try{
-                tienKL = Integer.parseInt(tienKyLuat);
-                kyLuatDAO.suaKyLuat(maKyLuat,tienKL, lyDo);
-                
-                JOptionPane.showMessageDialog(panelGradient1, "Update thành công!");
-
-                
-                kyLuatList = kyLuatDAO.getListKyLuat();
-                loadDataToTableKL(kyLuatList);
-            }catch(NumberFormatException e){
-                JOptionPane.showMessageDialog(null, "Error: Nhập số tiền 1 số!", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
-            }catch(SQLException e){
-                JOptionPane.showMessageDialog(null, "SQL error: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
-            }catch(Exception j){
-                JOptionPane.showMessageDialog(null, "Error: " + j.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            
-        }
-    }//GEN-LAST:event_btnUpdate_KLActionPerformed
-
     private void cbMaThuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMaThuongActionPerformed
         // TODO add your handling code here:
         String maThuong = cbMaThuong.getSelectedItem().toString();
         if(maThuong.equals("")){
-            
+
         }
         else{
             Model.KhenThuong kt = khenThuongDAO.getKhenThuongByMaThuong(maThuong);
@@ -1738,12 +1361,62 @@ public class ChamCong extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cbMaThuongActionPerformed
 
-    private void btnReset_KTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReset_KTActionPerformed
+    private void clickToGetData(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickToGetData
         // TODO add your handling code here:
-        Phantichthietkehethong_nhom4.resetForm(jP_KT_KL);
-        txtThongTinKhenThuong.setText("Thông tin khen thưởng");
-        txtThongTinKyLuat.setText("Thông tin kỷ luật");
-    }//GEN-LAST:event_btnReset_KTActionPerformed
+        int row = tblKhenThuong.getSelectedRow();
+        if(row>=-1){
+            cbMaThuong.setSelectedItem(tblKhenThuong.getValueAt(row, 0).toString());
+            txtTienThuong_KT.setText(tblKhenThuong.getValueAt(row, 1).toString());
+            txtLyDo_KT.setText(tblKhenThuong.getValueAt(row, 2).toString());
+        }
+    }//GEN-LAST:event_clickToGetData
+
+    private void clickToGetDataKL(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickToGetDataKL
+        // TODO add your handling code here:
+        int row = tblKyLuat.getSelectedRow();
+        if(row>=-1){
+            cbKyLuat.setSelectedItem(tblKyLuat.getValueAt(row, 0).toString());
+            txtTienKyLuat_KyLuat.setText(tblKyLuat.getValueAt(row, 1).toString());
+            txtLyDo_KL.setText(tblKyLuat.getValueAt(row, 2).toString());
+        }
+    }//GEN-LAST:event_clickToGetDataKL
+
+    private void bttUpdate_KTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttUpdate_KTActionPerformed
+        // TODO add your handling code here:
+        String tienThuong = txtTienThuong_KT.getText();
+        String lyDo = txtLyDo_KT.getText();
+        int tienT;
+        String maThuong = cbMaThuong.getSelectedItem().toString();
+        if(tienThuong.equalsIgnoreCase("")|| lyDo.equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(panelGradient1, "Vui lòng điền đầy đủ thông tin");
+        }
+        else{
+            try{
+                tienT = Integer.parseInt(tienThuong);
+                khenThuongDAO.suaKhenThuong(maThuong, tienT, lyDo);
+
+                JOptionPane.showMessageDialog(panelGradient1, "Update thành công!");
+
+                khenThuongList = khenThuongDAO.getListKhenThuong();
+                loadDataToTableKT(khenThuongList);
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Error: Nhập tiền thưởng là 1 số!", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+            }catch(SQLException e){
+                JOptionPane.showMessageDialog(null, "SQL error: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
+            }catch(Exception j){
+                JOptionPane.showMessageDialog(null, "Error: " + j.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        }
+    }//GEN-LAST:event_bttUpdate_KTActionPerformed
+
+    private void bttUpdate_KTMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bttUpdate_KTMouseExited
+        setWhiteColor();
+    }//GEN-LAST:event_bttUpdate_KTMouseExited
+
+    private void bttUpdate_KTMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bttUpdate_KTMouseEntered
+        bttUpdate_KT.setForeground(new Color(51, 0, 153));
+    }//GEN-LAST:event_bttUpdate_KTMouseEntered
 
     private void btnAdd_KTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd_KTActionPerformed
         // TODO add your handling code here:
@@ -1761,10 +1434,9 @@ public class ChamCong extends javax.swing.JPanel {
                 try{
                     tienT = Integer.parseInt(tienThuong);
                     khenThuongDAO.themKhenThuong(tienT, lyDo);
-                    
+
                     JOptionPane.showMessageDialog(panelGradient1, "Thêm thành công!");
 
-                    
                     khenThuongList = khenThuongDAO.getListKhenThuong();
                     loadDataToTableKT(khenThuongList);
                     loadMaKTToCB_CC();
@@ -1779,40 +1451,113 @@ public class ChamCong extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnAdd_KTActionPerformed
 
-    private void bttUpdate_KTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttUpdate_KTActionPerformed
+    private void btnAdd_KTMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdd_KTMouseExited
+        setWhiteColor();
+    }//GEN-LAST:event_btnAdd_KTMouseExited
+
+    private void btnAdd_KTMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdd_KTMouseEntered
+        btnAdd_KT.setForeground(new Color(51, 0, 153));
+
+    }//GEN-LAST:event_btnAdd_KTMouseEntered
+
+    private void btnReset_KLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReset_KLActionPerformed
         // TODO add your handling code here:
-        String tienThuong = txtTienThuong_KT.getText();
-        String lyDo = txtLyDo_KT.getText();
-        int tienT;
-        String maThuong = cbMaThuong.getSelectedItem().toString();
-        if(tienThuong.equalsIgnoreCase("")|| lyDo.equalsIgnoreCase("")){
+        Phantichthietkehethong_nhom4.resetForm(jP_KT_KL);
+        txtThongTinKhenThuong.setText("Thông tin khen thưởng");
+        txtThongTinKyLuat.setText("Thông tin kỷ luật");
+
+    }//GEN-LAST:event_btnReset_KLActionPerformed
+
+    private void btnReset_KLMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReset_KLMouseExited
+        setWhiteColor();
+    }//GEN-LAST:event_btnReset_KLMouseExited
+
+    private void btnReset_KLMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReset_KLMouseEntered
+        btnReset_KL.setForeground(new Color(51, 0, 153));
+    }//GEN-LAST:event_btnReset_KLMouseEntered
+
+    private void btnAdd_KLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd_KLActionPerformed
+        // TODO add your handling code here:
+        String tienKL = txtTienKyLuat_KyLuat.getText();
+        String lyDo = txtLyDo_KL.getText();
+        int tienKyLuat;
+        if(tienKL.equalsIgnoreCase("") || lyDo.equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(panelGradient1, "Vui lòng điền đầy đủ thông tin");
+        }else{
+            if(kyLuatDAO.islyDoExists(lyDo)){
+                JOptionPane.showMessageDialog(panelGradient1, "Lý do kỉ luật đã tồn tại");
+            }
+            else{
+                try{
+                    tienKyLuat = Integer.parseInt(tienKL);
+                    kyLuatDAO.themKyLuat(tienKyLuat, lyDo);
+
+                    JOptionPane.showMessageDialog(panelGradient1, "Thêm thành công!");
+
+                    kyLuatList = kyLuatDAO.getListKyLuat();
+                    loadDataToTableKL(kyLuatList);
+                    loadMaKLToCB_CC();
+                }catch(NumberFormatException e){
+                    JOptionPane.showMessageDialog(null, "Error: Nhập thời gian là 1 số!", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+                }catch(SQLException e){
+                    JOptionPane.showMessageDialog(null, "SQL error: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
+                }catch(Exception j){
+                    JOptionPane.showMessageDialog(null, "Error: " + j.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+
+    }//GEN-LAST:event_btnAdd_KLActionPerformed
+
+    private void btnAdd_KLMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdd_KLMouseExited
+        setWhiteColor();
+    }//GEN-LAST:event_btnAdd_KLMouseExited
+
+    private void btnAdd_KLMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdd_KLMouseEntered
+        btnAdd_KL.setForeground(new Color(51, 0, 153));
+    }//GEN-LAST:event_btnAdd_KLMouseEntered
+
+    private void btnUpdate_KLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate_KLActionPerformed
+        // TODO add your handling code here:
+        String tienKyLuat = txtTienKyLuat_KyLuat.getText();
+        String lyDo = txtLyDo_KL.getText();
+        int tienKL;
+        String maKyLuat = cbKyLuat.getSelectedItem().toString();
+        if(tienKyLuat.equalsIgnoreCase("")|| lyDo.equalsIgnoreCase("")){
             JOptionPane.showMessageDialog(panelGradient1, "Vui lòng điền đầy đủ thông tin");
         }
         else{
             try{
-                tienT = Integer.parseInt(tienThuong);
-                khenThuongDAO.suaKhenThuong(maThuong, tienT, lyDo);
-                
+                tienKL = Integer.parseInt(tienKyLuat);
+                kyLuatDAO.suaKyLuat(maKyLuat,tienKL, lyDo);
+
                 JOptionPane.showMessageDialog(panelGradient1, "Update thành công!");
 
-                
-                khenThuongList = khenThuongDAO.getListKhenThuong();
-                loadDataToTableKT(khenThuongList);
+                kyLuatList = kyLuatDAO.getListKyLuat();
+                loadDataToTableKL(kyLuatList);
             }catch(NumberFormatException e){
-                JOptionPane.showMessageDialog(null, "Error: Nhập tiền thưởng là 1 số!", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Error: Nhập số tiền 1 số!", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
             }catch(SQLException e){
                 JOptionPane.showMessageDialog(null, "SQL error: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
             }catch(Exception j){
                 JOptionPane.showMessageDialog(null, "Error: " + j.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-                
+
         }
-    }//GEN-LAST:event_bttUpdate_KTActionPerformed
+    }//GEN-LAST:event_btnUpdate_KLActionPerformed
+
+    private void btnUpdate_KLMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdate_KLMouseExited
+        setWhiteColor();
+    }//GEN-LAST:event_btnUpdate_KLMouseExited
+
+    private void btnUpdate_KLMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdate_KLMouseEntered
+        btnUpdate_KL.setForeground(new Color(51, 0, 153));
+    }//GEN-LAST:event_btnUpdate_KLMouseEntered
 
     private void btnDelete_KTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete_KTActionPerformed
         // TODO add your handling code here:
         String maThuong = cbMaThuong.getSelectedItem().toString();
-        
+
         int confirm = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xóa không?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
 
         // Kiểm tra phản hồi của người dùng
@@ -1827,27 +1572,272 @@ public class ChamCong extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnDelete_KTActionPerformed
 
-    private void txtKhenThuong_CCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKhenThuong_CCActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtKhenThuong_CCActionPerformed
+    private void btnDelete_KTMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDelete_KTMouseExited
+        setWhiteColor();
+    }//GEN-LAST:event_btnDelete_KTMouseExited
 
-    private void cbThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbThangActionPerformed
+    private void btnDelete_KTMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDelete_KTMouseEntered
+        btnDelete_KT.setForeground(new Color(51, 0, 153));
+    }//GEN-LAST:event_btnDelete_KTMouseEntered
+
+    private void btnReset_KTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReset_KTActionPerformed
         // TODO add your handling code here:
-        int thang = Integer.parseInt(cbThang.getSelectedItem().toString());
-        int nam = Integer.parseInt(cbNam.getSelectedItem().toString());
+        Phantichthietkehethong_nhom4.resetForm(jP_KT_KL);
+        txtThongTinKhenThuong.setText("Thông tin khen thưởng");
+        txtThongTinKyLuat.setText("Thông tin kỷ luật");
+    }//GEN-LAST:event_btnReset_KTActionPerformed
+
+    private void btnReset_KTMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReset_KTMouseExited
+        setWhiteColor();
+    }//GEN-LAST:event_btnReset_KTMouseExited
+
+    private void btnReset_KTMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReset_KTMouseEntered
+        btnReset_KT.setForeground(new Color(51, 0, 153));
+    }//GEN-LAST:event_btnReset_KTMouseEntered
+
+    private void btnDelete_KLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete_KLActionPerformed
+        // TODO add your handling code here:
+        String maKyLuat = cbKyLuat.getSelectedItem().toString();
+
+        int confirm = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xóa không?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
+
+        // Kiểm tra phản hồi của người dùng
+        if (confirm == JOptionPane.YES_OPTION) {
+            // Thực hiện hành động xóa
+
+            kyLuatDAO.xoaKyLuat(maKyLuat);
+            kyLuatList = kyLuatDAO.getListKyLuat();
+            loadDataToTableKL(kyLuatList);
+            phantichthietkehethong_nhom4.Phantichthietkehethong_nhom4.resetForm(jP_KT_KL);
+
+            loadMaKLToCB_CC();
+            loadMaKLToCB_CC();
+        }
+
+    }//GEN-LAST:event_btnDelete_KLActionPerformed
+
+    private void btnDelete_KLMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDelete_KLMouseExited
+        setWhiteColor();
+    }//GEN-LAST:event_btnDelete_KLMouseExited
+
+    private void btnDelete_KLMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDelete_KLMouseEntered
+        btnDelete_KL.setForeground(new Color(51, 0, 153));
+    }//GEN-LAST:event_btnDelete_KLMouseEntered
+
+    private void txtLyDo_KLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLyDo_KLActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLyDo_KLActionPerformed
+
+    private void txtThongTinKyLuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtThongTinKyLuatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtThongTinKyLuatActionPerformed
+
+    private void txtThongTinKhenThuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtThongTinKhenThuongActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtThongTinKhenThuongActionPerformed
+
+    private void btnXuatFile_CCTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatFile_CCTVActionPerformed
+        int thang = cnMonth_CCTV.getMonth()+1;
+        int nam = cbYear_CCTV.getYear();
+        String fileName = "BangChamCongTV_Thang" + thang + "_Nam" + nam;
+        ExportExcelUtil.exportToExcel(tblBangCongThuViec, fileName);
+    }//GEN-LAST:event_btnXuatFile_CCTVActionPerformed
+
+    private void btnXuatFile_CCTVMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXuatFile_CCTVMouseExited
+        setWhiteColor();
+    }//GEN-LAST:event_btnXuatFile_CCTVMouseExited
+
+    private void btnXuatFile_CCTVMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXuatFile_CCTVMouseEntered
+        btnXuatFile_CCTV.setForeground(new Color(51, 0, 153));
+    }//GEN-LAST:event_btnXuatFile_CCTVMouseEntered
+
+    private void btnUpdate_CCTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate_CCTVActionPerformed
+        SuaCongNhanVienThuViec scnvtv = new SuaCongNhanVienThuViec(this);
+        scnvtv.setLocationRelativeTo(null);
+        scnvtv.setResizable(false);
+        int row = tblBangCongThuViec.getSelectedRow();
+        if(row >= 0){
+            scnvtv.setVisible(true);
+            scnvtv.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            scnvtv.txtMaNVSuaCongNV.setText(tblBangCongThuViec.getValueAt(row, 0).toString());
+            scnvtv.tfLuong_SCThuViec.setText(tblBangCongThuViec.getValueAt(row, 4).toString());
+            scnvtv.txtThang_SCThuViec.setText(tblBangCongThuViec.getValueAt(row, 2).toString());
+            scnvtv.txtNam_SCThuViec.setText(tblBangCongThuViec.getValueAt(row, 3).toString());
+            scnvtv.tfSoNgayCong_SCThuViec.setText(tblBangCongThuViec.getValueAt(row, 5).toString());
+            scnvtv.tfSoGioThem_SCThuViec.setText(tblBangCongThuViec.getValueAt(row, 6).toString());
+            scnvtv.tfGhiChu_SCThuViec.setText(tblBangCongThuViec.getValueAt(row, 8).toString());
+        }
+        else{
+            JOptionPane.showMessageDialog(panelGradient1, "Vui lòng chọn công cần sửa!");
+        }
+
+    }//GEN-LAST:event_btnUpdate_CCTVActionPerformed
+
+    private void btnUpdate_CCTVMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdate_CCTVMouseExited
+        setWhiteColor();
+    }//GEN-LAST:event_btnUpdate_CCTVMouseExited
+
+    private void btnUpdate_CCTVMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdate_CCTVMouseEntered
+        btnUpdate_CCTV.setForeground(new Color(51, 0, 153));
+    }//GEN-LAST:event_btnUpdate_CCTVMouseEntered
+
+    private void btnDelete_CCTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete_CCTVActionPerformed
+        // TODO add your handling code here:
+        int row = tblBangCongThuViec.getSelectedRow();
+        String maNVTV =(tblBangCongThuViec.getValueAt(row, 0).toString());
+        int thang = Integer.parseInt(tblBangCongThuViec.getValueAt(row, 2).toString());
+        int nam = Integer.parseInt(tblBangCongThuViec.getValueAt(row, 3).toString());
+        // Hiển thị hộp thoại xác nhận
+        int confirm = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xóa nhân viên này không?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
+
+        // Kiểm tra phản hồi của người dùng
+        if (confirm == JOptionPane.YES_OPTION) {
+            // Thực hiện hành động xóa
+            tinhLuongTVDAO.delTinhLuongTV(maNVTV, thang, nam);
+            tinhLuongTVList = tinhLuongTVDAO.getListTinhLuongTV();
+            loadDataToTableTLTV(tinhLuongTVList);
+
+        }
+    }//GEN-LAST:event_btnDelete_CCTVActionPerformed
+
+    private void btnDelete_CCTVMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDelete_CCTVMouseExited
+        setWhiteColor();
+    }//GEN-LAST:event_btnDelete_CCTVMouseExited
+
+    private void btnDelete_CCTVMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDelete_CCTVMouseEntered
+        btnDelete_CCTV.setForeground(new Color(51, 0, 153));
+    }//GEN-LAST:event_btnDelete_CCTVMouseEntered
+
+    private void btnAddCong_CCTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCong_CCTVActionPerformed
+        ChamCongNhanVienThuViec ccnvtv = new ChamCongNhanVienThuViec(this);
+        ccnvtv.setLocationRelativeTo(null);
+        ccnvtv.setResizable(false);
+        ccnvtv.setVisible(true);
+        ccnvtv.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_btnAddCong_CCTVActionPerformed
+
+    private void btnAddCong_CCTVMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddCong_CCTVMouseExited
+        setWhiteColor();
+    }//GEN-LAST:event_btnAddCong_CCTVMouseExited
+
+    private void btnAddCong_CCTVMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddCong_CCTVMouseEntered
+        btnAddCong_CCTV.setForeground(new Color(51, 0, 153));
+    }//GEN-LAST:event_btnAddCong_CCTVMouseEntered
+
+    private void btnReset_CCTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReset_CCTVActionPerformed
+        // TODO add your handling code here:
+        int thang = cnMonth_CCTV.getMonth()+1;
+        int nam = cbYear_CCTV.getYear();
+        tinhLuongTVList = tinhLuongTVDAO.getListTinhLuongTVByThangNam(thang, nam);
+        loadDataToTableTLTV(tinhLuongTVList);
+
+    }//GEN-LAST:event_btnReset_CCTVActionPerformed
+
+    private void btnReset_CCTVMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReset_CCTVMouseExited
+        setWhiteColor();
+    }//GEN-LAST:event_btnReset_CCTVMouseExited
+
+    private void btnReset_CCTVMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReset_CCTVMouseEntered
+        btnReset_CCTV.setForeground(new Color(51, 0, 153));
+    }//GEN-LAST:event_btnReset_CCTVMouseEntered
+
+    private void txtBangQuanLyChamCongThuViecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBangQuanLyChamCongThuViecActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBangQuanLyChamCongThuViecActionPerformed
+
+    private void cbMaNV_CCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMaNV_CCActionPerformed
+        // TODO add your handling code here:
         String maNV = cbMaNV_CC.getSelectedItem().toString();
-        int soNgayNghiPhep = nghiPhepDAO.getSoNgayNghiPhep(maNV, thang, nam);
-        int soNgayChamCong = chamCongDAO.getSoNgayChamCong(maNV, thang, nam);
-        txtSoNgay_CC.setText(String.valueOf(soNgayChamCong));
-        txtNghiKhongPhep.setText(String.valueOf(26-soNgayChamCong-soNgayNghiPhep));
-        txtHHDA.setText(Integer.toString(duanDAO.hoaHongNVInDA(maNV,nam,thang)));
+        if(maNV.equalsIgnoreCase("")){
 
+        }else{
+            int thang = cbThang_CC.getMonth()+1;
+            int nam = cbNam_CC.getYear();
 
-    }//GEN-LAST:event_cbThangActionPerformed
+            Model.NhanVien nv = nvDAO.getNVByMaNV(maNV);
+            Model.Luong luong = luongDAO.getLuongByMaNV(maNV);
+            txtMaPhong_CC.setText(nv.getMaPB());
+            txtMaLuong_CC.setText(nv.getMaLuong());
+            txtLuongCB_CC.setText(String.valueOf(luong.getLuongCoBan()));
+            txtPCCV_CC.setText(Integer.toString(luong.getPhuCapCV()));
+            txtPCK_CC.setText(Integer.toString(luong.getPhuCapKhac()));
+            txtHHDA.setText(Integer.toString(duanDAO.hoaHongNVInDA(maNV,nam,thang)));
 
-    private void txtSoNgay_CCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoNgay_CCActionPerformed
+            int soNgayNghiPhep = nghiPhepDAO.getSoNgayNghiPhep(maNV, thang, nam);
+            int soNgayChamCong = chamCongDAO.getSoNgayChamCong(maNV, thang, nam);
+            txtSoNgay_CC.setText(String.valueOf(soNgayChamCong));
+            txtNghiKhongPhep.setText(String.valueOf(26-soNgayChamCong-soNgayNghiPhep));
+
+        }
+    }//GEN-LAST:event_cbMaNV_CCActionPerformed
+
+    private void btnXuatFile_CCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatFile_CCActionPerformed
+        int thang = cbThang_CC.getMonth()+1;
+        int nam = cbNam_CC.getYear();
+        String fileName = "BangChamCong_Thang" + thang + "_Nam" + nam;
+        ExportExcelUtil.exportToExcel(tblThongTinChiTiet, fileName);
+    }//GEN-LAST:event_btnXuatFile_CCActionPerformed
+
+    private void btnXuatFile_CCMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXuatFile_CCMouseExited
+        setWhiteColor();
+    }//GEN-LAST:event_btnXuatFile_CCMouseExited
+
+    private void btnXuatFile_CCMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXuatFile_CCMouseEntered
+        btnXuatFile_CC.setForeground(new Color(51, 0, 153));
+    }//GEN-LAST:event_btnXuatFile_CCMouseEntered
+
+    private void btnReset_CCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReset_CCActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtSoNgay_CCActionPerformed
+        Phantichthietkehethong_nhom4.resetForm(jPanel1);
+        txtQuanLyChamCong.setText("Quản lý chấm công");
+    }//GEN-LAST:event_btnReset_CCActionPerformed
+
+    private void btnReset_CCMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReset_CCMouseExited
+        setWhiteColor();
+    }//GEN-LAST:event_btnReset_CCMouseExited
+
+    private void btnReset_CCMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReset_CCMouseEntered
+        btnReset_CC.setForeground(new Color(51, 0, 153));
+    }//GEN-LAST:event_btnReset_CCMouseEntered
+
+    private void btnAdd_CCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd_CCActionPerformed
+        // TODO add your handling code here:
+        if(Phantichthietkehethong_nhom4.kiemTraRong(jPanel1)){
+            String maNV = cbMaNV_CC.getSelectedItem().toString();
+            String maLuong = txtMaLuong_CC.getText();
+            int thang = cbThang_CC.getMonth()+1;
+            int nam = cbNam_CC.getYear();
+
+            int tienThuong = Integer.parseInt(txtKhenThuong_CC.getText());
+            int tienKyLuat = Integer.parseInt(txtKyLuat_CC.getText());
+            int hoaHong = Integer.parseInt(txtHHDA.getText());
+            int soNgayCong = Integer.parseInt(txtSoNgay_CC.getText());
+            int luongThucNhan = Integer.parseInt(txtTongLuong.getText());
+
+            Model.Luong luong = luongDAO.getLuongByMaLuong(maLuong);
+            System.out.println(luong.getMaLuong());
+            if(tinhLuongDAO.kiemTraTonTai(maNV, thang, nam)){
+                JOptionPane.showMessageDialog(panelGradient1, "Tháng "+thang +" năm" +nam + " đã chấm công rồi");
+            }
+            else{
+                tinhLuongDAO.them_Tinh_Luong(maNV, luong, thang, nam, tienThuong, tienKyLuat, hoaHong, soNgayCong, luongThucNhan,luong.getGhiChu());
+                JOptionPane.showMessageDialog(panelGradient1, "Thêm thành công");
+                tinhLuongList = tinhLuongDAO.getListTinhLuong();
+                loadDataToTableTL(tinhLuongList);
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(panelGradient1, "Vui lòng tính lương trước khi thêm!");
+        }
+    }//GEN-LAST:event_btnAdd_CCActionPerformed
+
+    private void btnAdd_CCMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdd_CCMouseExited
+        setWhiteColor();
+    }//GEN-LAST:event_btnAdd_CCMouseExited
+
+    private void btnAdd_CCMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdd_CCMouseEntered
+        btnAdd_CC.setForeground(new Color(51, 0, 153));
+    }//GEN-LAST:event_btnAdd_CCMouseEntered
 
     private void btnTinhLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTinhLuongActionPerformed
         // TODO add your handling code here:
@@ -1877,106 +1867,86 @@ public class ChamCong extends javax.swing.JPanel {
             int tongLuong = luongCoBan + phuCapCV + phuCapKhac + hoaHong + khenThuong - kyLuat - (soNgayNghiKhongPhep*200000);
             txtTongLuong.setText(String.valueOf(tongLuong));
         }
-        
+
     }//GEN-LAST:event_btnTinhLuongActionPerformed
 
-    private void cbNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNamActionPerformed
+    private void btnTinhLuongMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTinhLuongMouseExited
+        setWhiteColor();
+    }//GEN-LAST:event_btnTinhLuongMouseExited
+
+    private void btnTinhLuongMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTinhLuongMouseEntered
+        btnTinhLuong.setForeground(new Color(51, 0, 153));
+    }//GEN-LAST:event_btnTinhLuongMouseEntered
+
+    private void btnKLCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKLCCActionPerformed
+        DanhSachKyLuat dskl = new DanhSachKyLuat(this);
+        dskl.setLocationRelativeTo(null);
+        dskl.setResizable(false);
+        dskl.setVisible(true);
+        dskl.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        dskl.tfTongTien_DanhSachKyLuat.setText(txtKyLuat_CC.getText());
+    }//GEN-LAST:event_btnKLCCActionPerformed
+
+    private void btnKLCCMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKLCCMouseExited
+        setWhiteColor();
+    }//GEN-LAST:event_btnKLCCMouseExited
+
+    private void btnKLCCMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKLCCMouseEntered
+        btnKLCC.setForeground(new Color(51, 0, 153));
+    }//GEN-LAST:event_btnKLCCMouseEntered
+
+    private void btnKTCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKTCCActionPerformed
+        DanhSachKhenThuong dskt = new DanhSachKhenThuong(this);
+        dskt.setLocationRelativeTo(null);
+        dskt.setResizable(false);
+        dskt.setVisible(true);
+        dskt.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        dskt.tfTongTien_DanhSachKhenThuong.setText(txtKhenThuong_CC.getText());
+    }//GEN-LAST:event_btnKTCCActionPerformed
+
+    private void btnKTCCMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKTCCMouseExited
+        setWhiteColor();
+    }//GEN-LAST:event_btnKTCCMouseExited
+
+    private void btnKTCCMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKTCCMouseEntered
+        btnKTCC.setForeground(new Color(51, 0, 153));
+    }//GEN-LAST:event_btnKTCCMouseEntered
+
+    private void btnSelectNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectNVActionPerformed
+        ChonNhanVien cnv = new ChonNhanVien(this);
+        cnv.setLocationRelativeTo(null);
+        cnv.setResizable(false);
+        cnv.setVisible(true);
+        cnv.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_btnSelectNVActionPerformed
+
+    private void btnSelectNVMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSelectNVMouseExited
+        setWhiteColor();
+    }//GEN-LAST:event_btnSelectNVMouseExited
+
+    private void btnSelectNVMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSelectNVMouseEntered
+        btnSelectNV.setForeground(new Color(51, 0, 153));
+    }//GEN-LAST:event_btnSelectNVMouseEntered
+
+    private void txtSoNgay_CCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoNgay_CCActionPerformed
         // TODO add your handling code here:
-        int thang = Integer.parseInt(cbThang.getSelectedItem().toString());
-        int nam = Integer.parseInt(cbNam.getSelectedItem().toString());
-        String maNV = cbMaNV_CC.getSelectedItem().toString();
-        int soNgayNghiPhep = nghiPhepDAO.getSoNgayNghiPhep(maNV, thang, nam);
-        int soNgayChamCong = chamCongDAO.getSoNgayChamCong(maNV, thang, nam);
-        txtSoNgay_CC.setText(String.valueOf(soNgayChamCong));
-        txtNghiKhongPhep.setText(String.valueOf(26-soNgayChamCong-soNgayNghiPhep));
-    }//GEN-LAST:event_cbNamActionPerformed
+    }//GEN-LAST:event_txtSoNgay_CCActionPerformed
 
-    private void btnReset_CCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReset_CCActionPerformed
+    private void txtKhenThuong_CCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKhenThuong_CCActionPerformed
         // TODO add your handling code here:
-        Phantichthietkehethong_nhom4.resetForm(jPanel1);
-        txtQuanLyChamCong.setText("Quản lý chấm công");
-    }//GEN-LAST:event_btnReset_CCActionPerformed
+    }//GEN-LAST:event_txtKhenThuong_CCActionPerformed
 
-    private void btnAdd_CCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd_CCActionPerformed
+    private void txtMaLuong_CCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaLuong_CCActionPerformed
         // TODO add your handling code here:
-        if(Phantichthietkehethong_nhom4.kiemTraRong(jPanel1)){
-            String maNV = cbMaNV_CC.getSelectedItem().toString();
-            String maLuong = txtMaLuong_CC.getText();
-            int thang = Integer.parseInt(cbThang.getSelectedItem().toString());
-            int nam = Integer.parseInt(cbNam.getSelectedItem().toString());
-//            int luongCoBan = Integer.parseInt(txtLuongCB_CC.getText());
-//            int phuCapCV = Integer.parseInt(txtPCCV_CC.getText());
-//            int phuCapKhac = Integer.parseInt(txtPCK_CC.getText());
-            int tienThuong = Integer.parseInt(txtKhenThuong_CC.getText());
-            int tienKyLuat = Integer.parseInt(txtKyLuat_CC.getText());
-            int hoaHong = Integer.parseInt(txtHHDA.getText());
-            int soNgayCong = Integer.parseInt(txtSoNgay_CC.getText());
-            int luongThucNhan = Integer.parseInt(txtTongLuong.getText());
-            
-            Model.Luong luong = luongDAO.getLuongByMaLuong(maLuong);
-            System.out.println(luong.getMaLuong());
-            if(tinhLuongDAO.kiemTraTonTai(maNV, thang, nam)){
-                JOptionPane.showMessageDialog(panelGradient1, "Tháng "+thang +" năm" +nam + " đã chấm công rồi");
-            }
-            else{
-                tinhLuongDAO.them_Tinh_Luong(maNV, luong, thang, nam, tienThuong, tienKyLuat, hoaHong, soNgayCong, luongThucNhan,luong.getGhiChu());
-                JOptionPane.showMessageDialog(panelGradient1, "Thêm thành công");
-                tinhLuongList = tinhLuongDAO.getListTinhLuong();
-                loadDataToTableTL(tinhLuongList);
-            }
-        }
-        else{
-            JOptionPane.showMessageDialog(panelGradient1, "Vui lòng tính lương trước khi thêm!");
-        }
-    }//GEN-LAST:event_btnAdd_CCActionPerformed
+    }//GEN-LAST:event_txtMaLuong_CCActionPerformed
 
-    private void btnDelete_CCTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete_CCTVActionPerformed
+    private void txtMaPhong_CCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaPhong_CCActionPerformed
         // TODO add your handling code here:
-        int row = tblBangCongThuViec.getSelectedRow();
-        String maNVTV =(tblBangCongThuViec.getValueAt(row, 0).toString());
-        int thang = Integer.parseInt(tblBangCongThuViec.getValueAt(row, 2).toString());
-        int nam = Integer.parseInt(tblBangCongThuViec.getValueAt(row, 3).toString());
-        // Hiển thị hộp thoại xác nhận
-        int confirm = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xóa nhân viên này không?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
+    }//GEN-LAST:event_txtMaPhong_CCActionPerformed
 
-        // Kiểm tra phản hồi của người dùng
-        if (confirm == JOptionPane.YES_OPTION) {
-            // Thực hiện hành động xóa
-            tinhLuongTVDAO.delTinhLuongTV(maNVTV, thang, nam);
-            tinhLuongTVList = tinhLuongTVDAO.getListTinhLuongTV();
-            loadDataToTableTLTV(tinhLuongTVList);        
-
-        }
-    }//GEN-LAST:event_btnDelete_CCTVActionPerformed
-
-    private void btnReset_CCTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReset_CCTVActionPerformed
+    private void txtQuanLyChamCongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuanLyChamCongActionPerformed
         // TODO add your handling code here:
-        int thang = cnMonth_CCTV.getMonth()+1;
-        int nam = cbYear_CCTV.getYear();
-        tinhLuongTVList = tinhLuongTVDAO.getListTinhLuongTVByThangNam(thang, nam);
-        loadDataToTableTLTV(tinhLuongTVList);
-        
-    }//GEN-LAST:event_btnReset_CCTVActionPerformed
-
-    private void clickToGetData(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickToGetData
-        // TODO add your handling code here:
-        int row = tblKhenThuong.getSelectedRow();
-        if(row>=-1){
-            cbMaThuong.setSelectedItem(tblKhenThuong.getValueAt(row, 0).toString());
-            txtTienThuong_KT.setText(tblKhenThuong.getValueAt(row, 1).toString());
-            txtLyDo_KT.setText(tblKhenThuong.getValueAt(row, 2).toString());
-        }
-    }//GEN-LAST:event_clickToGetData
-
-    private void clickToGetDataKL(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickToGetDataKL
-        // TODO add your handling code here:
-        int row = tblKyLuat.getSelectedRow();
-        if(row>=-1){
-            cbKyLuat.setSelectedItem(tblKyLuat.getValueAt(row, 0).toString());
-            txtTienKyLuat_KyLuat.setText(tblKyLuat.getValueAt(row, 1).toString());
-            txtLyDo_KL.setText(tblKyLuat.getValueAt(row, 2).toString());
-        }
-    }//GEN-LAST:event_clickToGetDataKL
+    }//GEN-LAST:event_txtQuanLyChamCongActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2003,8 +1973,8 @@ public class ChamCong extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbKyLuat;
     public javax.swing.JComboBox<String> cbMaNV_CC;
     private javax.swing.JComboBox<String> cbMaThuong;
-    private javax.swing.JComboBox<String> cbNam;
-    private javax.swing.JComboBox<String> cbThang;
+    private com.toedter.calendar.JYearChooser cbNam_CC;
+    private com.toedter.calendar.JMonthChooser cbThang_CC;
     private com.toedter.calendar.JYearChooser cbYear_CCTV;
     private com.toedter.calendar.JMonthChooser cnMonth_CCTV;
     private javax.swing.JLabel jLabel1;
@@ -2044,9 +2014,9 @@ public class ChamCong extends javax.swing.JPanel {
     private util.PanelGradient panelGradient1;
     public static javax.swing.JPanel pnCCTV;
     public static javax.swing.JTable tblBangCongThuViec;
-    private javax.swing.JTable tblChamCong;
     private javax.swing.JTable tblKhenThuong;
     private javax.swing.JTable tblKyLuat;
+    private javax.swing.JTable tblThongTinChiTiet;
     public static javax.swing.JTextField txtBangQuanLyChamCongThuViec;
     public javax.swing.JTextField txtHHDA;
     public javax.swing.JTextField txtKhenThuong_CC;
