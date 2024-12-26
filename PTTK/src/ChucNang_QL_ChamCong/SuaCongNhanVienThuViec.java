@@ -272,7 +272,7 @@ public class SuaCongNhanVienThuViec extends javax.swing.JFrame {
 
     private void bttThem_SCThuViecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttThem_SCThuViecActionPerformed
         // TODO add your handling code here:
-        if(phantichthietkehethong_nhom4.Phantichthietkehethong_nhom4.kiemTraRong(panelGradient1)){
+        if(PTPM_NHOM18.PTPM_NHOM18.kiemTraRong(panelGradient1)){
             int soGioThem;
             int soNgayCong;
             String ghiChu = tfGhiChu_SCThuViec.getText();

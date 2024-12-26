@@ -33,7 +33,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
-import phantichthietkehethong_nhom4.Phantichthietkehethong_nhom4;
+import PTPM_NHOM18.PTPM_NHOM18;
 import util.ExportExcelUtil;
 
 /**
@@ -939,7 +939,7 @@ public class NhanVien extends javax.swing.JPanel {
     }//GEN-LAST:event_btnXuatFileMouseEntered
 
     private void btnResetNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetNVActionPerformed
-        Phantichthietkehethong_nhom4.resetForm(pnNhanVien);
+        PTPM_NHOM18.resetForm(pnNhanVien);
         txtThongTinChiTiet.setText("Thông tin chi tiết");
     }//GEN-LAST:event_btnResetNVActionPerformed
 

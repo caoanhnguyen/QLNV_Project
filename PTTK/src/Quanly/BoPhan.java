@@ -16,7 +16,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import phantichthietkehethong_nhom4.Phantichthietkehethong_nhom4;
+import PTPM_NHOM18.PTPM_NHOM18;
 import util.PanelGradient;
 
 /**
@@ -666,7 +666,7 @@ public class BoPhan extends javax.swing.JPanel {
         if(bpDAO.isTenBPExists(tenBP)){
             JOptionPane.showMessageDialog(null, "Tên bộ phận đã tồn tại!");
         }else{
-            if(Phantichthietkehethong_nhom4.kiemTraRong(jPBoPhan,cbMaBP_BP)){
+            if(PTPM_NHOM18.kiemTraRong(jPBoPhan,cbMaBP_BP)){
                 bpDAO.themBP(tenBP, ghiChu);
                 
                 JOptionPane.showMessageDialog(null, "Thêm thành công!");
@@ -676,7 +676,7 @@ public class BoPhan extends javax.swing.JPanel {
                 loadMaBPToCB_BP();
                 
                 //reset form
-                Phantichthietkehethong_nhom4.resetForm(jPBoPhan);
+                PTPM_NHOM18.resetForm(jPBoPhan);
                 txtQuanLyBoPhan.setText("Quản lý bộ phận");
             }else{
                 JOptionPane.showMessageDialog(null, "Bạn chưa điền đầy đủ thông tin!");
@@ -686,13 +686,13 @@ public class BoPhan extends javax.swing.JPanel {
 
     private void btnResetBPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetBPActionPerformed
         // TODO add your handling code here:
-        Phantichthietkehethong_nhom4.resetForm(jPBoPhan);
+        PTPM_NHOM18.resetForm(jPBoPhan);
         txtQuanLyBoPhan.setText("Quản lý bộ phận");
     }//GEN-LAST:event_btnResetBPActionPerformed
 
     private void btnUpdatePBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdatePBActionPerformed
         // TODO add your handling code here:
-        if(Phantichthietkehethong_nhom4.kiemTraRong(jPPB)){
+        if(PTPM_NHOM18.kiemTraRong(jPPB)){
             try{
                 String maPB = cbMaPB_PB.getSelectedItem().toString();
                 if(maPB.equals("")){
@@ -721,7 +721,7 @@ public class BoPhan extends javax.swing.JPanel {
 
     private void btnResetPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetPBActionPerformed
         // TODO add your handling code here:
-        Phantichthietkehethong_nhom4.resetForm(jPPB);
+        PTPM_NHOM18.resetForm(jPPB);
         txtQuanLyPhongBan.setText("Quản lý phòng ban");
         PBList = pbDAO.getPBList();
         loadDataToTablePB(PBList);
@@ -753,7 +753,7 @@ public class BoPhan extends javax.swing.JPanel {
         if(pbDAO.isTenPBExists(tenPB)){
             JOptionPane.showMessageDialog(null, "Tên phòng ban đã tồn tại!");
         }else{
-            if(Phantichthietkehethong_nhom4.kiemTraRong(jPPB,cbMaPB_PB)){
+            if(PTPM_NHOM18.kiemTraRong(jPPB,cbMaPB_PB)){
                 pbDAO.themPB(maBP,tenPB, ghiChu);
                 
                 JOptionPane.showMessageDialog(null, "Thêm thành công!");
@@ -764,7 +764,7 @@ public class BoPhan extends javax.swing.JPanel {
                 loadMaPBTo_PB();
                 
                 //reset form
-                Phantichthietkehethong_nhom4.resetForm(jPPB);
+                PTPM_NHOM18.resetForm(jPPB);
                 
             }else{
                 JOptionPane.showMessageDialog(null, "Bạn chưa điền đầy đủ thông tin!");

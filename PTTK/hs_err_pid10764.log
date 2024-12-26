@@ -198,7 +198,7 @@ Dynamic libraries:
 VM Arguments:
 jvm_args: -Dfile.encoding=UTF-8 
 java_command: Quanly.UIQuanLy
-java_class_path (initial): C:\java\Phantichthietkehethong_nhom4\build\classes
+java_class_path (initial): C:\java\PTPM_NHOM18\build\classes
 Launcher Type: SUN_STANDARD
 
 Environment Variables:

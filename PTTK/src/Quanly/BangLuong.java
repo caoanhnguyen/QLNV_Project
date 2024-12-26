@@ -15,8 +15,11 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import phantichthietkehethong_nhom4.Phantichthietkehethong_nhom4;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+import PTPM_NHOM18.PTPM_NHOM18;
 import util.ExportExcelUtil;
 
 /**
@@ -102,6 +105,21 @@ public class BangLuong extends javax.swing.JPanel {
         
     }
     
+    private void adjustColumnWidths(JTable myTable){
+        // Giả sử bảng của bạn có tên là "yourTableName"
+        JTable table = myTable;
+
+        // Lấy mô hình cột của bảng
+        TableColumnModel columnModel = table.getColumnModel();
+
+        // Lặp qua tất cả các cột để đặt chiều rộng nếu cần thiết
+        for (int i = 0; i < columnModel.getColumnCount(); i++) {
+            TableColumn column = columnModel.getColumn(i);
+            column.setPreferredWidth(120); // Bạn có thể tùy chỉnh giá trị này
+        }
+
+    }
+    
     private void loadDataToCB_MALUONG(){
         maLuongList = luongDAO.getMaLuongList();
         DefaultComboBoxModel<String> mode_pb = new DefaultComboBoxModel<>(maLuongList.toArray(new String[0]));
@@ -162,6 +180,8 @@ public class BangLuong extends javax.swing.JPanel {
             dtm.addRow(row);
         }
         tbl_BTL.setModel(dtm);
+        
+        adjustColumnWidths(tbl_BTL);
     }
     
     private void loadDataToTableTDBL(List<Model.ThayDoiBangLuong> tdblList){
@@ -236,7 +256,7 @@ public class BangLuong extends javax.swing.JPanel {
         jLabel16 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
         tbl_BTL = new javax.swing.JTable();
         btnXuatFile_BTL = new util.ButtonGradient();
         btnReset_BTL = new util.ButtonGradient();
@@ -319,11 +339,11 @@ public class BangLuong extends javax.swing.JPanel {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1056, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         btnAddLuong_BL.setText("Thêm lương mới");
@@ -435,17 +455,18 @@ public class BangLuong extends javax.swing.JPanel {
                         .addComponent(btnDelete_BL, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
                         .addComponent(btnReset_LM, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(19, 19, 19))
-            .addGroup(jPLuongLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtThongTinBangLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 1082, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPLuongLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtThongTinBangLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 1082, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPLuongLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         jPLuongLayout.setVerticalGroup(
             jPLuongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPLuongLayout.createSequentialGroup()
-                .addComponent(txtThongTinBangLuong, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                .addComponent(txtThongTinBangLuong, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
                 .addGap(34, 34, 34)
                 .addGroup(jPLuongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPLuongLayout.createSequentialGroup()
@@ -478,7 +499,7 @@ public class BangLuong extends javax.swing.JPanel {
                     .addComponent(btnDelete_BL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(59, 59, 59)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38))
+                .addGap(115, 115, 115))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -493,8 +514,7 @@ public class BangLuong extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPLuong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Bảng lương", jPanel2);
@@ -527,17 +547,26 @@ public class BangLuong extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane4.setViewportView(tbl_BTL);
+        tbl_BTL.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tbl_BTL.setColumnSelectionAllowed(true);
+        tbl_BTL.setMinimumSize(new java.awt.Dimension(100, 80));
+        jScrollPane1.setViewportView(tbl_BTL);
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1085, Short.MAX_VALUE)
+            .addGap(0, 1071, Short.MAX_VALUE)
+            .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1071, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE)
+            .addGap(0, 590, Short.MAX_VALUE)
+            .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel11Layout.createSequentialGroup()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 72, Short.MAX_VALUE)))
         );
 
         btnXuatFile_BTL.setText("Xuất file");
@@ -592,9 +621,9 @@ public class BangLuong extends javax.swing.JPanel {
                 .addGap(75, 75, 75))
             .addGroup(jPBangLuongLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPBangLuongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtBangTinhLuong))
+                .addGroup(jPBangLuongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBangTinhLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 1085, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPBangLuongLayout.setVerticalGroup(
@@ -616,7 +645,7 @@ public class BangLuong extends javax.swing.JPanel {
                         .addComponent(cbNam_BTL, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(28, 28, 28)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -631,8 +660,8 @@ public class BangLuong extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPBangLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPBangLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(282, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Bảng tính lương", jPanel3);
@@ -683,7 +712,7 @@ public class BangLuong extends javax.swing.JPanel {
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1084, Short.MAX_VALUE)
+            .addComponent(jScrollPane3)
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -732,8 +761,8 @@ public class BangLuong extends javax.swing.JPanel {
                     .addGroup(jPTDBLLayout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addGroup(jPTDBLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtThayDoiBangLuong)))
+                            .addComponent(txtThayDoiBangLuong, javax.swing.GroupLayout.DEFAULT_SIZE, 1084, Short.MAX_VALUE)
+                            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPTDBLLayout.createSequentialGroup()
                         .addGap(454, 454, 454)
                         .addComponent(btnUpdate_TDBL, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -816,7 +845,9 @@ public class BangLuong extends javax.swing.JPanel {
         );
         panelGradient1Layout.setVerticalGroup(
             panelGradient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGradient1Layout.createSequentialGroup()
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -888,7 +919,7 @@ public class BangLuong extends javax.swing.JPanel {
                     loadDataToCB_MALUONG();
 
                     //reset form
-                    Phantichthietkehethong_nhom4.resetForm(jPLuong);
+                    PTPM_NHOM18.resetForm(jPLuong);
                 }
             }catch(NumberFormatException e){
                 JOptionPane.showMessageDialog(null, "Error: Nhập lương và phụ cấp là 1 số!", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
@@ -914,7 +945,7 @@ public class BangLuong extends javax.swing.JPanel {
 
     private void btnUpdate_TDBLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate_TDBLActionPerformed
         // TODO add your handling code here:
-        if(Phantichthietkehethong_nhom4.kiemTraRong(jPTDBL)){
+        if(PTPM_NHOM18.kiemTraRong(jPTDBL)){
             String maNV = cbMaNV.getSelectedItem().toString();
             String maLuongCu = txtMaLuong_TDBL.getText();
             String maLuongMoi = cbMaLuongMoi.getSelectedItem().toString();
@@ -955,7 +986,7 @@ public class BangLuong extends javax.swing.JPanel {
 
     private void btnReset_BTLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReset_BTLActionPerformed
         // TODO add your handling code here:
-//        Phantichthietkehethong_nhom4.resetForm(jPBangLuong);
+//        PTPM_NHOM18.resetForm(jPBangLuong);
         tinhLuongList = tlDAO.getTinhLuongList(cbThang_BTL.getMonth()+1, cbNam_BTL.getYear());
         loadDataToTableTinhLuong(tinhLuongList);
     }//GEN-LAST:event_btnReset_BTLActionPerformed
@@ -971,7 +1002,7 @@ public class BangLuong extends javax.swing.JPanel {
     private void cbMaLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMaLuongActionPerformed
         // TODO add your handling code here:
         if(cbMaLuong.getSelectedItem().toString().equals("")){
-            Phantichthietkehethong_nhom4.resetForm(jPLuong);
+            PTPM_NHOM18.resetForm(jPLuong);
         }else{
             String maLuong = cbMaLuong.getSelectedItem().toString();
             Model.Luong luong = luongDAO.getLuongByMaLuong(maLuong);
@@ -984,7 +1015,7 @@ public class BangLuong extends javax.swing.JPanel {
 
     private void btnReset_LMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReset_LMActionPerformed
         // TODO add your handling code here:
-        Phantichthietkehethong_nhom4.resetForm(jPLuong);
+        PTPM_NHOM18.resetForm(jPLuong);
         txtGhiChu.setText("");
         txtThongTinBangLuong.setText("Thông tin bảng lương");
     }//GEN-LAST:event_btnReset_LMActionPerformed
@@ -1003,7 +1034,7 @@ public class BangLuong extends javax.swing.JPanel {
 
     private void btnAddLuong_BLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLuong_BLActionPerformed
         // TODO add your handling code here:
-        if(Phantichthietkehethong_nhom4.kiemTraRong(jPLuong,cbMaLuong)){
+        if(PTPM_NHOM18.kiemTraRong(jPLuong,cbMaLuong)){
             try{
                 int luongCB = Integer.parseInt(txtLuongCB_BL.getText());
                 int phuCapCV = Integer.parseInt(txtPCCV_BL.getText());
@@ -1030,7 +1061,7 @@ public class BangLuong extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddLuong_BLActionPerformed
 
     private void btnUpdate_BLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate_BLActionPerformed
-        if(!"".equals(txtGhiChu.getText()) && Phantichthietkehethong_nhom4.kiemTraRong(jPLuong)){
+        if(!"".equals(txtGhiChu.getText()) && PTPM_NHOM18.kiemTraRong(jPLuong)){
             try{
                 String maLuong = cbMaLuong.getSelectedItem().toString();
 
@@ -1102,9 +1133,9 @@ public class BangLuong extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private util.PanelGradient panelGradient1;

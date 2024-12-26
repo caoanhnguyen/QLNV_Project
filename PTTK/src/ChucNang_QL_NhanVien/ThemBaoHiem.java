@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import phantichthietkehethong_nhom4.Phantichthietkehethong_nhom4;
+import PTPM_NHOM18.PTPM_NHOM18;
 
 /**
  *
@@ -288,7 +288,7 @@ public class ThemBaoHiem extends javax.swing.JFrame {
 
     private void bttThem_ThemBaoHiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttThem_ThemBaoHiemActionPerformed
         // TODO add your handling code here:
-        if(Phantichthietkehethong_nhom4.kiemTraRong(pnThongTinBH,cbMaNV)){
+        if(PTPM_NHOM18.kiemTraRong(pnThongTinBH,cbMaNV)){
             try{
                 String maNV = cbMaNV.getSelectedItem().toString() == null ? " " : cbMaNV.getSelectedItem().toString();
                 String noiCap = tfNoiCap.getText();
@@ -301,7 +301,7 @@ public class ThemBaoHiem extends javax.swing.JFrame {
                     try{
                         bhDAO.themBaoHiem(maNV, noiCap, ngayCap, ghiChu);
                         JOptionPane.showMessageDialog(null, "Thêm thành công!");
-                        Phantichthietkehethong_nhom4.resetForm(pnThongTinBH);
+                        PTPM_NHOM18.resetForm(pnThongTinBH);
 
                         reLoadData();
                     }catch(SQLException e){

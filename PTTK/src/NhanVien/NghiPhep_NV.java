@@ -11,7 +11,7 @@ import java.sql.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import phantichthietkehethong_nhom4.Phantichthietkehethong_nhom4;
+import PTPM_NHOM18.PTPM_NHOM18;
 
 /**
  *
@@ -420,7 +420,7 @@ public class NghiPhep_NV extends javax.swing.JPanel {
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         // TODO add your handling code here:
-        Phantichthietkehethong_nhom4.resetForm(jPDK_NP);
+        PTPM_NHOM18.resetForm(jPDK_NP);
         txtDangKyNghiPhep.setText("Đăng ký nghỉ phép");
         txtNhanVien.setText(nv.getMaNV());
         txtHoTen.setText(nv.getHoTen());

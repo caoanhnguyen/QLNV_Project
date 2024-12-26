@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import phantichthietkehethong_nhom4.Phantichthietkehethong_nhom4;
+import PTPM_NHOM18.PTPM_NHOM18;
 
 /**
  *
@@ -339,7 +339,7 @@ public class ThemNVTV extends javax.swing.JFrame {
     private void bttThem_ThemNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttThem_ThemNhanVienActionPerformed
         // TODO add your handling code here:
         
-        if(Phantichthietkehethong_nhom4.kiemTraRong(pnThongTinNhanVienThuViec)){
+        if(PTPM_NHOM18.kiemTraRong(pnThongTinNhanVienThuViec)){
             String hoTen = txtHoTenTV.getText();
             Date ngaySinh;
             String CCCD = txtCCCD_TV.getText();
@@ -360,7 +360,7 @@ public class ThemNVTV extends javax.swing.JFrame {
 
                 reLoadData();
                 this.dispose();
-                Phantichthietkehethong_nhom4.resetForm(pnThongTinNhanVienThuViec);
+                PTPM_NHOM18.resetForm(pnThongTinNhanVienThuViec);
             }catch(NumberFormatException e){
                 JOptionPane.showMessageDialog(null, "Error: Nhập thời gian là 1 số!", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
             }catch(SQLException e){

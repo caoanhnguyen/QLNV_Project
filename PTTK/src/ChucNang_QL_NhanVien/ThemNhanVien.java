@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import phantichthietkehethong_nhom4.Phantichthietkehethong_nhom4;
+import PTPM_NHOM18.PTPM_NHOM18;
 
 /**
  *
@@ -361,7 +361,7 @@ public class ThemNhanVien extends javax.swing.JFrame {
 
     private void bttThem_ThemNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttThem_ThemNhanVienActionPerformed
         // TODO add your handling code here:
-        if(Phantichthietkehethong_nhom4.kiemTraRong(pnThongTinNhanVien)){
+        if(PTPM_NHOM18.kiemTraRong(pnThongTinNhanVien)){
             String hoTen = txtHoTen.getText();
             String gioiTinh = cbGioiTinh.getSelectedItem().toString();
             String danToc = cbDanToc.getSelectedItem().toString();
@@ -380,7 +380,7 @@ public class ThemNhanVien extends javax.swing.JFrame {
                 nvDAO.themNV(hoTen, gioiTinh, danToc, chucVu, loaiHopDong, thoiGian, CCCD, SDT, hocVan, email, maPB, maLuong, ghiChu);
                 
                 JOptionPane.showMessageDialog(null, "Thêm thành công!");
-                Phantichthietkehethong_nhom4.resetForm(pnThongTinNhanVien);
+                PTPM_NHOM18.resetForm(pnThongTinNhanVien);
                 //reload data
                 reLoadData();
             }catch(NumberFormatException e){

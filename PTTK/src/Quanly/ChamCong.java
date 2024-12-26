@@ -26,8 +26,11 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import phantichthietkehethong_nhom4.Phantichthietkehethong_nhom4;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+import PTPM_NHOM18.PTPM_NHOM18;
 import util.ExportExcelUtil;
 
 /**
@@ -117,6 +120,21 @@ public class ChamCong extends javax.swing.JPanel {
         
         
     }
+    
+    private void adjustColumnWidths(JTable myTable){
+        // Giả sử bảng của bạn có tên là "yourTableName"
+        JTable table = myTable;
+
+        // Lấy mô hình cột của bảng
+        TableColumnModel columnModel = table.getColumnModel();
+
+        // Lặp qua tất cả các cột để đặt chiều rộng nếu cần thiết
+        for (int i = 0; i < columnModel.getColumnCount(); i++) {
+            TableColumn column = columnModel.getColumn(i);
+            column.setPreferredWidth(120); // Bạn có thể tùy chỉnh giá trị này
+        }
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -127,7 +145,7 @@ public class ChamCong extends javax.swing.JPanel {
     private void loadMaNVToCB_CC(){
         //Load mã bộ phận vào combo box BP
         List<String> maNVList = new ArrayList<>();
-        maNVList = nvDAO.getMaNVList();
+        maNVList = nvDAO.getMaNV_0ADMINList();
         DefaultComboBoxModel<String> model_nv = new DefaultComboBoxModel<>(maNVList.toArray(new String[0]));
         cbMaNV_CC.setModel(model_nv);
     }
@@ -207,6 +225,7 @@ public class ChamCong extends javax.swing.JPanel {
             dtm.addRow(row);
         }
         tblThongTinChiTiet.setModel(dtm);
+        adjustColumnWidths(tblThongTinChiTiet);
     }
     public void loadDataToTableTLTV(List<Model.TinhLuongTV> tinhLuongTVList){
         DefaultTableModel dtm = new DefaultTableModel();
@@ -1462,7 +1481,7 @@ public class ChamCong extends javax.swing.JPanel {
 
     private void btnReset_KLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReset_KLActionPerformed
         // TODO add your handling code here:
-        Phantichthietkehethong_nhom4.resetForm(jP_KT_KL);
+        PTPM_NHOM18.resetForm(jP_KT_KL);
         txtThongTinKhenThuong.setText("Thông tin khen thưởng");
         txtThongTinKyLuat.setText("Thông tin kỷ luật");
 
@@ -1565,7 +1584,7 @@ public class ChamCong extends javax.swing.JPanel {
             khenThuongDAO.xoaKhenThuong(maThuong);
             khenThuongList = khenThuongDAO.getListKhenThuong();
             loadDataToTableKT(khenThuongList);
-            phantichthietkehethong_nhom4.Phantichthietkehethong_nhom4.resetForm(jP_KT_KL);
+            PTPM_NHOM18.resetForm(jP_KT_KL);
 
             loadMaKTToCB_CC();
             loadMaKTToCB_CC();
@@ -1582,7 +1601,7 @@ public class ChamCong extends javax.swing.JPanel {
 
     private void btnReset_KTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReset_KTActionPerformed
         // TODO add your handling code here:
-        Phantichthietkehethong_nhom4.resetForm(jP_KT_KL);
+        PTPM_NHOM18.resetForm(jP_KT_KL);
         txtThongTinKhenThuong.setText("Thông tin khen thưởng");
         txtThongTinKyLuat.setText("Thông tin kỷ luật");
     }//GEN-LAST:event_btnReset_KTActionPerformed
@@ -1608,7 +1627,7 @@ public class ChamCong extends javax.swing.JPanel {
             kyLuatDAO.xoaKyLuat(maKyLuat);
             kyLuatList = kyLuatDAO.getListKyLuat();
             loadDataToTableKL(kyLuatList);
-            phantichthietkehethong_nhom4.Phantichthietkehethong_nhom4.resetForm(jP_KT_KL);
+            PTPM_NHOM18.resetForm(jP_KT_KL);
 
             loadMaKLToCB_CC();
             loadMaKLToCB_CC();
@@ -1788,7 +1807,7 @@ public class ChamCong extends javax.swing.JPanel {
 
     private void btnReset_CCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReset_CCActionPerformed
         // TODO add your handling code here:
-        Phantichthietkehethong_nhom4.resetForm(jPanel1);
+        PTPM_NHOM18.resetForm(jPanel1);
         txtQuanLyChamCong.setText("Quản lý chấm công");
     }//GEN-LAST:event_btnReset_CCActionPerformed
 
@@ -1802,7 +1821,7 @@ public class ChamCong extends javax.swing.JPanel {
 
     private void btnAdd_CCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd_CCActionPerformed
         // TODO add your handling code here:
-        if(Phantichthietkehethong_nhom4.kiemTraRong(jPanel1)){
+        if(PTPM_NHOM18.kiemTraRong(jPanel1)){
             String maNV = cbMaNV_CC.getSelectedItem().toString();
             String maLuong = txtMaLuong_CC.getText();
             int thang = cbThang_CC.getMonth()+1;

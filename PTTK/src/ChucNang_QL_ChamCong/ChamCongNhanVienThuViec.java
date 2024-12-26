@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import phantichthietkehethong_nhom4.Phantichthietkehethong_nhom4;
+import PTPM_NHOM18.PTPM_NHOM18;
 
 /**
  *
@@ -301,7 +301,7 @@ public class ChamCongNhanVienThuViec extends javax.swing.JFrame {
 
     private void bttThem_CCThuViecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttThem_CCThuViecActionPerformed
         // TODO add your handling code here:
-        if(phantichthietkehethong_nhom4.Phantichthietkehethong_nhom4.kiemTraRong(pnCCNVTV)== false){
+        if(PTPM_NHOM18.kiemTraRong(pnCCNVTV)== false){
             JOptionPane.showMessageDialog(rootPane, "Vui lòng điền đầy đủ thông tin");
         }
         else{
@@ -324,7 +324,7 @@ public class ChamCongNhanVienThuViec extends javax.swing.JFrame {
                 luongThucNhan = luongThuViec  + (soGioLamThem*50000);
                 
                 tinhLuongTVDAO.addTinhLuongTV(maNhanVien, maLuongTV, thang, nam, luongThuViec, soNgayCong, soGioLamThem, luongThucNhan, ghiChu);
-                Phantichthietkehethong_nhom4.resetForm(pnCCNVTV);
+                PTPM_NHOM18.resetForm(pnCCNVTV);
                 
                 reLoadData();
                 
@@ -353,15 +353,11 @@ public class ChamCongNhanVienThuViec extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ChamCongNhanVienThuViec.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ChamCongNhanVienThuViec.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ChamCongNhanVienThuViec.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ChamCongNhanVienThuViec.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */

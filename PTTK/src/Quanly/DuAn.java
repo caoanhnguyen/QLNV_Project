@@ -16,7 +16,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import phantichthietkehethong_nhom4.Phantichthietkehethong_nhom4;
+import PTPM_NHOM18.PTPM_NHOM18;
 
 /**
  *
@@ -749,7 +749,7 @@ public class DuAn extends javax.swing.JPanel {
                     loadMaBPToCB_MaDA();
                     loadTenDAToCB_DA();
                     //resetForm
-                    Phantichthietkehethong_nhom4.resetForm(jPQLDuAn);
+                    PTPM_NHOM18.resetForm(jPQLDuAn);
                 }
             }else{
                 JOptionPane.showMessageDialog(null, "Dự án đang triển khai, không thể xóa!");
@@ -820,13 +820,13 @@ public class DuAn extends javax.swing.JPanel {
 
     private void btnReset_DAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReset_DAActionPerformed
         // TODO add your handling code here:
-        Phantichthietkehethong_nhom4.resetForm(jPQLDuAn);
+        PTPM_NHOM18.resetForm(jPQLDuAn);
         txtQuanLyDuAn.setText("Quản lý dự án");
     }//GEN-LAST:event_btnReset_DAActionPerformed
 
     private void btnUpdate_DAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate_DAActionPerformed
         // TODO add your handling code here:
-        if(Phantichthietkehethong_nhom4.kiemTraRong(jPQLDuAn)){
+        if(PTPM_NHOM18.kiemTraRong(jPQLDuAn)){
             try{
                 String tenDA = txtTenDuAn.getText();
                 String diaDiem = txtDiaDiem.getText();
@@ -871,7 +871,7 @@ public class DuAn extends javax.swing.JPanel {
 
     private void btnAdd_DAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd_DAActionPerformed
         // TODO add your handling code here:
-        if(Phantichthietkehethong_nhom4.kiemTraRong(jPQLDuAn,cbMaDA)){
+        if(PTPM_NHOM18.kiemTraRong(jPQLDuAn,cbMaDA)){
 //            String maDA = cbMaDA.getSelectedItem().toString();
             String tenDA = txtTenDuAn.getText();
             String diaDiem = txtDiaDiem.getText();
@@ -978,7 +978,7 @@ public class DuAn extends javax.swing.JPanel {
 
     private void btnReset_PCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReset_PCActionPerformed
         // TODO add your handling code here:
-        Phantichthietkehethong_nhom4.resetForm(jPPC_DA);
+        PTPM_NHOM18.resetForm(jPPC_DA);
         txtPhanCongDuAn.setText("Phân công dự án");
     }//GEN-LAST:event_btnReset_PCActionPerformed
 

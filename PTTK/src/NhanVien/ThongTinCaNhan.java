@@ -18,7 +18,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
-import phantichthietkehethong_nhom4.Phantichthietkehethong_nhom4;
+import PTPM_NHOM18.PTPM_NHOM18;
 
 /**
  *
@@ -824,7 +824,7 @@ public class ThongTinCaNhan extends javax.swing.JPanel {
 
     private void btnReset_CCCNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReset_CCCNActionPerformed
         // TODO add your handling code here:
-        Phantichthietkehethong_nhom4.resetForm(jPanel10);
+        PTPM_NHOM18.resetForm(jPanel10);
     }//GEN-LAST:event_btnReset_CCCNActionPerformed
 
     private void btnChamCongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChamCongActionPerformed

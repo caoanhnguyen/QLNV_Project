@@ -10,7 +10,8 @@ import java.util.List;
 
 public class NVDAO {
 	private static final Connection connection = DBManager.getConnection();
-        private static final String GET_MANV_LIST = "SELECT maNV FROM tbl_NhanVien ORDER BY maNV".toLowerCase();
+        private static final String GET_MANV_LIST = "SELECT tenDNhap AS maNV FROM tbl_taikhoan where maLoaiTK = 'LTK02' ORDER BY maLoaiTK".toLowerCase();
+        private static final String GET_MANV_0ADMIN_LIST = "SELECT tenDNhap AS maNV FROM tbl_taikhoan where maLoaiTK = 'LTK02' ORDER BY maLoaiTK".toLowerCase();
         private static final String GET_NV_BY_MANV = "SELECT * FROM tbl_NhanVien WHERE maNV = ? ORDER BY maNV".toLowerCase();
         private static final String GET_NV_LIST = "SELECT * FROM tbl_NhanVien ORDER BY maNV".toLowerCase();
         private static final String GET_MANV_BY_TENNV = "SELECT maNV FROM tbl_NhanVien WHERE hoTen = ?".toLowerCase();
@@ -175,6 +176,24 @@ public class NVDAO {
                 List<String> maNVList = new ArrayList<>();
 //                maNVList.add("");
                 ResultSet result = stm.executeQuery(GET_MANV_LIST);
+
+                while(result.next()){
+                    String maNV = result.getString("maNV");
+                    maNVList.add(maNV);
+                }
+            
+                return maNVList;
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+        
+        public List<String> getMaNV_0ADMINList(){
+            try(Statement stm = connection.createStatement()){
+                List<String> maNVList = new ArrayList<>();
+//                maNVList.add("");
+                ResultSet result = stm.executeQuery(GET_MANV_0ADMIN_LIST);
 
                 while(result.next()){
                     String maNV = result.getString("maNV");

@@ -14,7 +14,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
-import phantichthietkehethong_nhom4.Phantichthietkehethong_nhom4;
+import PTPM_NHOM18.PTPM_NHOM18;
 
 /**
  *
@@ -323,14 +323,14 @@ public class TraCuuThongTin extends javax.swing.JPanel {
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         // TODO add your handling code here:
-        Phantichthietkehethong_nhom4.resetForm(jPTraCuuTT);
+        PTPM_NHOM18.resetForm(jPTraCuuTT);
         loadDataToTableNV(NVList);
         txtTraCuuThongTin.setText("Tra cứu thông tin");
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         // TODO add your handling code here:
-        if(Phantichthietkehethong_nhom4.kiemTraRong(jPTraCuuTT)){
+        if(PTPM_NHOM18.kiemTraRong(jPTraCuuTT)){
             String ttin = txtNhapThongTin.getText().toLowerCase();
             List<NhanVien> NVTam = new ArrayList<>();
             if(rbtMaNhanVien.isSelected()){

@@ -16,7 +16,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import phantichthietkehethong_nhom4.Phantichthietkehethong_nhom4;
+import PTPM_NHOM18.PTPM_NHOM18;
 
 /**
  *
@@ -391,7 +391,7 @@ public class HeThong extends javax.swing.JPanel {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        if(Phantichthietkehethong_nhom4.kiemTraRong(jPTKhoan)){
+        if(PTPM_NHOM18.kiemTraRong(jPTKhoan)){
             String maNV = cbMaNV.getSelectedItem().toString();
             if(maNV.equals("")){
                 JOptionPane.showMessageDialog(null, "Bạn chưa chọn tài khoản muốn sửa!");
@@ -442,7 +442,7 @@ public class HeThong extends javax.swing.JPanel {
 
     private void btnNhapLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapLaiActionPerformed
         // TODO add your handling code here:
-        Phantichthietkehethong_nhom4.resetForm(jPTKhoan);
+        PTPM_NHOM18.resetForm(jPTKhoan);
         txtDangKyTaiKhoan.setText("Đăng ký tài khoản");
     }//GEN-LAST:event_btnNhapLaiActionPerformed
 

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import phantichthietkehethong_nhom4.Phantichthietkehethong_nhom4;
+import PTPM_NHOM18.PTPM_NHOM18;
 
 /**
  *
@@ -371,7 +371,7 @@ public class SuaNhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_bttHuy_SuaNhanVienMouseEntered
 
     private void bttSua_SuaNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttSua_SuaNhanVienActionPerformed
-        if(Phantichthietkehethong_nhom4.kiemTraRong(pnThongTinNhanVien)){
+        if(PTPM_NHOM18.kiemTraRong(pnThongTinNhanVien)){
             String hoTen = txtHoTen.getText();
             String gioiTinh = cbGioiTinh.getSelectedItem().toString();
             String danToc = cbDanToc.getSelectedItem().toString();

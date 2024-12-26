@@ -255,7 +255,7 @@ public class SuaBaoHiem extends javax.swing.JFrame {
 
     private void bttSua_SuaBaoHiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttSua_SuaBaoHiemActionPerformed
         // TODO add your handling code here:
-        if(phantichthietkehethong_nhom4.Phantichthietkehethong_nhom4.kiemTraRong(pnThongTinNhanVien)){
+        if(PTPM_NHOM18.PTPM_NHOM18.kiemTraRong(pnThongTinNhanVien)){
             String maBaoHiem = cbMaBaoHiem.getSelectedItem().toString();
             try{
                 String noiCap = tfNoiCap.getText();
