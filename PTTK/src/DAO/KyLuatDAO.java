@@ -5,8 +5,6 @@
 package DAO;
 
 import Model.kyLuat;
-import com.mysql.cj.protocol.Resultset;
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.REUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

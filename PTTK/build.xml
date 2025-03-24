@@ -4,27 +4,36 @@
 
     <!-- Thiết lập thư mục các file JAR -->
     <path id="classpath">
-        <!-- Bao gồm tất cả các JAR trong thư mục lib -->
         <fileset dir="lib">
-            <include name="*.jar"/>
+            <include name="*.jar"/> <!-- Bao gồm tất cả file .jar trong thư mục lib -->
         </fileset>
     </path>
 
     <!-- Target để biên dịch các file Java -->
     <target name="compile" description="Compile Java files">
         <mkdir dir="build/classes"/>
-        <javac srcdir="src" destdir="build/classes" classpathref="classpath"/>
+        <javac srcdir="src" destdir="build/classes" classpathref="classpath" debug="true"/>
     </target>
 
     <!-- Target để tạo file JAR -->
     <target name="jar" depends="compile" description="Create JAR file">
         <mkdir dir="dist"/>
-        <jar destfile="dist/PTTK.jar" basedir="build/classes"/>
+        <jar destfile="dist/PTTK.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="PTPM_NHOM18.PTPM_NHOM18"/> <!-- Tên đầy đủ của class chính -->
+            </manifest>
+            <!-- Gộp thư viện vào file JAR -->
+            <zipfileset dir="lib" includes="*.jar"/>
+        </jar>
     </target>
 
     <!-- Target để chạy ứng dụng -->
     <target name="run" depends="jar" description="Run the project">
-        <java jar="dist/PTTK.jar" fork="true"/>
+        <java jar="dist/PTTK.jar" fork="true">
+            <classpath>
+                <fileset dir="lib" includes="*.jar"/>
+            </classpath>
+        </java>
     </target>
 
     <!-- Target để làm sạch các file biên dịch -->
